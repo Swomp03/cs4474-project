@@ -1,0 +1,21 @@
+
+
+.home-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#edit-layout-button{
+    margin-left: 5vh;
+    height: 10vh;
+    width: 50vh;
+    font-size: 28px;
+}
+
+#new-folder-button{
+    margin-right: 5vh;
+    height: 10vh;
+    width: 50vh;
+    font-size: 28px;
+}
