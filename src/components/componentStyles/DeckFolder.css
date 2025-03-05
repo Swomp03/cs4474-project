@@ -1,18 +1,30 @@
 
 .add-new-deck-button{
-    margin: 1vh 0
+    margin: 3vh 0 0;
+    height: 5vh;
 }
 
 .dropdown-group{
-    margin-left: 3vh;
+    margin-left: 5vh;
 }
 
 .deck-description{
     margin-left: 3vh;
+    color: rgb(149, 149, 149);
 }
 
 .deck-group{
     margin-bottom: 3vh;
+}
+
+.deck-name{
+    font-size: 24px;
+}
+
+.folder-button{
+    height: 5vh;
+    text-align: left;
+    font-size: 24px;
 }
 
 .folder-div{
