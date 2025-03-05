@@ -1,0 +1,21 @@
+
+.add-new-deck-button{
+    margin: 1vh 0
+}
+
+.dropdown-group{
+    margin-left: 3vh;
+}
+
+.deck-description{
+    margin-left: 3vh;
+}
+
+.deck-group{
+    margin-bottom: 3vh;
+}
+
+.folder-div{
+    display: grid;
+    width: 30vh;
+}

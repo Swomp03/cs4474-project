@@ -6,6 +6,20 @@
     align-items: center;
 }
 
+.deck-folders{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    background-color: rgb(57, 57, 57);
+    justify-content: center;
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.deck-folder-group{
+    margin: 2vh 10vh;
+}
+
 #edit-layout-button{
     margin-left: 5vh;
     height: 10vh;
