@@ -1,0 +1,54 @@
+.deck-button{
+    height: 10vh;
+    width: 50vh;
+    font-size: 28px;
+}
+
+#deck-body{
+    text-align: center;
+    background-color: rgb(57, 57, 57);
+    margin-left: 10vh;
+    margin-right: 10vh;
+}
+
+#deck-button-section{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10vh;
+}
+
+#deck-subtitle{
+    margin: 5vh 0;
+    font-size: 32px;
+    color: rgb(134, 134, 134);
+}
+
+#deck-name{
+    padding-top: 10vh;
+    font-size: 64px;
+}
+
+#edit-deck-button{
+    margin-right: 2vh;
+}
+
+#number-of-cards{
+    margin: 5vh 0;
+}
+
+#return-button{
+    height: 10vh;
+    width: 50vh;
+    font-size: 28px;
+    margin-top: 2vh;
+    margin-left: 2vh;
+}
+
+#study-now-button{
+    margin-left: 2vh;
+    background-color: blue;
+}
+
+
+
+
