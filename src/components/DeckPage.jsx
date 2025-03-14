@@ -6,7 +6,7 @@ const DeckPage = () =>{
     console.log(params)
     return(
         <>
-            <button id='return-button'>Return</button>
+            <a href="/"><button id='return-button'>Return</button></a>
         
             <div id='deck-body'>
                 <h1 id='deck-name'>Deck Name</h1>

@@ -24,10 +24,12 @@ const DeckFolder = () =>{
                 <div className="dropdown-group">
                     <button className="add-new-deck-button">+ Add New Deck</button>
                     {decks.map((deck) => (
-                        <div key={deck.name} className="deck-group">
-                            <p className="deck-name">{deck.name}</p>
-                            <p className="deck-description">{deck.description}</p>
-                        </div>
+                        <a href="/deckpage">
+                            <div key={deck.name} className="deck-group">
+                                <p className="deck-name">{deck.name}</p>
+                                <p className="deck-description">{deck.description}</p>
+                            </div>
+                        </a>
                     ))}
                 </div>
             </div>
