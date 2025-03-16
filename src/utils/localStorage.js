@@ -20,11 +20,11 @@ export const addFolder = (name) => {
 };
 
 // Add a deck to a folder
-export const addDeck = (folderId, deckName) => {
+export const addDeck = (folderId, deckName, deckDescription) => {
     const data = loadData();
     const folder = data.find(f => f.id === folderId);
     if(folder) {
-        folder.decks.push({ id: Date.now().toString(), name: deckName, cards: [] });
+        folder.decks.push({ id: Date.now().toString(), name: deckName, description: deckDescription, cards: [] });
         saveData(data);
     }
 };
