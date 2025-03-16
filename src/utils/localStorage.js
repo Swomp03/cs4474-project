@@ -14,7 +14,7 @@ export const loadData = () => {
 // Adding a folder
 export const addFolder = (name) => {
     const data = loadData();
-    const newFolder = { id:Date.now().toString(), name, decks: [] };
+    const newFolder = { id: Date.now().toString(), name, decks: [] };
     data.push(newFolder);
     saveData(data);
 };

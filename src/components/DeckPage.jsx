@@ -1,17 +1,25 @@
 import './componentStyles/DeckPage.css'
 import { useParams } from 'react-router-dom';
+import { loadData, saveData } from '../utils/localStorage';
+import { useState } from 'react';
 
 const DeckPage = () =>{
-    const params = useParams();
-    console.log(params)
+    const { folderId, deckId } = useParams();
+    // console.log(folderId, deckId);
+
+    const data = loadData();
+    const folder = data.find(f => f.id === folderId);
+    const foundDeck = folder?.decks.find(d => d.id === deckId);
+
+    console.log("Found deck:", foundDeck);
     return(
         <>
             <a href="/"><button id='return-button'>Return</button></a>
         
             <div id='deck-body'>
-                <h1 id='deck-name'>Deck Name</h1>
-                <h3 id='deck-subtitle'><i>Deck Subtitle</i></h3>
-                <h2 id='number-of-cards'>Number of cards:</h2>
+                <h1 id='deck-name'>{foundDeck.name}</h1>
+                <h3 id='deck-subtitle'><i>{foundDeck.description}</i></h3>
+                <h2 id='number-of-cards'>Number of cards: {foundDeck.cards.length}</h2>
                 <div id='deck-button-section'>
                     <button className='deck-button' id='edit-deck-button'>Edit Deck</button>
                     <button className='deck-button' id='study-now-button'>Study Now</button>

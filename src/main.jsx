@@ -19,6 +19,10 @@ const router = createBrowserRouter([
     element: <DeckPage></DeckPage>
   },
   {
+    path: '/deckpage/:folderId/:deckId',
+    element: <DeckPage></DeckPage>
+  },
+  {
     path: '/playpage',
     element: <PlayPage></PlayPage>
   }

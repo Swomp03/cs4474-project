@@ -11,10 +11,10 @@ const Home = () =>{
     const [folderName, setFolderName] = useState("");
     const [folders, setFolders] = useState([]);
 
-    function newFolder(folderName){
-        console.log("New folder clicked");
-        addFolder(folderName);
-    }
+    // function newFolder(folderName){
+    //     console.log("New folder clicked");
+    //     addFolder(folderName);
+    // }
 
     function test(){
         console.log('test');
@@ -24,8 +24,8 @@ const Home = () =>{
         setFolders(loadData());
     }, []);
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
+    const handleSubmit = (event) =>{
+        event.preventDefault();
         if(!folderName.trim()) return;
 
         addFolder(folderName);
@@ -39,7 +39,7 @@ const Home = () =>{
             <div>
                 <h2>Create a New Folder</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Enter Folder Name" value={folderName} onChange={(e) => setFolderName(e.target.value)}/>
+                    <input type="text" placeholder="Enter Folder Name" value={folderName} onChange={(event) => setFolderName(event.target.value)}/>
                     <button type="submit">Add Folder</button>
                 </form>
             </div>
