@@ -15,9 +15,9 @@ const EditDeckModal = () => {
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button>Cancel</button>
-                        <h1>Hi</h1>
-                        <button>Save</button>
+                        <button className={"header-btn"}>Cancel</button>
+                        <h1>Edit Deck</h1>
+                        <button className={"header-btn save-btn"}>Save</button>
                     </div>
 
                     <div id="cards-container">

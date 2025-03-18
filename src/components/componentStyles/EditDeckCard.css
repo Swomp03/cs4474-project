@@ -2,5 +2,8 @@
     display: flex;
     flex-direction: column;
     padding: 16px;
-    background-color: lightgray;
+    background-color: darkgray;
+    height: 10rem;
+    width: 15rem;
+    border-radius: 25px;
 }

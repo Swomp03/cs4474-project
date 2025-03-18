@@ -14,7 +14,7 @@
 }
 
 #modal-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
@@ -24,15 +24,31 @@
 }
 
 #modal-body {
-    margin-inline: 1rem;
-    margin-block: 1rem;
-    background-color: darkgray;
-    color: black;
+    margin-inline: 2rem;
+    margin-block: 2rem;
+    background-color: dimgrey;
+    color: white;
+    border-radius: 25px;
+    min-width: 50vw;
 }
 
 #modal-header {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+}
+
+.header-btn {
+    padding-inline: 4rem;
+    padding-block: 1rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1rem;
+}
+
+.save-btn {
+    background-color: #1698ff;
+    color: white;
 }
 
 #cards-container {
@@ -42,4 +58,6 @@
     justify-content: center;
     margin-inline: 1rem;
     margin-block: 1rem;
+    overflow-x: hidden;
+    max-height: 50vh;
 }
