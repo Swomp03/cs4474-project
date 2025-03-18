@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {loadData} from "../utils/localStorage.js";
 import EditDeckCard from "./EditDeckCard.jsx";
 
-const EditDeckModal = () => {
+const EditDeckModal = (props) => {
 
     const cards = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
@@ -15,7 +15,7 @@ const EditDeckModal = () => {
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button className={"header-btn"}>Cancel</button>
+                        <button className={"header-btn"} onClick={() => props.toggle()}>Cancel</button>
                         <h1>Edit Deck</h1>
                         <button className={"header-btn save-btn"}>Save</button>
                     </div>
