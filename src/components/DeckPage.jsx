@@ -2,6 +2,7 @@ import './componentStyles/DeckPage.css'
 import { useParams } from 'react-router-dom';
 import { loadData, saveData } from '../utils/localStorage';
 import { useState } from 'react';
+import EditDeckModal from "./EditDeckModal.jsx";
 
 const DeckPage = () =>{
     const { folderId, deckId } = useParams();
@@ -25,6 +26,7 @@ const DeckPage = () =>{
                     <button className='deck-button' id='study-now-button'>Study Now</button>
                 </div>
             </div>
+            <EditDeckModal></EditDeckModal>
         </>
     )
 }

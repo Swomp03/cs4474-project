@@ -1,0 +1,6 @@
+.edit-card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: lightgray;
+}
