@@ -2,7 +2,9 @@ import "./componentStyles/EditDeckModal.css";
 
 import {useParams} from "react-router-dom";
 import {loadData} from "../utils/localStorage.js";
-import EditDeckCard from "./EditDeckCard.jsx";
+import {EditDeckCard, AddDeckCard} from "./EditDeckCard.jsx";
+
+// TODO: Make escape hide modal as well?
 
 const EditDeckModal = (props) => {
 
@@ -10,7 +12,7 @@ const EditDeckModal = (props) => {
 
     return (
         <div className="static">
-            <div id="modal-background"></div>
+            <div id="modal-background" onClick={() => props.toggle()}></div>
 
             <div id="modal-container">
                 <div id="modal-body">
@@ -24,6 +26,7 @@ const EditDeckModal = (props) => {
                         {cards.map((card) => (
                             <EditDeckCard></EditDeckCard>
                         ))}
+                        <AddDeckCard></AddDeckCard>
                     </div>
                 </div>
             </div>

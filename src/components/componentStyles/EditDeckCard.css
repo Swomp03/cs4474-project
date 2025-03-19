@@ -7,3 +7,33 @@
     width: 15rem;
     border-radius: 25px;
 }
+
+#new-card {
+    color: inherit;
+    background-color: unset;
+    border: none;
+    font: inherit;
+    /*outline: inherit;*/
+    box-sizing: unset;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    outline: 4px dashed grey;
+    outline-offset: -4px;
+
+    padding: 16px;
+    height: 10rem;
+    width: 15rem;
+    border-radius: 25px;
+
+    font-size: 20px;
+
+    transition: background-color 0.3s;
+}
+
+#new-card:hover {
+    background-color: rgba(169, 169, 169, 0.1);
+}

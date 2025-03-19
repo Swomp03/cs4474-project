@@ -1,6 +1,6 @@
 import "./componentStyles/EditDeckCard.css"
 
-const EditDeckCard = () => {
+export function EditDeckCard() {
 
     return (
         <>
@@ -12,4 +12,12 @@ const EditDeckCard = () => {
     )
 }
 
-export default EditDeckCard;
+export function AddDeckCard() {
+    return (
+        <>
+            <button id="new-card" onClick={() => console.log("HI")}>
+                <span>+ New Card</span>
+            </button>
+        </>
+    )
+}

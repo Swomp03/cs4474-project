@@ -44,6 +44,7 @@
     border-radius: 50px;
     border: none;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 .save-btn {
@@ -56,8 +57,12 @@
     flex-wrap: wrap;
     gap: .75rem;
     justify-content: center;
-    margin-inline: 1rem;
+    margin-right: .5rem;
+    margin-left: 1.5rem; /* TODO: Ensure this is correct for scrollbar width*/
     margin-block: 1rem;
     overflow-x: hidden;
+    overflow-y: scroll;
     max-height: 50vh;
+
+    scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
 }
