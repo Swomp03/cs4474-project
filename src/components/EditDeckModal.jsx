@@ -8,7 +8,8 @@ import {EditDeckCard, AddDeckCard} from "./EditDeckCard.jsx";
 
 const EditDeckModal = (props) => {
 
-    const cards = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const cards = [{"question": "HI?", "answer": "HELLO"}, {"question": "test?", "answer": "123"},
+        {"question": "Anyone home?", "answer": "Yes"}, {"question": "9 + 10?", "answer": "21"}];
 
     return (
         <div className="static">
@@ -23,8 +24,8 @@ const EditDeckModal = (props) => {
                     </div>
 
                     <div id="cards-container">
-                        {cards.map((card) => (
-                            <EditDeckCard></EditDeckCard>
+                        {cards.map((card, index) => (
+                            <EditDeckCard key={card} index={index + 1} question={card.question} answer={card.answer}></EditDeckCard>
                         ))}
                         <AddDeckCard></AddDeckCard>
                     </div>

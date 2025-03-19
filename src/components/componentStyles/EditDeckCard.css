@@ -3,7 +3,7 @@
     flex-direction: column;
     padding: 16px;
     background-color: darkgray;
-    height: 10rem;
+    height: 12rem;
     width: 15rem;
     border-radius: 25px;
 }
@@ -25,7 +25,7 @@
     outline-offset: -4px;
 
     padding: 16px;
-    height: 10rem;
+    height: 12rem;
     width: 15rem;
     border-radius: 25px;
 
@@ -36,4 +36,69 @@
 
 #new-card:hover {
     background-color: rgba(169, 169, 169, 0.1);
+}
+
+.text-header {
+    margin-block: 0.4rem;
+}
+
+.text-input {
+    background-color: transparent;
+    color: inherit;
+    border: 1px solid transparent;
+    /*border-bottom: 1px solid #dfdfdf;*/
+    /*border-radius: 10px;*/
+    /*width: 64px;*/
+    /*height: 32px;*/
+    padding: 0;
+    /*text-align: center;*/
+    /*font-size: 18px;*/
+    /*outline: 1px solid #dfdfdf;*/
+
+    transition: border-bottom 0.2s;
+}
+
+.text-input:hover {
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.index-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    gap: 1rem;
+}
+
+.index-number-input {
+    background-color: grey;
+    color: inherit;
+    border: none;
+    border-radius: 10px;
+    width: 64px;
+    height: 32px;
+    padding: 0;
+    text-align: center;
+    font-size: 18px;
+    outline: 1px solid #dfdfdf;
+}
+
+.index-buttons {
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    border-radius: 50px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+
+    transition: background-color 0.3s;
+}
+
+.index-buttons:hover {
+    background-color: #9f9f9f;
 }
