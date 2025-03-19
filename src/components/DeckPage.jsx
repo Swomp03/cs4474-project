@@ -13,7 +13,7 @@ const DeckPage = () =>{
     const folder = data.find(f => f.id === folderId);
     const foundDeck = folder?.decks.find(d => d.id === deckId);
 
-    const { state: visible, toggle } = useToggle();
+    const { state: visible, toggle: toggleVisibility } = useToggle();
 
     console.log("Found deck:", foundDeck);
     return(
@@ -25,11 +25,11 @@ const DeckPage = () =>{
                 <h3 id='deck-subtitle'><i>{foundDeck.description}</i></h3>
                 <h2 id='number-of-cards'>Number of cards: {foundDeck.cards.length}</h2>
                 <div id='deck-button-section'>
-                    <button className='deck-button' id='edit-deck-button' onClick={toggle}>Edit Deck</button>
+                    <button className='deck-button' id='edit-deck-button' onClick={toggleVisibility}>Edit Deck</button>
                     <button className='deck-button' id='study-now-button'>Study Now</button>
                 </div>
             </div>
-            {visible && <EditDeckModal toggle={toggle}></EditDeckModal>}
+            {visible && <EditDeckModal toggleVisibility={toggleVisibility} cards={foundDeck.cards}></EditDeckModal>}
         </>
     )
 }
