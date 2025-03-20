@@ -6,18 +6,19 @@ import {EditDeckCard, AddDeckCard} from "./EditDeckCard.jsx";
 import {useEffect, useState} from "react";
 
 // TODO: Make escape hide modal as well?
+// TODO: Fix being unable to click padding around modal-container to close modal
 
 const EditDeckModal = (props) => {
-
     const defaultCards = [
-        {"index": 0, "question": "HI?", "answer": "HELLO"},
-        {"index": 1, "question": "test?", "answer": "123"},
-        {"index": 2, "question": "Anyone home?", "answer": "Yes"},
-        {"index": 3, "question": "9 + 10?", "answer": "21"}
+        {"index": 0, "position": 1, "question": "HI?", "answer": "HELLO"},
+        {"index": 1, "position": 2, "question": "test?", "answer": "123"},
+        {"index": 2, "position": 3, "question": "Anyone home?", "answer": "Yes"},
+        {"index": 3, "position": 4, "question": "9 + 10?", "answer": "21"}
     ];
 
     const [cards, setCards] = useState(defaultCards);
 
+    // Used to disabled the index buttons when it makes sense
     useEffect(() => {
         const container = document.getElementById("cards-container");
         if (!container) return;
@@ -46,13 +47,15 @@ const EditDeckModal = (props) => {
         cards[cards.length - 2].lastChild.lastChild.disabled = true;
     }, [cards]);
 
-    // TODO: Fix being unable to click padding around modal-container to close modal
-
     const addCard = () => {
         // Create a new card at the end of the deck, with placeholder text
-        const newCard = {"index": cards.length, "question": "New question", "answer": "New answer"};
+        const newCard = {
+            "index": cards.length,
+            "position": cards.length + 1,
+            "question": "New question",
+            "answer": "New answer"
+        };
         setCards([...cards, newCard]);
-        console.log(cards);
     }
 
     const increaseIndex = (currIndex) => {
@@ -66,7 +69,9 @@ const EditDeckModal = (props) => {
         const targetCard = newCards[currIndex + 1];
         newCards[currIndex + 1] = newCards[currIndex]; // Increase the moving card's index by 1
         newCards[currIndex + 1].index = currIndex + 1;
+        newCards[currIndex + 1].position = currIndex + 2;
 
+        targetCard.position = currIndex + 1;
         targetCard.index = currIndex; // Change the target card's index to the index of the moved card
         newCards[currIndex] = targetCard;
 
@@ -74,7 +79,7 @@ const EditDeckModal = (props) => {
     }
 
     const decreaseIndex = (currIndex) => {
-        if (currIndex <= 0) {
+        if (currIndex < 1) {
             console.log("Can't decrease index, at bound");
             return;
         }
@@ -85,47 +90,117 @@ const EditDeckModal = (props) => {
 
         newCards[currIndex - 1] = newCards[currIndex]; // Decrease the moving card's index by 1
         newCards[currIndex - 1].index = currIndex - 1;
+        newCards[currIndex - 1].position = currIndex;
 
+        targetCard.position = currIndex + 1;
         targetCard.index = currIndex; // Change the target card's index to the index of the moved card
         newCards[currIndex] = targetCard;
 
         setCards(newCards);
     }
 
-    // TODO: Going from high postion to low doesn't work
-    const moveCard = (currIndex, newIndexString) => {
-        if (newIndexString === "") {
-            // TODO: Allow blank again -- maybe select text on click
+    // TODO: Re-enable again
+    const resetPosition = (currIndex, currentValueString) => {
+        console.log("Reset pos")
+        console.log(`currIndex: ${currIndex}`);
+
+        const currentValue = parseInt(currentValueString);
+
+        if (isNaN(currentValue) || currentValue < 0 || currentValue >= cards.length) {
+            const newCards = [...cards]; // Make a copy of the array
+
+            console.log(newCards[currIndex]);
+            console.log(newCards);
+
+            newCards[currIndex].position = currIndex + 1;
+
+            try {
+                setCards(newCards);
+            } catch {
+                // ignore any errors since we want to be able to enter blank values
+            }
+        }
+    }
+
+    const updatePosition = (currIndex, newIndexString) => {
+        const newIndex = parseInt(newIndexString);
+
+        if (newIndex < 0 || newIndex >= cards.length) {
+            console.log(`Index out of range (must be between 0 and ${cards.length - 1})`);
+        }
+
+        const newCards = [...cards]; // Make a copy of the array
+
+        newCards[currIndex].position = newIndex;
+
+        try {
+            setCards(newCards);
+        } catch {
+            // ignore any errors since we want to be able to enter blank values
+        }
+    }
+
+    const moveCard = (currIndex, newIndexString, event) => {
+        // Return early if the user didn't press the enter key
+        if (event.key !== "Enter") {
             return;
         }
 
-        const newIndex = parseInt(newIndexString) - 1; // Convert back to a zero-based index
+        if (newIndexString === "") {
+            event.target.blur(); // Remove focus
+            return;
+        }
+
+        const newIndex = parseInt(newIndexString); // Convert back to a zero-based index
 
         if (isNaN(newIndex)) {
             console.log("Index is not a number");
             return;
         }
 
-        console.log("moving card from position", currIndex + 1, "to", newIndex + 1);
+        // If currIndex > newIndex then the change is negative so the diff is -1, otherwise it is 0
+        let diff = currIndex > newIndex ? -1 : 0;
 
-        if (newIndex < 0 || newIndex >= cards.length) {
+        console.log("moving card from position", currIndex + 1, "to", newIndex);
+
+        if (newIndex < 0 || newIndex > cards.length) {
             console.log(`Index out of range (must be between 1 and ${cards.length})`);
         } else {
-            console.log(cards);
-            // Insert card at newIndex and create a copy of the array
-            const adjustedCards = cards.toSpliced(newIndex + 1, 0, cards[currIndex]);
-            adjustedCards.splice(currIndex, 1); // Remove original card
+            const adjustedCards = [...cards];
+
+            const movingCard =  adjustedCards.splice(currIndex, 1)[0]; // Remove original card
+            adjustedCards.splice(newIndex + diff, 0, movingCard); // Insert the moving card
 
             // Fix the indexes
             for (let i = 0; i < adjustedCards.length; i++) {
                 adjustedCards[i].index = i;
+                adjustedCards[i].position = i + 1;
             }
 
             setCards(adjustedCards);
-            console.log(adjustedCards);
+            event.target.blur(); // Remove focus
         }
     }
 
+    const updateValue = (valueName, index, value) => {
+        const updatedCards = [...cards];
+
+        switch (valueName) {
+            case "answer":
+                updatedCards[index].answer = value;
+                break;
+            case "question":
+                updatedCards[index].question = value;
+                break;
+            default:
+                console.log("Invalid value name");
+                return;
+        }
+
+        setCards(updatedCards);
+    }
+
+    // TODO: Surround cards container in form
     return (
         <div className="static">
             <div id="modal-background" onClick={() => props.toggleVisibility()}></div>
@@ -140,9 +215,10 @@ const EditDeckModal = (props) => {
 
                     <div id="cards-container">
                         {cards.map((card, index) => (
-                            <EditDeckCard key={index} index={card.index} question={card.question}
-                                          answer={card.answer} increaseIndex={increaseIndex}
-                                          decreaseIndex={decreaseIndex} moveCard={moveCard}></EditDeckCard>
+                            <EditDeckCard key={index} card={card} increaseIndex={increaseIndex}
+                                          decreaseIndex={decreaseIndex} moveCard={moveCard}
+                                          updateValue={updateValue} updatePosition={updatePosition}
+                                          resetPosition={resetPosition}></EditDeckCard>
                         ))}
                         <AddDeckCard addCard={addCard}></AddDeckCard>
                     </div>
