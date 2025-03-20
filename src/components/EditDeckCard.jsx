@@ -1,6 +1,7 @@
 import "./componentStyles/EditDeckCard.css"
-
-/* TODO: Change icon for plus and minus buttons*/
+import deleteIcon from '../assets/icons/delete.svg';
+import plusIcon from '../assets/icons/plus.svg';
+import minusIcon from '../assets/icons/minus.svg';
 
 // TODO: Change file and card names
 
@@ -24,14 +25,23 @@ export function EditDeckCard(props) {
                 <div className="card-footer">
                     <div className="placeholder"></div>
                     <div className="index-container">
-                        <button className="index-buttons" title="Decrease card postion" onClick={() => props.decreaseIndex(card.index)}>-</button>
+                        <button className="card-btn" title="Decrease card postion"
+                                onClick={() => props.decreaseIndex(card.index)}>
+                            <img src={minusIcon} alt="Minus icon"/>
+                        </button>
                         <input type="number" className="index-number-input" value={card.position}
                                onChange={e => props.updatePosition(card.index, e.target.value)}
                                onKeyDown={e => props.moveCard(card.index, e.target.value, e)}
                         />
-                        <button className="index-buttons" title="Increase card postion" onClick={() => props.increaseIndex(card.index)}>+</button>
+                        <button className="card-btn" title="Increase card postion"
+                                onClick={() => props.increaseIndex(card.index)}>
+                            <img src={plusIcon} alt="Plus icon"/>
+                        </button>
                     </div>
-                    <button type="button" className="delete-card-btn" title="Delete this card" onClick={() => props.removeCard(card.index)}>X</button>
+                    <button type="button" className="card-btn" title="Delete this card"
+                            onClick={() => props.removeCard(card.index)}>
+                        <img src={deleteIcon} alt="Delete icon"/>
+                    </button>
                 </div>
             </div>
         </>
@@ -42,7 +52,8 @@ export function AddDeckCard(props) {
     return (
         <>
             <button id="new-card" onClick={() => props.addCard()}>
-                <span>+ New Card</span>
+                <img src={plusIcon} alt="Plus icon"/>
+                <span>New Card</span>
             </button>
         </>
     )

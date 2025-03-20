@@ -36,7 +36,7 @@
     color: white;
     border-radius: 25px;
     max-width: 80vw;
-    /*min-width: 40rem;*/
+    min-width: 40rem;
 }
 
 #modal-header {

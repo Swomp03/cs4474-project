@@ -1,3 +1,7 @@
+img {
+    -webkit-user-drag: none;
+}
+
 .edit-card {
     display: flex;
     flex-direction: column;
@@ -21,6 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px;
     cursor: pointer;
 
     outline: 4px dashed grey;
@@ -40,25 +45,6 @@
 
 #new-card:hover {
     background-color: rgba(169, 169, 169, 0.1);
-}
-
-.delete-card-btn {
-    background-color: transparent;
-    color: inherit;
-    border: none;
-    border-radius: 50px;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    text-align: center;
-    cursor: pointer;
-    font-size: 18px;
-
-    transition: background-color 0.3s;
-}
-
-.delete-card-btn:hover {
-    background-color: #9f9f9f;
 }
 
 .text-header {
@@ -124,19 +110,32 @@ input::-webkit-inner-spin-button {
     height: 28px;
 }
 
-.index-buttons {
+.card-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background-color: transparent;
-    color: inherit;
+    color: white;
     border: none;
     border-radius: 50px;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     padding: 0;
     text-align: center;
     cursor: pointer;
     font-size: 18px;
 
     transition: background-color 0.3s;
+}
+
+.card-btn:hover {
+    background-color: #9f9f9f;
+}
+
+.card-btn > img {
+    width: 20px;
+    height: 20px;
 }
 
 .index-buttons:hover {
