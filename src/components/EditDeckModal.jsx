@@ -20,8 +20,6 @@ const EditDeckModal = (props) => {
 
     // TODO: Fix being unable to click padding around modal-container to close modal
 
-    // TODO: Prevent changing index at bounds
-
     const addCard = () => {
         // Create a new card at the end of the deck, with placeholder text
         const newCard = {"index": cards.length, "question": "New question", "answer": "New answer"};
@@ -30,6 +28,11 @@ const EditDeckModal = (props) => {
     }
 
     const increaseIndex = (currIndex) => {
+        if (currIndex >= cards.length - 1) {
+            console.log("Can't increase index, at bound");
+            return;
+        }
+
         const newCards = [...cards]; // Make a copy of the array
 
         const targetCard = newCards[currIndex + 1];
@@ -43,6 +46,11 @@ const EditDeckModal = (props) => {
     }
 
     const decreaseIndex = (currIndex) => {
+        if (currIndex <= 0) {
+            console.log("Can't decrease index, at bound");
+            return;
+        }
+
         const newCards = [...cards]; // Make a copy of the array
 
         const targetCard = newCards[currIndex - 1];
@@ -58,34 +66,36 @@ const EditDeckModal = (props) => {
 
     const moveCard = (currIndex, newIndexString) => {
         if (newIndexString === "") {
-
+            // TODO: Allow blank again
             return;
         }
 
-        const newIndex = parseInt(newIndexString) - 1; // -1 because the index is +1 as a input value
-
-        console.log("moving from index", currIndex + 1, "to", newIndex + 1);
+        const newIndex = parseInt(newIndexString) - 1; // Convert back to a zero-based index
 
         if (isNaN(newIndex)) {
-            console.log("Invalid index");
-        } else if (newIndex < 0 || newIndex > cards.length - 1) {
-            console.log(`Index out of range (1 - ${cards.length})`);
+            console.log("Index is not a number");
+            return;
+        }
+
+        console.log("moving card from position", currIndex + 1, "to", newIndex + 1);
+
+        if (newIndex < 0 || newIndex >= cards.length) {
+            console.log(`Index out of range (must be between 1 and ${cards.length})`);
         } else {
-            const adjustedCards = [...cards];
+            console.log(cards);
+            // Insert card at newIndex and create a copy of the array
+            const adjustedCards = cards.toSpliced(newIndex + 1, 0, cards[currIndex]);
+            adjustedCards.splice(currIndex, 1); // Remove original card
 
-            const targetCard = adjustedCards[newIndex];
-
-            adjustedCards[newIndex] = adjustedCards[currIndex];
-            adjustedCards[newIndex].index = newIndex;
-
-            targetCard.index = currIndex;
-            adjustedCards[currIndex] = targetCard;
+            // Fix the indexes
+            for (let i = 0; i < adjustedCards.length; i++) {
+                adjustedCards[i].index = i;
+            }
 
             setCards(adjustedCards);
+            console.log(adjustedCards);
         }
     }
-
-    // TODO: Make card key unique and not the index
 
     return (
         <div className="static">
