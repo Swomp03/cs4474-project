@@ -29,7 +29,8 @@ const DeckPage = () =>{
                     <button className='deck-button' id='study-now-button'>Study Now</button>
                 </div>
             </div>
-            {visible && <EditDeckModal toggleVisibility={toggleVisibility} cards={foundDeck.cards}></EditDeckModal>}
+            {visible && <EditDeckModal toggleVisibility={toggleVisibility} cards={foundDeck.cards}
+                                       folderId={folderId} deckId={deckId}></EditDeckModal>}
         </>
     )
 }

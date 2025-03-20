@@ -1,50 +1,51 @@
 import "./componentStyles/EditDeckModal.css";
 
 import {useParams} from "react-router-dom";
-import {loadData} from "../utils/localStorage.js";
+import {saveCards} from "../utils/localStorage.js";
 import {EditDeckCard, AddDeckCard} from "./EditDeckCard.jsx";
 import {useEffect, useState} from "react";
 
 // TODO: Make escape hide modal as well?
-// TODO: Fix being unable to click padding around modal-container to close modal
 
 const EditDeckModal = (props) => {
-    const defaultCards = [
-        {"index": 0, "position": 1, "question": "HI?", "answer": "HELLO"},
-        {"index": 1, "position": 2, "question": "test?", "answer": "123"},
-        {"index": 2, "position": 3, "question": "Anyone home?", "answer": "Yes"},
-        {"index": 3, "position": 4, "question": "9 + 10?", "answer": "21"}
-    ];
+    // const defaultCards = [
+    //     {"index": 0, "position": 1, "question": "HI?", "answer": "HELLO"},
+    //     {"index": 1, "position": 2, "question": "test?", "answer": "123"},
+    //     {"index": 2, "position": 3, "question": "Anyone home?", "answer": "Yes"},
+    //     {"index": 3, "position": 4, "question": "9 + 10?", "answer": "21"}
+    // ];
 
-    const [cards, setCards] = useState(defaultCards);
+    const [cards, setCards] = useState(props.cards);
 
     // Used to disabled the index buttons when it makes sense
     useEffect(() => {
         const container = document.getElementById("cards-container");
         if (!container) return;
 
-        const cards = container.children;
-        if (cards.length === 1) return;
+        const cardElements = container.children;
+        if (cardElements.length === 1) return;
 
         // Reset all elements
-        [...cards].forEach(card => {
-            const lastChild = card.lastChild;
-            if (lastChild.firstChild.classList?.contains("disabled")) {
-                lastChild.firstChild.classList.remove("disabled");
-                lastChild.firstChild.disabled = false;
+        [...cardElements].forEach(card => {
+            if (card instanceof HTMLButtonElement) return; // Ignore the new card button
+
+            const indexControls = card.lastChild.children[1];
+            if (indexControls.firstChild.classList?.contains("disabled")) {
+                indexControls.firstChild.classList.remove("disabled");
+                indexControls.firstChild.disabled = false;
             }
 
-            if (lastChild.lastChild.classList?.contains("disabled")) {
-                lastChild.lastChild.classList.remove("disabled");
-                lastChild.lastChild.disabled = false;
+            if (indexControls.lastChild.classList?.contains("disabled")) {
+                indexControls.lastChild.classList.remove("disabled");
+                indexControls.lastChild.disabled = false;
             }
         });
 
         // Disable the first and last card's index buttons since they have no effect
-        cards[0].lastChild.firstChild.classList.add("disabled");
-        cards[0].lastChild.firstChild.disabled = true;
-        cards[cards.length - 2].lastChild.lastChild.classList.add("disabled");
-        cards[cards.length - 2].lastChild.lastChild.disabled = true;
+        cardElements[0].lastChild.children[1].firstChild.classList.add("disabled");
+        cardElements[0].lastChild.children[1].firstChild.disabled = true;
+        cardElements[cardElements.length - 2].lastChild.children[1].lastChild.classList.add("disabled");
+        cardElements[cardElements.length - 2].lastChild.children[1].lastChild.disabled = true;
     }, [cards]);
 
     const addCard = () => {
@@ -52,10 +53,31 @@ const EditDeckModal = (props) => {
         const newCard = {
             "index": cards.length,
             "position": cards.length + 1,
-            "question": "New question",
-            "answer": "New answer"
+            "question": "",
+            "answer": ""
         };
         setCards([...cards, newCard]);
+    }
+
+    const removeCard = (index) => {
+        if (index < 0 || index > cards.length) {
+            console.log(`Index out of range (must be between 1 and ${cards.length})`);
+            return;
+        }
+
+        console.log("Removing card at", index);
+
+        const adjustedCards = [...cards];
+
+        adjustedCards.splice(index, 1); // Delete card at index
+
+        // Fix the indexes
+        for (let i = 0; i < adjustedCards.length; i++) {
+            adjustedCards[i].index = i;
+            adjustedCards[i].position = i + 1;
+        }
+
+        setCards(adjustedCards);
     }
 
     const increaseIndex = (currIndex) => {
@@ -140,6 +162,7 @@ const EditDeckModal = (props) => {
         }
     }
 
+    // TODO: Doesn't work for 2 cards
     const moveCard = (currIndex, newIndexString, event) => {
         // Return early if the user didn't press the enter key
         if (event.key !== "Enter") {
@@ -161,7 +184,7 @@ const EditDeckModal = (props) => {
         // If currIndex > newIndex then the change is negative so the diff is -1, otherwise it is 0
         let diff = currIndex > newIndex ? -1 : 0;
 
-        console.log("moving card from position", currIndex + 1, "to", newIndex);
+        console.log("Moving card from position", currIndex + 1, "to", newIndex);
 
         if (newIndex < 0 || newIndex > cards.length) {
             console.log(`Index out of range (must be between 1 and ${cards.length})`);
@@ -200,9 +223,15 @@ const EditDeckModal = (props) => {
         setCards(updatedCards);
     }
 
+    // TODO: Change to submit
+    const saveEdits = () => {
+        saveCards(props.folderId, props.deckId, cards);
+        props.toggleVisibility();
+    }
+
     // TODO: Surround cards container in form
     return (
-        <div className="static">
+        <div id="modal-root" className="static">
             <div id="modal-background" onClick={() => props.toggleVisibility()}></div>
 
             <div id="modal-container">
@@ -210,7 +239,7 @@ const EditDeckModal = (props) => {
                     <div id="modal-header">
                         <button className={"header-btn"} onClick={() => props.toggleVisibility()}>Cancel</button>
                         <h1>Edit Deck</h1>
-                        <button className={"header-btn save-btn"}>Save</button>
+                        <button className={"header-btn save-btn"} onClick={saveEdits}>Save</button>
                     </div>
 
                     <div id="cards-container">
@@ -218,7 +247,7 @@ const EditDeckModal = (props) => {
                             <EditDeckCard key={index} card={card} increaseIndex={increaseIndex}
                                           decreaseIndex={decreaseIndex} moveCard={moveCard}
                                           updateValue={updateValue} updatePosition={updatePosition}
-                                          resetPosition={resetPosition}></EditDeckCard>
+                                          resetPosition={resetPosition} removeCard={removeCard}></EditDeckCard>
                         ))}
                         <AddDeckCard addCard={addCard}></AddDeckCard>
                     </div>

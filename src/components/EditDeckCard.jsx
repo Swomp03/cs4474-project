@@ -12,6 +12,7 @@ export function EditDeckCard(props) {
     return (
         <>
             <div className="edit-card">
+
                 <span className="text-header">Question</span>
                 <input type="text" name="question" placeholder="Question..." className="text-input" value={card.question}
                        onChange={e => props.updateValue("question", card.index, e.target.value)}/>
@@ -20,13 +21,17 @@ export function EditDeckCard(props) {
                 <input type="text" name="answer" placeholder="Answer..." className="text-input" value={card.answer}
                        onChange={e => props.updateValue("answer", card.index, e.target.value, e)}/>
 
-                <div className="index-container">
-                    <button className="index-buttons" onClick={() => props.decreaseIndex(card.index)}>-</button>
-                    <input type="number" className="index-number-input" value={card.position}
-                           onChange={e => props.updatePosition(card.index, e.target.value)}
-                           onKeyDown={e => props.moveCard(card.index, e.target.value, e)}
-                           />
-                    <button className="index-buttons" onClick={() => props.increaseIndex(card.index)}>+</button>
+                <div className="card-footer">
+                    <div className="placeholder"></div>
+                    <div className="index-container">
+                        <button className="index-buttons" title="Decrease card postion" onClick={() => props.decreaseIndex(card.index)}>-</button>
+                        <input type="number" className="index-number-input" value={card.position}
+                               onChange={e => props.updatePosition(card.index, e.target.value)}
+                               onKeyDown={e => props.moveCard(card.index, e.target.value, e)}
+                        />
+                        <button className="index-buttons" title="Increase card postion" onClick={() => props.increaseIndex(card.index)}>+</button>
+                    </div>
+                    <button type="button" className="delete-card-btn" title="Delete this card" onClick={() => props.removeCard(card.index)}>X</button>
                 </div>
             </div>
         </>

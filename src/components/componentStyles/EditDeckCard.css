@@ -3,9 +3,11 @@
     flex-direction: column;
     padding: 16px;
     background-color: darkgray;
-    height: 12rem;
-    width: 15rem;
+    height: 15rem;
+    width: 20rem;
     border-radius: 25px;
+
+    /*flex: 1 1 auto;*/
 }
 
 #new-card {
@@ -25,9 +27,11 @@
     outline-offset: -4px;
 
     padding: 16px;
-    height: 12rem;
-    width: 15rem;
+    height: 15rem;
+    width: 20rem;
     border-radius: 25px;
+
+    /*flex: 1 1 auto;*/
 
     font-size: 20px;
 
@@ -38,8 +42,28 @@
     background-color: rgba(169, 169, 169, 0.1);
 }
 
+.delete-card-btn {
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    border-radius: 50px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+
+    transition: background-color 0.3s;
+}
+
+.delete-card-btn:hover {
+    background-color: #9f9f9f;
+}
+
 .text-header {
     margin-block: 0.4rem;
+    font-weight: bold;
 }
 
 .text-input {
@@ -62,12 +86,16 @@
     border-bottom: 1px solid #dfdfdf;
 }
 
-.index-container {
+.card-footer {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-top: auto;
+}
+
+.index-container {
+    display: flex;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -84,11 +112,16 @@
     outline: 1px solid #dfdfdf;
 }
 
-/* Chrome, Safari, Edge, Opera */
+/* Disable margin for inputs in Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.placeholder {
+    width: 28px;
+    height: 28px;
 }
 
 .index-buttons {

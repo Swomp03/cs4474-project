@@ -43,3 +43,17 @@ export const addCard = (folderId, deckId, question, answer) => {
     }
 }
 
+export const saveCards = (folderId, deckId, cards) => {
+    const data = loadData();
+    const folder = data.find(f => f.id === folderId);
+
+    if(folder){
+        const deck = folder.decks.find(d => d.id === deckId);
+        if(deck){
+            // TODO: Add warning about empty cards
+            deck.cards = cards;
+            saveData(data);
+        }
+    }
+}
+
