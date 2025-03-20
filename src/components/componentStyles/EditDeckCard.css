@@ -2,16 +2,19 @@ img {
     -webkit-user-drag: none;
 }
 
-.edit-card {
+.card {
     display: flex;
-    flex-direction: column;
     padding: 16px;
-    background-color: darkgray;
     height: 15rem;
     width: 20rem;
     border-radius: 25px;
 
     /*flex: 1 1 auto;*/
+}
+
+.edit-card {
+    flex-direction: column;
+    background-color: darkgray;
 }
 
 #new-card {
@@ -22,7 +25,6 @@ img {
     /*outline: inherit;*/
     box-sizing: unset;
 
-    display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
@@ -30,13 +32,6 @@ img {
 
     outline: 4px dashed grey;
     outline-offset: -4px;
-
-    padding: 16px;
-    height: 15rem;
-    width: 20rem;
-    border-radius: 25px;
-
-    /*flex: 1 1 auto;*/
 
     font-size: 20px;
 
@@ -136,10 +131,6 @@ input::-webkit-inner-spin-button {
 .card-btn > img {
     width: 20px;
     height: 20px;
-}
-
-.index-buttons:hover {
-    background-color: #9f9f9f;
 }
 
 .disabled {

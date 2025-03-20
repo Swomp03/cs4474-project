@@ -2,10 +2,11 @@ import "./componentStyles/EditDeckModal.css";
 
 import {useParams} from "react-router-dom";
 import {saveCards} from "../utils/localStorage.js";
-import {EditDeckCard, AddDeckCard} from "./EditDeckCard.jsx";
+import {EditDeckCards, AddDeckCard} from "./EditDeckCards.jsx";
 import {useEffect, useState} from "react";
 
 // TODO: Make escape hide modal as well?
+// TODO: Add warning on cancel?
 
 const EditDeckModal = (props) => {
     // const defaultCards = [
@@ -223,13 +224,15 @@ const EditDeckModal = (props) => {
         setCards(updatedCards);
     }
 
-    // TODO: Change to submit
-    const saveEdits = () => {
+    const saveEdits = (event) => {
+        event.preventDefault();
+
         saveCards(props.folderId, props.deckId, cards);
         props.toggleVisibility();
+
+        return true;
     }
 
-    // TODO: Surround cards container in form
     return (
         <div id="modal-root" className="static">
             <div id="modal-background" onClick={() => props.toggleVisibility()}></div>
@@ -237,20 +240,20 @@ const EditDeckModal = (props) => {
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button className={"header-btn"} onClick={() => props.toggleVisibility()}>Cancel</button>
+                        <button type="button" className={"header-btn"} onClick={() => props.toggleVisibility()}>Cancel</button>
                         <h1>Edit Deck</h1>
-                        <button className={"header-btn save-btn"} onClick={saveEdits}>Save</button>
+                        <button type="submit" className={"header-btn save-btn"} form="cards-container">Save</button>
                     </div>
 
-                    <div id="cards-container">
+                    <form id="cards-container" onSubmit={e => saveEdits(e)}>
                         {cards.map((card, index) => (
-                            <EditDeckCard key={index} card={card} increaseIndex={increaseIndex}
-                                          decreaseIndex={decreaseIndex} moveCard={moveCard}
-                                          updateValue={updateValue} updatePosition={updatePosition}
-                                          resetPosition={resetPosition} removeCard={removeCard}></EditDeckCard>
+                            <EditDeckCards key={index} card={card} increaseIndex={increaseIndex}
+                                           decreaseIndex={decreaseIndex} moveCard={moveCard}
+                                           updateValue={updateValue} updatePosition={updatePosition}
+                                           resetPosition={resetPosition} removeCard={removeCard}></EditDeckCards>
                         ))}
                         <AddDeckCard addCard={addCard}></AddDeckCard>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
