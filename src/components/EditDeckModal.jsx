@@ -3,7 +3,7 @@ import "./componentStyles/EditDeckModal.css";
 import {useParams} from "react-router-dom";
 import {loadData} from "../utils/localStorage.js";
 import {EditDeckCard, AddDeckCard} from "./EditDeckCard.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 // TODO: Make escape hide modal as well?
 
@@ -17,6 +17,34 @@ const EditDeckModal = (props) => {
     ];
 
     const [cards, setCards] = useState(defaultCards);
+
+    useEffect(() => {
+        const container = document.getElementById("cards-container");
+        if (!container) return;
+
+        const cards = container.children;
+        if (cards.length === 1) return;
+
+        // Reset all elements
+        [...cards].forEach(card => {
+            const lastChild = card.lastChild;
+            if (lastChild.firstChild.classList?.contains("disabled")) {
+                lastChild.firstChild.classList.remove("disabled");
+                lastChild.firstChild.disabled = false;
+            }
+
+            if (lastChild.lastChild.classList?.contains("disabled")) {
+                lastChild.lastChild.classList.remove("disabled");
+                lastChild.lastChild.disabled = false;
+            }
+        });
+
+        // Disable the first and last card's index buttons since they have no effect
+        cards[0].lastChild.firstChild.classList.add("disabled");
+        cards[0].lastChild.firstChild.disabled = true;
+        cards[cards.length - 2].lastChild.lastChild.classList.add("disabled");
+        cards[cards.length - 2].lastChild.lastChild.disabled = true;
+    }, [cards]);
 
     // TODO: Fix being unable to click padding around modal-container to close modal
 
@@ -64,9 +92,10 @@ const EditDeckModal = (props) => {
         setCards(newCards);
     }
 
+    // TODO: Going from high postion to low doesn't work
     const moveCard = (currIndex, newIndexString) => {
         if (newIndexString === "") {
-            // TODO: Allow blank again
+            // TODO: Allow blank again -- maybe select text on click
             return;
         }
 

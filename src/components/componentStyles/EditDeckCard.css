@@ -109,3 +109,9 @@ input::-webkit-inner-spin-button {
 .index-buttons:hover {
     background-color: #9f9f9f;
 }
+
+.disabled {
+    cursor: default;
+    background-color: transparent !important;
+    color: #cccccc !important;
+}
