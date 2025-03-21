@@ -1,12 +1,15 @@
 import "./componentStyles/EditDeckModal.css";
 
-import {useParams} from "react-router-dom";
 import {saveCards} from "../utils/localStorage.js";
 import {EditDeckCards, AddDeckCard} from "./EditDeckCards.jsx";
 import {useEffect, useState} from "react";
 
 // TODO: Make escape hide modal as well?
 // TODO: Add warning on cancel?
+
+// TODO: Improve colours
+// TODO: Increase inputs to 2 lines
+// TODO: Prevent text inputs from submitting
 
 const EditDeckModal = (props) => {
     // const defaultCards = [
@@ -18,7 +21,7 @@ const EditDeckModal = (props) => {
 
     const [cards, setCards] = useState(props.cards);
 
-    // Used to disabled the index buttons when it makes sense
+    // Used to disable the index buttons when it makes sense
     useEffect(() => {
         const container = document.getElementById("cards-container");
         if (!container) return;
@@ -163,7 +166,6 @@ const EditDeckModal = (props) => {
         }
     }
 
-    // TODO: Doesn't work for 2 cards
     const moveCard = (currIndex, newIndexString, event) => {
         // Return early if the user didn't press the enter key
         if (event.key !== "Enter") {
@@ -183,7 +185,7 @@ const EditDeckModal = (props) => {
         }
 
         // If currIndex > newIndex then the change is negative so the diff is -1, otherwise it is 0
-        let diff = currIndex > newIndex ? -1 : 0;
+        let diff = currIndex >= newIndex ? -1 : 0;
 
         console.log("Moving card from position", currIndex + 1, "to", newIndex);
 
@@ -192,7 +194,7 @@ const EditDeckModal = (props) => {
         } else {
             const adjustedCards = [...cards];
 
-            const movingCard =  adjustedCards.splice(currIndex, 1)[0]; // Remove original card
+            const movingCard = adjustedCards.splice(currIndex, 1)[0]; // Remove original card
             adjustedCards.splice(newIndex + diff, 0, movingCard); // Insert the moving card
 
             // Fix the indexes

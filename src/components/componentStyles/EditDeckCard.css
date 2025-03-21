@@ -5,8 +5,8 @@ img {
 .card {
     display: flex;
     padding: 16px;
-    height: 15rem;
-    width: 20rem;
+    height: 14rem;
+    width: 28rem;
     border-radius: 25px;
 
     /*flex: 1 1 auto;*/

@@ -50,7 +50,7 @@ export const saveCards = (folderId, deckId, cards) => {
     if(folder){
         const deck = folder.decks.find(d => d.id === deckId);
         if(deck){
-            // TODO: Add warning about empty cards
+            // TODO: Add warning about empty cards?
             deck.cards = cards;
             saveData(data);
         }
