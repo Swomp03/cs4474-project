@@ -41,7 +41,7 @@ export const addCard = (folderId, deckId, question, answer) => {
             saveData(data);
         }
     }
-}
+};
 
 export const saveCards = (folderId, deckId, cards) => {
     const data = loadData();
@@ -55,5 +55,10 @@ export const saveCards = (folderId, deckId, cards) => {
             saveData(data);
         }
     }
-}
+};
+
+// Save the updated order of folders
+export const saveFolders = (folders) => {
+    saveData(folders);
+};
 
