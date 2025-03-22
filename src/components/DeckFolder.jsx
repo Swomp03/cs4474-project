@@ -55,7 +55,7 @@ const DeckFolder = (props) =>{
                     <button className="add-new-deck-button">+ Add New Deck</button>
 
                     <div>
-                        <h2>Create a New Folder</h2>
+                        <h2>Create a New Folder </h2>
                         <form onSubmit={handleAddDeck}>
                             <input type="text" placeholder="Enter Deck Name" value={deckName} onChange={(e) => setDeckName(e.target.value)}/>
                             <input type="text" placeholder="Enter Deck Desc." value={deckDescription} onChange={(e2) => setDeckDescription(e2.target.value)}/>
