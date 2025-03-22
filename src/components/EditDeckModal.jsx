@@ -182,18 +182,16 @@ const EditDeckModal = (props) => {
             return;
         }
 
-        // If currIndex > newIndex then the change is negative so the diff is -1, otherwise it is 0
-        let diff = currIndex >= newIndex ? -1 : 0;
-
         console.log("Moving card from position", currIndex + 1, "to", newIndex);
 
         if (newIndex < 0 || newIndex > cards.length) {
             console.log(`Index out of range (must be between 1 and ${cards.length})`);
+            event.preventDefault(); // Prevent submitting
         } else {
             const adjustedCards = [...cards];
 
             const movingCard = adjustedCards.splice(currIndex, 1)[0]; // Remove original card
-            adjustedCards.splice(newIndex + diff, 0, movingCard); // Insert the moving card
+            adjustedCards.splice(newIndex - 1, 0, movingCard); // Insert the moving card
 
             // Fix the indexes
             for (let i = 0; i < adjustedCards.length; i++) {
