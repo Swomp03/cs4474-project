@@ -14,7 +14,9 @@ export const loadData = () => {
 // Adding a folder
 export const addFolder = (name) => {
     const data = loadData();
-    const newFolder = { id: Date.now().toString(), name, decks: [] };
+    const lastFolder = data[data.length - 1]; // Get the last folder in the list
+    const newPosition = lastFolder ? lastFolder.position + 1 : 1; // Set position to last folder's position + 1 (or 1 if no folders exist)
+    const newFolder = { id: Date.now().toString(), name, decks: [], position: newPosition };
     data.push(newFolder);
     saveData(data);
 };
@@ -41,7 +43,7 @@ export const addCard = (folderId, deckId, question, answer) => {
             saveData(data);
         }
     }
-}
+};
 
 export const saveCards = (folderId, deckId, cards) => {
     const data = loadData();
@@ -55,5 +57,10 @@ export const saveCards = (folderId, deckId, cards) => {
             saveData(data);
         }
     }
-}
+};
+
+// Save the updated order of folders
+export const saveFolders = (folders) => {
+    saveData(folders);
+};
 
