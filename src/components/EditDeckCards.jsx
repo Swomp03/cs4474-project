@@ -14,12 +14,12 @@ export function EditDeckCards(props) {
             <div className="card edit-card">
 
                 <span className="text-header">Question</span>
-                <input type="text" required={true} name="question" placeholder="Question..." className="text-input"
+                <textarea required={true} name="question" placeholder="Question..." className="text-input"
                        value={card.question}
                        onChange={e => props.updateValue("question", card.index, e.target.value)}/>
 
                 <span className="text-header">Answer</span>
-                <input type="text" required={true} name="answer" placeholder="Answer..." className="text-input"
+                <textarea required={true} name="answer" placeholder="Answer..." className="text-input"
                        value={card.answer}
                        onChange={e => props.updateValue("answer", card.index, e.target.value, e)}/>
 

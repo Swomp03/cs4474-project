@@ -42,6 +42,10 @@ img {
     background-color: rgba(169, 169, 169, 0.1);
 }
 
+#new-card:focus {
+    background-color: rgba(169, 169, 169, 0.1);
+}
+
 .text-header {
     margin-block: 0.4rem;
     font-weight: bold;
@@ -50,21 +54,29 @@ img {
 .text-input {
     background-color: transparent;
     color: inherit;
-    border: 1px solid transparent;
+    border: 1px solid #d8d8d8;
     /*border-bottom: 1px solid #dfdfdf;*/
-    /*border-radius: 10px;*/
+    border-radius: 10px;
     /*width: 64px;*/
     /*height: 32px;*/
-    padding: 0;
+    padding: 6px;
     /*text-align: center;*/
     /*font-size: 18px;*/
     /*outline: 1px solid #dfdfdf;*/
 
-    transition: border-bottom 0.2s;
+    resize: none;
+
+    transition: background-color 0.2s;
 }
 
 .text-input:hover {
-    border-bottom: 1px solid #dfdfdf;
+    background-color: rgb(156, 156, 156);
+}
+
+.text-input:focus {
+    background-color: rgb(156, 156, 156);
+    outline: #1698ff solid 2px;
+    outline-offset: 2px;
 }
 
 .card-footer {
@@ -91,6 +103,11 @@ img {
     text-align: center;
     font-size: 18px;
     outline: 1px solid #dfdfdf;
+}
+
+.index-number-input:focus {
+    outline: #1698ff solid 2px;
+    outline-offset: 2px;
 }
 
 /* Disable margin for inputs in Chrome, Safari, Edge, Opera */
@@ -128,6 +145,12 @@ input::-webkit-inner-spin-button {
     background-color: #9f9f9f;
 }
 
+.card-btn:focus {
+    background-color: #9f9f9f;
+    outline: #1698ff solid 2px;
+    outline-offset: 2px;
+}
+
 .card-btn > img {
     width: 20px;
     height: 20px;
@@ -136,5 +159,6 @@ input::-webkit-inner-spin-button {
 .disabled {
     cursor: default;
     background-color: transparent !important;
-    color: #cccccc !important;
+    /*color: #cccccc !important;*/
+    opacity: 0.4;
 }

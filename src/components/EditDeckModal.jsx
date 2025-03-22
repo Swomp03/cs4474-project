@@ -8,8 +8,6 @@ import {useEffect, useState} from "react";
 // TODO: Add warning on cancel?
 
 // TODO: Improve colours
-// TODO: Increase inputs to 2 lines
-// TODO: Prevent text inputs from submitting
 
 const EditDeckModal = (props) => {
     // const defaultCards = [
