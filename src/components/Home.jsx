@@ -120,7 +120,7 @@ const Home = () => {
                     {isEditMode ? "Save Layout" : "Edit Layout"}
                 </button>
                 <h1>Decks</h1>
-                <button id="new-folder-button">+ New Folder</button>
+                <button id="new-folder-button">+ New Folder </button>
             </div>
 
             <div className="deck-folders">

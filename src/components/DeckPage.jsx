@@ -25,7 +25,7 @@ const DeckPage = () =>{
     return(
         <>
             <a href="/"><button id='return-button'>Return</button></a>
-        
+    
             <div id='deck-body'>
                 <h1 id='deck-name'>{foundDeck.name}</h1>
                 <h3 id='deck-subtitle'><i>{foundDeck.description}</i></h3>
