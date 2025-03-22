@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+// import { createHashRouter, RouterProvider } from 'react-router-dom'
 
 import Home from './components/Home.jsx'
 import DeckPage from './components/DeckPage.jsx'
