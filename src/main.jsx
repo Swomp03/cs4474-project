@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: <DeckPage></DeckPage>
   },
   {
-    path: '/playpage',
+    path: '/playpage/:folderId/:deckId',
     element: <PlayPage></PlayPage>
   }
 ]);
