@@ -1,27 +1,18 @@
 import "./componentStyles/Home.css";
 import DeckFolder from "./DeckFolder";
 import { useEffect, useState } from "react";
-import { loadData, addFolder, saveFolders } from "../utils/localStorage"; // Import saveFolders
+import { loadData, addFolder, saveFolders } from "../utils/localStorage";
 
 const Home = () => {
-    // State to track the folder name input
     const [folderName, setFolderName] = useState("");
-
-    // State to store the list of folders
     const [folders, setFolders] = useState([]);
-
-    // State to track whether the layout is in "edit mode"
     const [isEditMode, setIsEditMode] = useState(false);
-
-    // State to store temporary input values for new positions
     const [newPositions, setNewPositions] = useState({});
 
-    // Load folders from localStorage when the component mounts
     useEffect(() => {
         setFolders(loadData());
     }, []);
 
-    // Function to handle form submission for adding a new folder
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!folderName.trim()) return;
@@ -31,26 +22,21 @@ const Home = () => {
         setFolderName("");
     };
 
-    // Function to toggle edit mode
     const toggleEditMode = () => {
         if (isEditMode) {
-            // Save the new order of folders when exiting edit mode
             saveFolders(folders);
-            setNewPositions({}); // Clear the new positions state
+            setNewPositions({});
         }
         setIsEditMode(!isEditMode);
     };
 
-    // Function to handle changes in the new position input field
     const handleNewPositionChange = (folderId, newPosition) => {
-        // Update the new positions state
         setNewPositions((prev) => ({
             ...prev,
             [folderId]: newPosition,
         }));
     };
 
-    // Function to update the folder's position when the user presses Enter
     const updateFolderPosition = (folderId, newPosition, event) => {
         // Only proceed if the Enter key is pressed
         if (event.key !== "Enter") {
@@ -86,17 +72,23 @@ const Home = () => {
             return;
         }
 
-        // Remove the folder from its current position
-        const filteredFolders = updatedFolders.filter((folder) => folder.id !== folderId);
+        // Find the folder currently at the new position
+        const folderAtNewPosition = updatedFolders.find(
+            (folder) => folder.position === newPositionNumber
+        );
 
-        // Insert the folder at the new position
-        filteredFolders.splice(newPositionNumber - 1, 0, folderToMove);
+        // Swap positions
+        if (folderAtNewPosition) {
+            const tempPosition = folderToMove.position;
+            folderToMove.position = folderAtNewPosition.position;
+            folderAtNewPosition.position = tempPosition;
+        } else {
+            // If no folder is at the new position, just move the folder
+            folderToMove.position = newPositionNumber;
+        }
 
-        // Update the positions of all folders
-        const reorderedFolders = filteredFolders.map((folder, index) => ({
-            ...folder,
-            position: index + 1, // Update the position property
-        }));
+        // Sort folders by position
+        const reorderedFolders = updatedFolders.sort((a, b) => a.position - b.position);
 
         // Update the state with the new order of folders
         setFolders(reorderedFolders);
@@ -149,7 +141,7 @@ const Home = () => {
                                     type="number"
                                     min="1"
                                     max={folders.length}
-                                    value={newPositions[folder.id] ?? ""} // Use newPositions if it exists, otherwise use an empty string
+                                    value={newPositions[folder.id] ?? ""}
                                     onChange={(e) =>
                                         handleNewPositionChange(folder.id, e.target.value)
                                     }
