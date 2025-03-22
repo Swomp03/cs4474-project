@@ -10,8 +10,8 @@ import Home from './components/Home.jsx'
 import DeckPage from './components/DeckPage.jsx'
 import PlayPage from './components/PlayPage.jsx'
 
-const router = createHashRouter([
-// const router = createBrowserRouter([
+// const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Home></Home>
