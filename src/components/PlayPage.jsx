@@ -27,31 +27,33 @@ const PlayPage = () => {
   };
 
   const toggleAnswer = () => {
-    const card = document.getElementById("card-display");
+    const card = document.getElementById("card");
     if (!card) return;
 
-    card.classList.add("reveal");
+    card.classList.toggle("reveal");
 
-    setTimeout(function(){
-      setShowAnswer(!showAnswer);
-    }, 250);
-
-    setTimeout(function(){
-      card.classList.remove("reveal");
-    }, 510);
+    setShowAnswer(!showAnswer);
   };
 
   return (
     <div className="play-page">
       <button className="return-button" onClick={() => navigate(-1)}>Return</button>
-      <div id="card-display">
-        <div className="card-content">
-          {showAnswer ? foundDeck.cards[currentIndex].answer : foundDeck.cards[currentIndex].question}
+
+      <div id="card">
+        <div id="card-inner">
+          <div id="card-front">
+            <span className="card-text">{foundDeck.cards[currentIndex].question}</span>
+          </div>
+          <div id="card-back">
+            <span className="card-text">{foundDeck.cards[currentIndex].answer}</span>
+          </div>
         </div>
       </div>
+
       <button className="toggle-answer-button" onClick={toggleAnswer}>
         {showAnswer ? 'Hide Answer' : 'Show Answer'}
       </button>
+
       <div className="navigation">
         <button onClick={handlePrev} disabled={currentIndex === 0}>Prev</button>
         <span>{currentIndex + 1}/{foundDeck.cards.length}</span>
