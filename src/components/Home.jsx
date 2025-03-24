@@ -2,12 +2,17 @@ import "./componentStyles/Home.css";
 import DeckFolder from "./DeckFolder";
 import { useEffect, useState } from "react";
 import { loadData, addFolder, saveFolders } from "../utils/localStorage";
+import useToggle from "./hooks/useToggle.js";
+import NewFolderModal from "./NewFolderModal.jsx";
 
 const Home = () => {
     const [folderName, setFolderName] = useState("");
     const [folders, setFolders] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false);
     const [newPositions, setNewPositions] = useState({});
+    
+    const { state: visible, toggle: toggleVisibility } = useToggle();
+    
 
     useEffect(() => {
         setFolders(loadData());
@@ -100,6 +105,10 @@ const Home = () => {
         }));
     };
 
+    const updateFolders = (updatedFolders) => {
+        setFolders(updatedFolders);
+    };
+    
     return (
         <>
             <div>
@@ -120,8 +129,9 @@ const Home = () => {
                     {isEditMode ? "Save Layout" : "Edit Layout"}
                 </button>
                 <h1>Decks</h1>
-                <button id="new-folder-button">+ New Folder</button>
+                <button id="new-folder-button" onClick={toggleVisibility}>+ New Folder</button>
             </div>
+            {visible && <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders}></NewFolderModal>}
 
             <div className="deck-folders">
                 {folders.map((folder) => (
