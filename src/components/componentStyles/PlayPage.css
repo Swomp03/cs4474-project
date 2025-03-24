@@ -8,9 +8,9 @@
     color: white;
     text-align: center;
     position: relative;
-  }
-  
-  .return-button {
+}
+
+.return-button {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -20,9 +20,48 @@
     border-radius: 5px;
     color: white;
     cursor: pointer;
-  }
-  
-  .card-display {
+}
+
+
+@keyframes float-in {
+    0% {
+        left: -800px; top: -800px;
+        transform: rotate(120deg)
+    }
+    /*20%  {left:-400px; top:-400px; transform: rotate(20deg);}*/
+    /*40%  {left:-300px; top:-300px; transform: rotate(20deg);}*/
+    50% {
+        left: -300px; top: -500px;
+    }
+    /*60%  {left:-200px; top:-200px; transform: rotate(20deg);}*/
+    /*80%  {left:-100px; top:-100px; transform: rotate(20deg);}*/
+    100% {
+        left: 0; top: 0;
+    }
+}
+
+@keyframes reveal {
+    0% {
+        /*transform: rotateX(0deg);*/
+    }
+    49% {
+        /*transform: rotateX(90deg);*/
+        transform: rotateX(90deg) rotateY(0deg) rotateZ(15deg);
+        /*width: 55%;*/
+    }
+    51% {
+        /*transform: rotateX(90deg);*/
+        transform: rotateX(90deg) rotateY(0deg) rotateZ(-15deg);
+        /*width: 55%;*/
+    }
+    100% {
+        /*transform: rotateX(0deg);*/
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        /*width: 60%;*/
+    }
+}
+
+#card-display {
     background-color: #888;
     width: 60%;
     height: 50%;
@@ -31,20 +70,29 @@
     justify-content: center;
     margin: 20px 0;
     border-radius: 10px;
-  }
-  
-  .card-content {
+
+    /*position: relative;*/
+    /*animation-name: float-in;*/
+    animation-duration: 500ms;
+    animation-timing-function: linear;
+}
+
+.reveal {
+    animation-name: reveal;
+}
+
+.card-content {
     font-size: 32px;
-  }
-  
-  .navigation {
+}
+
+.navigation {
     display: flex;
     justify-content: space-between;
     width: 200px;
     margin-top: 20px;
-  }
-  
-  button {
+}
+
+button {
     background-color: #555;
     border: none;
     padding: 10px;
@@ -52,13 +100,14 @@
     color: white;
     cursor: pointer;
     font-size: 18px;
-  }
-  
-  button:disabled {
+}
+
+button:disabled {
     background-color: #777;
     cursor: not-allowed;
-  }
-  .toggle-answer-button {
+}
+
+.toggle-answer-button {
     background-color: #555;
     border: none;
     padding: 10px;
@@ -67,4 +116,4 @@
     cursor: pointer;
     font-size: 18px;
     margin: 10px 0;
-  }
+}

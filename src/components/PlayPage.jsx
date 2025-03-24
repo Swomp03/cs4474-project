@@ -27,13 +27,24 @@ const PlayPage = () => {
   };
 
   const toggleAnswer = () => {
-    setShowAnswer(!showAnswer);
+    const card = document.getElementById("card-display");
+    if (!card) return;
+
+    card.classList.add("reveal");
+
+    setTimeout(function(){
+      setShowAnswer(!showAnswer);
+    }, 250);
+
+    setTimeout(function(){
+      card.classList.remove("reveal");
+    }, 510);
   };
 
   return (
     <div className="play-page">
       <button className="return-button" onClick={() => navigate(-1)}>Return</button>
-      <div className="card-display">
+      <div id="card-display">
         <div className="card-content">
           {showAnswer ? foundDeck.cards[currentIndex].answer : foundDeck.cards[currentIndex].question}
         </div>
