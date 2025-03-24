@@ -3,7 +3,7 @@
 
 
 
-import "./componentStyles/NewFolderModal.css";
+import "./componentStyles/PositionEditorModal.css";
 import { saveFolders, addFolder, loadData } from "../utils/localStorage.js";
 import { EditFolder, AddFolderCard } from "./EditFolders.jsx";
 import { useEffect, useState } from "react";
@@ -87,7 +87,7 @@ const NewFolderModal = (props) => {
                         <button type="submit" className={"header-btn save-btn"} form="folders-container">Save</button>
                     </div>
 
-                    <form id="folders-container" onSubmit={saveEdits}>
+                    <form id="folders-container" className="group-container" onSubmit={saveEdits}>
                         {folders.map((folder, index) => (
                             <EditFolder key={index} folder={folder} updateName={updateName} removeFolder={() => removeFolder(index)} />
                         ))}

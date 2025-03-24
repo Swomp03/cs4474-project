@@ -75,7 +75,7 @@
     background-color: #1698ff;
 }
 
-#folders-container {
+.group-container {
     display: flex;
     flex-wrap: wrap;
     gap: .75rem;

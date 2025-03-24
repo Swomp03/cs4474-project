@@ -1,4 +1,4 @@
-import "./componentStyles/EditDeckModal.css";
+import "./componentStyles/PositionEditorModal.css";
 
 import {saveCards} from "../utils/localStorage.js";
 import {EditDeckCards, AddDeckCard} from "./EditDeckCards.jsx";
@@ -243,7 +243,7 @@ const EditDeckModal = (props) => {
                         <button type="submit" className={"header-btn save-btn"} form="cards-container">Save</button>
                     </div>
 
-                    <form id="cards-container" onSubmit={e => saveEdits(e)}>
+                    <form id="cards-container" className="group-container" onSubmit={e => saveEdits(e)}>
                         {cards.map((card, index) => (
                             <EditDeckCards key={index} card={card} increaseIndex={increaseIndex}
                                            decreaseIndex={decreaseIndex} moveCard={moveCard}

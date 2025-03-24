@@ -69,6 +69,7 @@
 .card-text {
     width: 100%;
     overflow: hidden;
+    white-space: pre-line;
 }
 
 .navigation {
