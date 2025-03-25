@@ -31,3 +31,10 @@
     display: grid;
     width: 30vh;
 }
+
+.new-deck-background{
+    background-color: rgb(120, 120, 120);
+    border-radius: 5px;
+    padding-left: 1vh;
+    padding-bottom: 1vh;
+}

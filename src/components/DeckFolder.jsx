@@ -1,6 +1,7 @@
 import { addDeck } from "../utils/localStorage";
 import "./componentStyles/DeckFolder.css"
 import { useState } from "react";
+import editIcon from "../assets/icons/edit.svg";
 
 const DeckFolder = (props) =>{
 
@@ -52,21 +53,21 @@ const DeckFolder = (props) =>{
                 <button className="folder-button">{folderName}</button>
                 
                 <div className="dropdown-group">
-                    <button className="add-new-deck-button">+ Add New Deck</button>
+                    {/* <button className="add-new-deck-button">+ Add New Deck</button> */}
 
-                    <div>
-                        <h2>Create a New Folder </h2>
+                    <div className="new-deck-background">
+                        <h2>New Deck:</h2>
                         <form onSubmit={handleAddDeck}>
                             <input type="text" placeholder="Enter Deck Name" value={deckName} onChange={(e) => setDeckName(e.target.value)}/>
                             <input type="text" placeholder="Enter Deck Desc." value={deckDescription} onChange={(e2) => setDeckDescription(e2.target.value)}/>
-                            <button type="submit">Add Folder</button>
+                            <button type="submit">Add Deck</button>
                         </form>
                     </div>
 
                     {decks.map((deck) => (
                         <a href={`/deckpage/${folderId}/${deck.id}`}>
                             <div key={deck.id} className="deck-group">
-                                <p className="deck-name">{deck.name}</p>
+                                <p className="deck-name">{deck.name} <img src={editIcon} alt="Edit Icon" /></p>
                                 <p className="deck-description"><i>{deck.description}</i></p>
                             </div>
                         </a>

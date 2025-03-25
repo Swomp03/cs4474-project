@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { loadData, addFolder, saveFolders } from "../utils/localStorage";
 import useToggle from "./hooks/useToggle.js";
 import NewFolderModal from "./NewFolderModal.jsx";
+import dashboardIcon from "../assets/icons/space_dashboard.svg"
 
 const Home = () => {
     const [folderName, setFolderName] = useState("");
@@ -17,15 +18,6 @@ const Home = () => {
     useEffect(() => {
         setFolders(loadData());
     }, []);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (!folderName.trim()) return;
-
-        addFolder(folderName);
-        setFolders(loadData());
-        setFolderName("");
-    };
 
     const toggleEditMode = () => {
         if (isEditMode) {
@@ -111,7 +103,7 @@ const Home = () => {
     
     return (
         <>
-            <div>
+            {/* <div>
                 <h2>Create a New Folder</h2>
                 <form onSubmit={handleSubmit}>
                     <input
@@ -122,11 +114,12 @@ const Home = () => {
                     />
                     <button type="submit">Add Folder</button>
                 </form>
-            </div>
+            </div> */}
 
             <div className="home-header">
                 <button id="edit-layout-button" onClick={toggleEditMode}>
-                    {isEditMode ? "Save Layout" : "Edit Layout"}
+                    <img src={dashboardIcon} alt="Dashboard Icon" />
+                    {isEditMode ? " Save Layout" : " Edit Layout"}
                 </button>
                 <h1>Decks</h1>
                 <button id="new-folder-button" onClick={toggleVisibility}>+ New Folder</button>
