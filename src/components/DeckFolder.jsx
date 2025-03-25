@@ -60,7 +60,7 @@ const DeckFolder = (props) =>{
                         <form onSubmit={handleAddDeck}>
                             <input type="text" placeholder="Enter Deck Name" value={deckName} onChange={(e) => setDeckName(e.target.value)}/>
                             <input type="text" placeholder="Enter Deck Desc." value={deckDescription} onChange={(e2) => setDeckDescription(e2.target.value)}/>
-                            <button type="submit">Add Deck</button>
+                            <button type="submit">+ Add Deck</button>
                         </form>
                     </div>
 
