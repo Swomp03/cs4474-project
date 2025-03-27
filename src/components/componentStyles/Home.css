@@ -1,35 +1,76 @@
+body {
+    overflow: hidden;
+    margin: 12px;
+}
 
+#root {
+    height: 100vh;
+}
 
-.home-header{
+.home-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
 }
 
-.deck-folders{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
+.deck-folders-container {
+    position: absolute;
+    top: 135px;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+
+    display: flex;
+    padding-block: 1em;
+
+    /*height: 80vh;*/
+
     background-color: rgb(57, 57, 57);
+    border-radius: 25px;
+}
+
+.deck-folders {
+    /*height: -webkit-fill-available;*/
+
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    height: 80vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    gap: 4em;
+
+    overflow-y:  scroll;
+    /*overflow-x: hidden;*/
+
+    padding-left: 17px; /* TODO: Ensure this is correct for scrollbar width*/
+    scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
+    margin-inline: 5px;
 }
 
-.deck-folder-group{
-    margin: 2vh 10vh;
+/*.deck-folders::-webkit-scrollbar {*/
+/*    width:30px;*/
+/*    background:transparent;*/
+/*}*/
+
+/*.deck-folders::-webkit-scrollbar-thumb {*/
+/*    border: 10px solid rgba(0, 0, 0, 0);*/
+/*    background-clip: padding-box;*/
+/*    border-radius: 9999px;*/
+/*    background-color: #AAAAAA;*/
+/*}*/
+
+.home-header > button {
+    height: 5rem;
+    width: 15rem;
+    font-size: calc(14px + .5vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 50px;
 }
 
-#edit-layout-button{
-    margin-left: 5vh;
-    height: 10vh;
-    width: 50vh;
-    font-size: 28px;
-}
-
-#new-folder-button{
-    margin-right: 5vh;
-    height: 10vh;
-    width: 50vh;
-    font-size: 28px;
-}
+/*.home-header > button > img {*/
+/*    height: 18px;*/
+/*    !*color: white;*!*/
+/*}*/

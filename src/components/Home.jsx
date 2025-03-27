@@ -5,6 +5,7 @@ import { loadData, addFolder, saveFolders } from "../utils/localStorage";
 import useToggle from "./hooks/useToggle.js";
 import NewFolderModal from "./NewFolderModal.jsx";
 import dashboardIcon from "../assets/icons/space_dashboard.svg"
+import plusIcon from "../assets/icons/plus.svg"
 
 const Home = () => {
     const [folderName, setFolderName] = useState("");
@@ -103,59 +104,52 @@ const Home = () => {
     
     return (
         <>
-            {/* <div>
-                <h2>Create a New Folder</h2>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Enter Folder Name"
-                        value={folderName}
-                        onChange={(event) => setFolderName(event.target.value)}
-                    />
-                    <button type="submit">Add Folder</button>
-                </form>
-            </div> */}
-
             <div className="home-header">
                 <button id="edit-layout-button" onClick={toggleEditMode}>
                     <img src={dashboardIcon} alt="Dashboard Icon" />
                     {isEditMode ? " Save Layout" : " Edit Layout"}
                 </button>
                 <h1>Decks</h1>
-                <button id="new-folder-button" onClick={toggleVisibility}>+ New Folder</button>
+                <button id="new-folder-button" onClick={toggleVisibility}>
+                    <img src={plusIcon} alt="Plus Icon"/>
+                    New Folder
+                </button>
             </div>
-            {visible && <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders}></NewFolderModal>}
+            {visible &&
+                <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders}></NewFolderModal>}
 
-            <div className="deck-folders">
-                {folders.map((folder) => (
-                    <div key={folder.id} className="deck-folder-group">
-                        <DeckFolder key={folder.id} folder={folder}></DeckFolder>
+            <div className="deck-folders-container">
+                <div className="deck-folders">
+                    {folders.map((folder) => (
+                        <div key={folder.id} className="deck-folder-group">
+                            <DeckFolder key={folder.id} folder={folder}></DeckFolder>
 
-                        {/* Static position field (always visible) */}
-                        <div className="position-container">
-                            <span>Position: {folder.position}</span>
-                        </div>
-
-                        {/* New position field (visible only in edit mode) */}
-                        {isEditMode && (
-                            <div className="new-position-container">
-                                <label>New Position:</label>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max={folders.length}
-                                    value={newPositions[folder.id] ?? ""}
-                                    onChange={(e) =>
-                                        handleNewPositionChange(folder.id, e.target.value)
-                                    }
-                                    onKeyDown={(e) =>
-                                        updateFolderPosition(folder.id, e.target.value, e)
-                                    }
-                                />
+                            {/* Static position field (always visible) */}
+                            <div className="position-container">
+                                <span>Position: {folder.position}</span>
                             </div>
-                        )}
-                    </div>
-                ))}
+
+                            {/* New position field (visible only in edit mode) */}
+                            {isEditMode && (
+                                <div className="new-position-container">
+                                    <label>New Position:</label>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        max={folders.length}
+                                        value={newPositions[folder.id] ?? ""}
+                                        onChange={(e) =>
+                                            handleNewPositionChange(folder.id, e.target.value)
+                                        }
+                                        onKeyDown={(e) =>
+                                            updateFolderPosition(folder.id, e.target.value, e)
+                                        }
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );

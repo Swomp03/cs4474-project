@@ -80,12 +80,12 @@
     flex-wrap: wrap;
     gap: .75rem;
     justify-content: center;
-    margin-left: 17px; /* TODO: Ensure this is correct for scrollbar width*/
     overflow-x: hidden;
     overflow-y: scroll;
     max-height: 60vh;
     padding-inline: 1.5rem;
     margin-bottom: 1rem;
 
+    margin-left: 17px; /* TODO: Ensure this is correct for scrollbar width*/
     scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
 }
