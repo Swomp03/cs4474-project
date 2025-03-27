@@ -3,7 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: light;
   color: rgba(255, 255, 255, 0.87);
   background-color: #4d4d4d;
 
@@ -11,6 +11,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --content-container-bkgr-colour: rgb(57, 57, 57);
+  --border-radius: 25px;
+}
+
+body {
+  overflow: hidden;
+  margin: 12px;
+}
+
+#root {
+  height: calc(100vh - 24px);
 }
 
 a {
@@ -25,4 +37,55 @@ a:hover {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+textarea {
+  font-family: inherit;
+}
+
+button {
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.default-btn {
+  background-color: #555;
+  border: none;
+  padding: 10px;
+  border-radius: 999px;
+  font-size: 18px;
+}
+
+.default-btn:disabled {
+  background-color: #454545;
+}
+
+.primary-btn {
+  background-color: #2b92d8;
+  border: none;
+  padding: 10px;
+  border-radius: 999px;
+  font-size: 18px;
+}
+
+.large-btn {
+  height: 6rem;
+  width: calc(7.5rem + 15vw);
+  font-size: 24px;
+}
+
+#return-button{
+  /*margin: 1rem;*/
+  margin-bottom: 12px;
+  flex: 0 0 auto;
 }

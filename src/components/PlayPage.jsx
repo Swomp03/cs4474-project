@@ -1,7 +1,8 @@
+import './componentStyles/PlayPage.css';
+
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { loadData } from '../utils/localStorage';
-import './componentStyles/PlayPage.css';
 
 const PlayPage = () => {
   const { folderId, deckId } = useParams();
@@ -36,28 +37,30 @@ const PlayPage = () => {
   };
 
   return (
-    <div className="play-page">
-      <button className="return-button" onClick={() => navigate(-1)}>Return</button>
+    <div className="page-container">
+      <button id="return-button" className="large-btn default-btn" onClick={() => navigate(-1)}>Return</button>
 
-      <div id="card">
-        <div id="card-inner">
-          <div id="card-front">
-            <span className="card-text">{foundDeck.cards[currentIndex].question}</span>
-          </div>
-          <div id="card-back">
-            <span className="card-text">{foundDeck.cards[currentIndex].answer}</span>
+      <div id="play-page-content">
+        <div id="card">
+          <div id="card-inner">
+            <div id="card-front">
+              <span className="card-text">{foundDeck.cards[currentIndex].question}</span>
+            </div>
+            <div id="card-back">
+              <span className="card-text">{foundDeck.cards[currentIndex].answer}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <button className="toggle-answer-button" onClick={toggleAnswer}>
-        {showAnswer ? 'Hide Answer' : 'Show Answer'}
-      </button>
+        <button id="toggle-answer-button" className="default-btn" onClick={toggleAnswer}>
+          {showAnswer ? 'Hide Answer' : 'Show Answer'}
+        </button>
 
-      <div className="navigation">
-        <button onClick={handlePrev} disabled={currentIndex === 0}>Prev</button>
-        <span>{currentIndex + 1}/{foundDeck.cards.length}</span>
-        <button onClick={handleNext} disabled={currentIndex === foundDeck.cards.length - 1}>Next</button>
+        <div id="navigation">
+          <button className="default-btn" onClick={handlePrev} disabled={currentIndex === 0}>Prev</button>
+          <span>{currentIndex + 1}/{foundDeck.cards.length}</span>
+          <button className="default-btn" onClick={handleNext} disabled={currentIndex === foundDeck.cards.length - 1}>Next</button>
+        </div>
       </div>
     </div>
   );

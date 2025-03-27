@@ -1,14 +1,16 @@
 import "./componentStyles/Home.css";
+
 import DeckFolder from "./DeckFolder";
 import { useEffect, useState } from "react";
-import { loadData, addFolder, saveFolders } from "../utils/localStorage";
+import { loadData, saveFolders } from "../utils/localStorage";
 import useToggle from "./hooks/useToggle.js";
 import NewFolderModal from "./NewFolderModal.jsx";
+
 import dashboardIcon from "../assets/icons/space_dashboard.svg"
 import plusIcon from "../assets/icons/plus.svg"
 
 const Home = () => {
-    const [folderName, setFolderName] = useState("");
+    // const [folderName, setFolderName] = useState("");
     const [folders, setFolders] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false);
     const [newPositions, setNewPositions] = useState({});
@@ -105,12 +107,12 @@ const Home = () => {
     return (
         <>
             <div className="home-header">
-                <button id="edit-layout-button" onClick={toggleEditMode}>
+                <button id="edit-layout-button" className="default-btn" onClick={toggleEditMode}>
                     <img src={dashboardIcon} alt="Dashboard Icon" />
                     {isEditMode ? " Save Layout" : " Edit Layout"}
                 </button>
                 <h1>Decks</h1>
-                <button id="new-folder-button" onClick={toggleVisibility}>
+                <button id="new-folder-button" className="default-btn" onClick={toggleVisibility}>
                     <img src={plusIcon} alt="Plus Icon"/>
                     New Folder
                 </button>

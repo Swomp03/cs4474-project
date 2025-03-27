@@ -1,31 +1,19 @@
-.play-page {
+#play-page-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #333;
-    color: white;
+    height: 100%;
+    background-color: var(--content-container-bkgr-colour);
     text-align: center;
     position: relative;
-}
-
-.return-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: #666;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+    border-radius: var(--border-radius);
 }
 
 #card {
     width: 60%;
-    height: 50%;
-    margin: 20px 0;
+    height: 65%;
+    margin-block: 20px;
     perspective: 1000px;
     font-size: 32px;
 }
@@ -59,7 +47,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 }
 
 #card-back {
@@ -72,36 +60,21 @@
     white-space: pre-line;
 }
 
-.navigation {
+#navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 200px;
-    margin-top: 20px;
+    width: 300px;
+    margin-block: 20px;
 }
 
-button {
-    background-color: #555;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
+#navigation button {
+    height: 3em;
+    width: 6em;
 }
 
-button:disabled {
-    background-color: #777;
-    cursor: not-allowed;
-}
-
-.toggle-answer-button {
-    background-color: #555;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
-    margin: 10px 0;
+#toggle-answer-button {
+    margin-block: 10px;
+    height: 4em;
+    width: 10em;
 }

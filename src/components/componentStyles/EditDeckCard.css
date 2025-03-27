@@ -7,7 +7,7 @@ img {
     padding: 16px;
     height: 14rem;
     width: 28rem;
-    border-radius: 25px;
+    border-radius: var(--border-radius);
 
     /*flex: 1 1 auto;*/
 }
@@ -61,7 +61,7 @@ img {
     /*height: 32px;*/
     padding: 6px;
     /*text-align: center;*/
-    /*font-size: 18px;*/
+    font-size: 14px;
     /*outline: 1px solid #dfdfdf;*/
 
     resize: none;

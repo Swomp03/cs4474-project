@@ -1,5 +1,6 @@
-import { addDeck } from "../utils/localStorage";
 import "./componentStyles/DeckFolder.css"
+
+import { addDeck } from "../utils/localStorage";
 import { useState } from "react";
 import editIcon from "../assets/icons/edit.svg";
 

@@ -6,7 +6,7 @@
 
 #deck-body{
     text-align: center;
-    background-color: rgb(57, 57, 57);
+    background-color: var(--content-container-bkgr-colour);
     margin-left: 10vh;
     margin-right: 10vh;
 }
@@ -36,17 +36,8 @@
     margin: 5vh 0;
 }
 
-#return-button{
-    height: 10vh;
-    width: 50vh;
-    font-size: 28px;
-    margin-top: 2vh;
-    margin-left: 2vh;
-}
-
 #study-now-button{
     margin-left: 2vh;
-    background-color: blue;
 }
 
 
