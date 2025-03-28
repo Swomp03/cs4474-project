@@ -7,16 +7,7 @@ import {useEffect, useState} from "react";
 // TODO: Make escape hide modal as well?
 // TODO: Add warning on cancel?
 
-// TODO: Improve colours
-
 const EditDeckModal = (props) => {
-    // const defaultCards = [
-    //     {"index": 0, "position": 1, "question": "HI?", "answer": "HELLO"},
-    //     {"index": 1, "position": 2, "question": "test?", "answer": "123"},
-    //     {"index": 2, "position": 3, "question": "Anyone home?", "answer": "Yes"},
-    //     {"index": 3, "position": 4, "question": "9 + 10?", "answer": "21"}
-    // ];
-
     const [cards, setCards] = useState(props.cards);
 
     // Used to disable the index buttons when it makes sense

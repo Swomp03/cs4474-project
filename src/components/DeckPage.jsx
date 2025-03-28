@@ -7,7 +7,6 @@ import useToggle from "./hooks/useToggle.js";
 
 const DeckPage = () =>{
     const { folderId, deckId } = useParams();
-    // console.log(folderId, deckId);
 
     const navigate = useNavigate();
     const data = loadData();

@@ -5,25 +5,9 @@ import { useState } from "react";
 import editIcon from "../assets/icons/edit.svg";
 
 const DeckFolder = (props) =>{
-
     const folderName = props.folder.name;
     const decks = props.folder.decks;
     const folderId = props.folder.id;
-
-    // const decks = [
-    //     {
-    //         name: "deck1",
-    //         description: "Lorem ipsum"
-    //     }, 
-    //     {
-    //         name: "deck2",
-    //         description: "dolor sit amet"
-    //     }, 
-    //     {
-    //         name: "deck3",
-    //         description: "Et voluptate"
-    //     }
-    // ]
 
     const [deckName, setDeckName] = useState("");
     const [deckDescription, setDeckDescription] = useState("");

@@ -7,9 +7,11 @@ import { loadData } from '../utils/localStorage';
 const PlayPage = () => {
   const { folderId, deckId } = useParams();
   const navigate = useNavigate();
+
   const data = loadData();
   const folder = data.find(f => f.id === folderId);
   const foundDeck = folder?.decks.find(d => d.id === deckId);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
