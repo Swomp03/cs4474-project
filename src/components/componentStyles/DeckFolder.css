@@ -5,24 +5,25 @@
 }
 
 .dropdown-group{
-    margin-left: 5vh;
-}
-
-.deck-description{
-    margin-left: 3vh;
-    color: rgb(149, 149, 149);
-}
-
-.deck-group{
-    margin-bottom: 3vh;
+    /*margin-left: 5vh;*/
+    display: grid;
+    gap: 1rem;
 }
 
 .deck-name{
-    font-size: 24px;
+    font-size: 18px;
+    margin-block: 0.75rem;
+}
+
+.deck-description{
+    /*margin-left: 3vh;*/
+    margin-block: 0.75rem;
+    font-size: 14px;
+    color: rgb(234, 234, 234);
 }
 
 .folder-button{
-    height: 5vh;
+    height: 3rem;
     text-align: left;
     font-size: 24px;
 
@@ -33,14 +34,22 @@
 
 .folder-div{
     display: grid;
-    width: 30vh;
+    width: 290px;
+    gap: 1rem;
 }
 
 .new-deck-background{
     background-color: rgb(120, 120, 120);
     border-radius: 5px;
-    padding-left: 1vh;
-    padding-bottom: 1vh;
+    padding: 8px;
+}
+
+.display-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .display-4-lines {
@@ -49,4 +58,66 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+
+
+.card-stack {
+    --card-width: 275px;
+    --card-height: 220px;
+    position: relative;
+    width: var(--card-width);
+    height: var(--card-height);
+}
+
+.deck-card {
+    position: absolute;
+    border-radius: 25px;
+    padding: 10px;
+
+    transition: .2s transform;
+
+    /*display: flex;*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*font-size: 36px;*/
+    color: white;
+    overflow: hidden;
+
+    /* drop-shadow( <length> <length> <length> <color> ) */
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.card-1 {
+    background-color: #959595FF; /* var(--card-colour) */
+    width: calc(var(--card-width) - 20px);
+    height: calc(var(--card-height) - 20px);
+}
+
+.card-2 {
+    background-color: #858585;
+    width: calc(var(--card-width) - 30px);
+    height: calc(var(--card-height) - 30px);
+    transform: translate(18px, 5px);
+}
+
+.card-3 {
+    background-color: #7c7c7c;
+    width: calc(var(--card-width) - 40px);
+    height: calc(var(--card-height) - 40px);
+    transform: translate(36px, 10px);
+}
+
+.card-stack:hover .card-1 {
+    transform: rotate(-2deg);
+}
+
+.card-stack:hover .card-2 {
+    transform: translate(18px, 5px) rotate(2deg);
+}
+
+.card-stack:hover .card-3 {
+    transform: translate(36px, 10px) rotate(5deg);
 }

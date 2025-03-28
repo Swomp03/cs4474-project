@@ -54,6 +54,7 @@ const DeckFolder = (props) =>{
                 <button className="folder-button">{folderName}</button>
                 
                 <div className="dropdown-group">
+                {/*<div>*/}
                     {/* <button className="add-new-deck-button">+ Add New Deck</button> */}
 
                     <div className="new-deck-background">
@@ -67,9 +68,13 @@ const DeckFolder = (props) =>{
 
                     {decks.map((deck) => (
                         <a href={`/deckpage/${folderId}/${deck.id}`}>
-                            <div key={deck.id} className="deck-group">
-                                <p className="deck-name">{deck.name} <img src={editIcon} alt="Edit Icon" /></p>
-                                <p className="deck-description display-4-lines"><i>{deck.description}</i></p>
+                            <div key={deck.id} className="deck-group card-stack">
+                                <div className="deck-card card-3"></div>
+                                <div className="deck-card card-2"></div>
+                                <div className="deck-card card-1">
+                                    <p className="deck-name display-2-lines">{deck.name} <img src={editIcon} alt="Edit Icon"/></p>
+                                    <p className="deck-description display-4-lines"><i>{deck.description}</i></p>
+                                </div>
                             </div>
                         </a>
                     ))}
