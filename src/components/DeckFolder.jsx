@@ -56,8 +56,8 @@ const DeckFolder = (props) =>{
                                 <div className="deck-card card-3"></div>
                                 <div className="deck-card card-2"></div>
                                 <div className="deck-card card-1">
-                                    <p className="deck-name display-2-lines">{deck.name} <img src={editIcon} alt="Edit Icon"/></p>
-                                    <p className="deck-description display-4-lines"><i>{deck.description}</i></p>
+                                    <p className="deck-name display-3-lines">{deck.name} <img src={editIcon} alt="Edit Icon"/></p>
+                                    <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
                                 </div>
                             </div>
                         </a>

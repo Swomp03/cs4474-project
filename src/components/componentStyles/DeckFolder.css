@@ -11,14 +11,15 @@
 }
 
 .deck-name{
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold;
     margin-block: 0.75rem;
 }
 
 .deck-description{
     /*margin-left: 3vh;*/
     margin-block: 0.75rem;
-    font-size: 14px;
+    font-size: 16px;
     color: rgb(234, 234, 234);
 }
 
@@ -44,17 +45,9 @@
     padding: 8px;
 }
 
-.display-2-lines {
+.display-3-lines {
     display: -webkit-box;
     -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.display-4-lines {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
