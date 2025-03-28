@@ -61,7 +61,7 @@ const DeckFolder = (props) =>{
                         <form onSubmit={handleAddDeck}>
                             <input type="text" placeholder="Enter Deck Name" value={deckName} onChange={(e) => setDeckName(e.target.value)}/>
                             <input type="text" placeholder="Enter Deck Desc." value={deckDescription} onChange={(e2) => setDeckDescription(e2.target.value)}/>
-                            <button type="submit">+ Add Deck</button>
+                            <button type="submit" className="default-btn">+ Add Deck</button>
                         </form>
                     </div>
 
@@ -69,7 +69,7 @@ const DeckFolder = (props) =>{
                         <a href={`/deckpage/${folderId}/${deck.id}`}>
                             <div key={deck.id} className="deck-group">
                                 <p className="deck-name">{deck.name} <img src={editIcon} alt="Edit Icon" /></p>
-                                <p className="deck-description"><i>{deck.description}</i></p>
+                                <p className="deck-description display-4-lines"><i>{deck.description}</i></p>
                             </div>
                         </a>
                     ))}

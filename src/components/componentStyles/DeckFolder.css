@@ -25,6 +25,10 @@
     height: 5vh;
     text-align: left;
     font-size: 24px;
+
+    background-color: rgb(149, 149, 149);
+    border: none;
+    border-radius: 5px;
 }
 
 .folder-div{
@@ -37,4 +41,12 @@
     border-radius: 5px;
     padding-left: 1vh;
     padding-bottom: 1vh;
+}
+
+.display-4-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -157,7 +157,6 @@ input::-webkit-inner-spin-button {
 }
 
 .disabled {
-    cursor: default;
     background-color: transparent !important;
     /*color: #cccccc !important;*/
     opacity: 0.4;

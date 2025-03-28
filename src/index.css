@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --content-container-bkgr-colour: rgb(57, 57, 57);
+  --card-colour: #888;
   --border-radius: 25px;
 }
 
@@ -79,8 +80,8 @@ button:disabled {
 }
 
 .large-btn {
-  height: 6rem;
-  width: calc(7.5rem + 15vw);
+  height: calc(3rem + 5vh);
+  width: calc(4rem + 20vw);
   font-size: 24px;
 }
 

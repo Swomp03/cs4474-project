@@ -1,43 +1,71 @@
-.deck-button{
-    height: 10vh;
-    width: 50vh;
+/* TODO: Fix scrollbar padding/size */
+/* TODO: Make return button use clamping? */
+/* TODO: Don't use vh for margin? */
+/* TODO: Resize text based on size of screen */
+
+/* TODO: Make return button absolute */
+.absolute {
+    position: absolute;
+}
+
+#root {
+    overflow-y: auto;
+
+    /*padding-left: 17px; !* TODO: Ensure this is correct for scrollbar width*!*/
+    scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
+
+}
+
+.deck-button {
+    height: clamp(4rem, 6rem, 6rem);
+    /*clamp(minimum-value, preferred-value, maximum-value)*/
+    /*width: clamp(10rem, 25vw, 25rem);*/
+    width: 25rem;
     font-size: 28px;
 }
 
-#deck-body{
+#deck-body {
+    /*height: 630px;*/
+
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    justify-content: center;
     text-align: center;
     background-color: var(--content-container-bkgr-colour);
-    margin-left: 10vh;
-    margin-right: 10vh;
+    margin-inline: 6vw;
+    margin-block: auto;
+    border-radius: var(--border-radius);
 }
 
-#deck-button-section{
-    display: flex;
-    justify-content: center;
-    padding-bottom: 10vh;
+#deck-name {
+    /*padding-top: 10vh;*/
+    padding-inline: 1rem; /* For long subtitles */
+    margin-top: 10vh;
+    margin-bottom: 0;
+    font-size: 64px;
 }
 
-#deck-subtitle{
-    margin: 5vh 0;
+#deck-subtitle {
+    /*margin-block: 3rem;*/
+    padding-inline: 2rem; /* For long subtitles */
+    margin-block: 3vh;
     font-size: 32px;
     color: rgb(134, 134, 134);
 }
 
-#deck-name{
-    padding-top: 10vh;
-    font-size: 64px;
+#number-of-cards {
+    /*margin-block: 3rem;*/
+    margin-block: 5vh;
 }
 
-#edit-deck-button{
-    margin-right: 2vh;
-}
-
-#number-of-cards{
-    margin: 5vh 0;
-}
-
-#study-now-button{
-    margin-left: 2vh;
+#deck-button-section {
+    display: flex;
+    justify-content: center;
+    /*margin-bottom: 4rem;*/
+    margin-bottom: clamp(12px, 10vh, 10rem);
+    margin-inline: 1rem;
+    gap: 1rem;
 }
 
 
