@@ -29,7 +29,8 @@ const DeckPage = () =>{
     return(
         <>
             <div className="page-container">
-                <button id='return-button' className="large-btn default-btn img-btn" onClick={() => navigate(-1)}>
+                <button id='return-button' className="large-btn default-btn img-btn" title="Return to the previous page"
+                        onClick={() => navigate(-1)}>
                     <img src={returnArrow} alt="Back arrow"/>
                     Return
                 </button>
@@ -39,8 +40,10 @@ const DeckPage = () =>{
                     <h3 id='deck-subtitle'><i>{foundDeck.description}</i></h3>
                     <h2 id='number-of-cards'>Number of cards: {foundDeck.cards.length}</h2>
                     <div id='deck-button-section'>
-                        <button id='edit-deck-button' className='deck-button default-btn' onClick={toggleVisibility}>Edit Deck</button>
-                        <button id='study-now-button' className='deck-button primary-btn' onClick={handleStudyNow} disabled={foundDeck.cards.length === 0}>Study Now</button>
+                        <button id='edit-deck-button' className='deck-button default-btn' title="Add, remove, and reorder cards"
+                                onClick={toggleVisibility}>Edit Deck</button>
+                        <button id='study-now-button' className='deck-button primary-btn' onClick={handleStudyNow}
+                                disabled={foundDeck.cards.length === 0}>Study Now</button>
                         </div>
                 </div>
             </div>

@@ -34,7 +34,6 @@
     /*margin-block: 2rem;*/
     padding-inline: 0.3rem;
     background-color: dimgrey;
-    color: white;
     border-radius: var(--border-radius);
     max-width: 90vw;
     min-width: 40rem;
@@ -58,21 +57,15 @@
     min-width: 5rem;
     /*padding-inline: 4rem;*/
     /*padding-block: 1rem;*/
-    border-radius: 999px;
-    border: none;
     font-size: 1rem;
-    cursor: pointer;
-    color: white;
+}
+
+.modal-btn {
     background-color: #8c8c8c;
 }
 
-.header-btn:focus {
-    outline: #1698ff solid 2px;
-    outline-offset: 2px;
-}
-
-.save-btn {
-    background-color: #1698ff;
+.modal-btn:hover {
+    background-color: #9a9a9a;
 }
 
 .group-container {

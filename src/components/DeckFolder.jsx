@@ -51,7 +51,7 @@ const DeckFolder = (props) =>{
                     </div>
 
                     {decks.map((deck) => (
-                        <a href={`/deckpage/${folderId}/${deck.id}`}>
+                        <a href={`/deckpage/${folderId}/${deck.id}`} className="deck-link">
                             <div key={deck.id} className="deck-group card-stack">
                                 <div className="deck-card card-3"></div>
                                 <div className="deck-card card-2"></div>

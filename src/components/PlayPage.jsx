@@ -46,7 +46,8 @@ const PlayPage = () => {
 
   return (
     <div className="page-container">
-      <button id="return-button" className="large-btn default-btn img-btn" onClick={() => navigate(-1)}>
+      <button id="return-button" className="large-btn default-btn img-btn" title="Return to the previous page"
+              onClick={() => navigate(-1)}>
         <img src={returnArrow} alt="Back arrow"/>
         Return
       </button>

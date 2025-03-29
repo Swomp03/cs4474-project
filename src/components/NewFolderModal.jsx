@@ -81,9 +81,9 @@ const NewFolderModal = (props) => {
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button type="button" className={"header-btn"} onClick={() => props.toggleVisibility()}>Cancel</button>
+                        <button type="button" className={"header-btn modal-btn default-btn"} onClick={() => props.toggleVisibility()}>Cancel</button>
                         <h1>Edit Folders</h1>
-                        <button type="submit" className={"header-btn save-btn"} form="folders-container">Save</button>
+                        <button type="submit" className={"header-btn primary-btn"} form="folders-container">Save</button>
                     </div>
 
                     <form id="folders-container" className="group-container" onSubmit={saveEdits}>

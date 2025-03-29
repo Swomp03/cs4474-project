@@ -109,7 +109,7 @@ const Home = () => {
     return (
         <>
             <div className="home-header">
-                <button id="edit-layout-button" className="default-btn img-btn" onClick={toggleEditMode}>
+                <button id="edit-layout-button" className="default-btn img-btn" title="Edit the folder layout"  onClick={toggleEditMode}>
                     <img src={dashboardIcon} alt="Dashboard Icon" />
                     {isEditMode ? " Save Layout" : " Edit Layout"}
                 </button>

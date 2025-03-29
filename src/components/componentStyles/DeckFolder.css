@@ -1,29 +1,28 @@
-
-.add-new-deck-button{
+.add-new-deck-button {
     margin: 3vh 0 0;
     height: 5vh;
 }
 
-.dropdown-group{
+.dropdown-group {
     /*margin-left: 5vh;*/
     display: grid;
     gap: 1rem;
 }
 
-.deck-name{
+.deck-name {
     font-size: 20px;
     font-weight: bold;
     margin-block: 0.75rem;
 }
 
-.deck-description{
+.deck-description {
     /*margin-left: 3vh;*/
     margin-block: 0.75rem;
     font-size: 16px;
     color: rgb(234, 234, 234);
 }
 
-.folder-button{
+.folder-button {
     height: 3rem;
     text-align: left;
     font-size: 24px;
@@ -33,16 +32,24 @@
     border-radius: 5px;
 }
 
-.folder-div{
+.folder-div {
     display: grid;
     width: 290px;
     gap: 1rem;
 }
 
-.new-deck-background{
+.new-deck-background {
     background-color: rgb(120, 120, 120);
     border-radius: 5px;
     padding: 8px;
+}
+
+.deck-link {
+    border-radius: var(--border-radius);
+}
+
+.deck-link:hover {
+    outline: none;
 }
 
 .display-3-lines {

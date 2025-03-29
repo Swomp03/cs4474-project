@@ -52,7 +52,7 @@ img {
 }
 
 .text-input {
-    background-color: transparent;
+    background-color: #9a9a9a;
     color: inherit;
     border: 1px solid #d8d8d8;
     /*border-bottom: 1px solid #dfdfdf;*/
@@ -66,17 +66,19 @@ img {
 
     resize: none;
 
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
+}
+
+.text-input::placeholder {
+    color: #dadada;
 }
 
 .text-input:hover {
-    background-color: rgb(156, 156, 156);
+    background-color: #8f8f8f;
 }
 
 .text-input:focus {
-    background-color: rgb(156, 156, 156);
-    outline: #1698ff solid 2px;
-    outline-offset: 2px;
+    background-color: #8f8f8f;
 }
 
 .card-footer {
@@ -93,7 +95,7 @@ img {
 }
 
 .index-number-input {
-    background-color: grey;
+    background-color: #9a9a9a;
     color: inherit;
     border: none;
     border-radius: 10px;
@@ -103,11 +105,16 @@ img {
     text-align: center;
     font-size: 18px;
     outline: 1px solid #dfdfdf;
+
+    transition: background-color .3s;
+}
+
+.index-number-input:hover {
+    background-color: #8f8f8f;
 }
 
 .index-number-input:focus {
-    outline: #1698ff solid 2px;
-    outline-offset: 2px;
+    background-color: #8f8f8f;
 }
 
 /* Disable margin for inputs in Chrome, Safari, Edge, Opera */
@@ -128,14 +135,12 @@ input::-webkit-inner-spin-button {
     justify-content: center;
 
     background-color: transparent;
-    color: white;
     border: none;
     border-radius: 50px;
     width: 32px;
     height: 32px;
     padding: 0;
     text-align: center;
-    cursor: pointer;
     font-size: 18px;
 
     transition: background-color 0.3s;
@@ -147,8 +152,6 @@ input::-webkit-inner-spin-button {
 
 .card-btn:focus {
     background-color: #9f9f9f;
-    outline: #1698ff solid 2px;
-    outline-offset: 2px;
 }
 
 .card-btn > img {
