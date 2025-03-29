@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { loadData, saveFolders } from "../utils/localStorage";
 import useToggle from "./hooks/useToggle.js";
 import NewFolderModal from "./NewFolderModal.jsx";
+import usePageTitle from "./hooks/setTitle.js";
 
 import dashboardIcon from "../assets/icons/space_dashboard.svg"
 import plusIcon from "../assets/icons/plus.svg"
@@ -16,7 +17,8 @@ const Home = () => {
     const [newPositions, setNewPositions] = useState({});
     
     const { state: visible, toggle: toggleVisibility } = useToggle();
-    
+
+    usePageTitle("Home | Anki+");
 
     useEffect(() => {
         setFolders(loadData());

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { loadData } from '../utils/localStorage';
 import EditDeckModal from "./EditDeckModal.jsx";
 import useToggle from "./hooks/useToggle.js";
+import usePageTitle from "./hooks/setTitle.js";
 
 const DeckPage = () =>{
     const { folderId, deckId } = useParams();
@@ -15,6 +16,8 @@ const DeckPage = () =>{
     const foundDeck = folder?.decks.find(d => d.id === deckId);
 
     const { state: visible, toggle: toggleVisibility } = useToggle();
+
+    usePageTitle(foundDeck.name + " | Anki+");
 
     const handleStudyNow = () => {
         navigate(`/playpage/${folderId}/${deckId}`);

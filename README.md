@@ -13,4 +13,5 @@ If you are developing a production application, we recommend using TypeScript an
 
 ## Icons
 
-The icons used are from [Google](https://fonts.google.com/icons)
+* The icons used are from [Google](https://fonts.google.com/icons)
+* The site icon is from [macOSicons](https://macosicons.com/#/?icon=utlA4yU304)
