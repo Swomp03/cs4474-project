@@ -30,11 +30,12 @@
     gap: 4em;
 
     overflow-y:  scroll;
-    /*overflow-x: hidden;*/
+    overflow-x: visible;
 
     padding-left: 17px; /* TODO: Ensure this is correct for scrollbar width*/
     scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
     margin-inline: 5px;
+    width: 100%;
 }
 
 /*.deck-folders::-webkit-scrollbar {*/

@@ -19,12 +19,13 @@
 }
 
 body {
-  overflow: hidden;
-  margin: 12px;
+  /*overflow: hidden;*/
+  /*margin: 12px;*/
 }
 
 #root {
   height: calc(100vh - 24px);
+  padding: 4px;
 }
 
 a {
