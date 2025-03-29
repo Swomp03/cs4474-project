@@ -79,10 +79,21 @@ button:disabled {
   font-size: 18px;
 }
 
+.primary-btn:disabled {
+  background-color: #134665;
+}
+
 .large-btn {
   height: calc(3rem + 5vh);
-  width: calc(4rem + 20vw);
+  width: calc(4rem + 15vw);
   font-size: 24px;
+}
+
+.img-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 #return-button{

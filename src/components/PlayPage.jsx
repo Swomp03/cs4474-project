@@ -4,6 +4,12 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { loadData } from '../utils/localStorage';
 
+import returnArrow from "../assets/icons/arrow_back.svg";
+import arrowBack from "../assets/icons/arrow_back_with_tail.svg";
+import arrowForward from "../assets/icons/arrow_forward_with_tail.svg";
+import visibility from "../assets/icons/visibility.svg";
+import visibilityOff from "../assets/icons/visibility_off.svg";
+
 const PlayPage = () => {
   const { folderId, deckId } = useParams();
   const navigate = useNavigate();
@@ -40,10 +46,13 @@ const PlayPage = () => {
 
   return (
     <div className="page-container">
-      <button id="return-button" className="large-btn default-btn" onClick={() => navigate(-1)}>Return</button>
+      <button id="return-button" className="large-btn default-btn img-btn" onClick={() => navigate(-1)}>
+        <img src={returnArrow} alt="Back arrow"/>
+        Return
+      </button>
 
       <div id="play-page-content">
-        <div id="card">
+      <div id="card">
           <div id="card-inner">
             <div id="card-front">
               <span className="card-text">{foundDeck.cards[currentIndex].question}</span>
@@ -54,14 +63,21 @@ const PlayPage = () => {
           </div>
         </div>
 
-        <button id="toggle-answer-button" className="default-btn" onClick={toggleAnswer}>
+        <button id="toggle-answer-button" className="default-btn img-btn" onClick={toggleAnswer}>
+          {/*<img src={showAnswer ? visibilityOff : visibility} alt="Visibility icon"/>*/}
           {showAnswer ? 'Hide Answer' : 'Show Answer'}
         </button>
 
         <div id="navigation">
-          <button className="default-btn" onClick={handlePrev} disabled={currentIndex === 0}>Prev</button>
+          <button className="default-btn img-btn" onClick={handlePrev} disabled={currentIndex === 0}>
+            <img src={arrowBack} alt="Back arrow"/>
+            Prev
+          </button>
           <span>{currentIndex + 1}/{foundDeck.cards.length}</span>
-          <button className="default-btn" onClick={handleNext} disabled={currentIndex === foundDeck.cards.length - 1}>Next</button>
+          <button className="default-btn img-btn" onClick={handleNext} disabled={currentIndex === foundDeck.cards.length - 1}>
+            Next
+            <img src={arrowForward} alt="Forward arrow"/>
+          </button>
         </div>
       </div>
     </div>

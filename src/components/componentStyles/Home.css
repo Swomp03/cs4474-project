@@ -53,12 +53,7 @@
     height: 5rem;
     width: 15rem;
     font-size: calc(14px + .5vw);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 8px;
-    /*border: none;*/
-    /*border-radius: 50px;*/
 }
 
 /*.home-header > button > img {*/

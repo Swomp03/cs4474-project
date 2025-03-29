@@ -6,6 +6,8 @@ import EditDeckModal from "./EditDeckModal.jsx";
 import useToggle from "./hooks/useToggle.js";
 import usePageTitle from "./hooks/setTitle.js";
 
+import returnArrow from "../assets/icons/arrow_back.svg";
+
 const DeckPage = () =>{
     const { folderId, deckId } = useParams();
 
@@ -27,15 +29,18 @@ const DeckPage = () =>{
     return(
         <>
             <div className="page-container">
-                <button id='return-button' className="large-btn default-btn" onClick={() => navigate(-1)}>Return</button>
+                <button id='return-button' className="large-btn default-btn img-btn" onClick={() => navigate(-1)}>
+                    <img src={returnArrow} alt="Back arrow"/>
+                    Return
+                </button>
 
                 <div id='deck-body'>
-                    <h1 id='deck-name'>{foundDeck.name}</h1>
+                <h1 id='deck-name'>{foundDeck.name}</h1>
                     <h3 id='deck-subtitle'><i>{foundDeck.description}</i></h3>
                     <h2 id='number-of-cards'>Number of cards: {foundDeck.cards.length}</h2>
                     <div id='deck-button-section'>
                         <button id='edit-deck-button' className='deck-button default-btn' onClick={toggleVisibility}>Edit Deck</button>
-                        <button id='study-now-button' className='deck-button primary-btn' onClick={handleStudyNow}>Study Now</button>
+                        <button id='study-now-button' className='deck-button primary-btn' onClick={handleStudyNow} disabled={foundDeck.cards.length === 0}>Study Now</button>
                         </div>
                 </div>
             </div>

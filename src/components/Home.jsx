@@ -109,12 +109,12 @@ const Home = () => {
     return (
         <>
             <div className="home-header">
-                <button id="edit-layout-button" className="default-btn" onClick={toggleEditMode}>
+                <button id="edit-layout-button" className="default-btn img-btn" onClick={toggleEditMode}>
                     <img src={dashboardIcon} alt="Dashboard Icon" />
                     {isEditMode ? " Save Layout" : " Edit Layout"}
                 </button>
                 <h1>Decks</h1>
-                <button id="new-folder-button" className="default-btn" onClick={toggleVisibility}>
+                <button id="new-folder-button" className="default-btn img-btn" onClick={toggleVisibility}>
                     <img src={plusIcon} alt="Plus Icon"/>
                     New Folder
                 </button>
