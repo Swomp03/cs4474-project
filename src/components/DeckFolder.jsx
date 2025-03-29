@@ -3,7 +3,7 @@ import "./componentStyles/DeckFolder.css"
 import {addDeck, loadData} from "../utils/localStorage";
 import {useEffect, useState} from "react";
 
-import editIcon from "../assets/icons/edit.svg";
+// import editIcon from "../assets/icons/edit.svg";
 import arrowDropdown from "../assets/icons/arrow_drop_down.svg";
 import useToggle from "./hooks/useToggle.js";
 
@@ -56,7 +56,7 @@ const DeckFolder = (props) =>{
                 dropdown.style.height = targetHeight + 'px';
             }, 15);
         }
-    });
+    }, [dropdownId]);
 
     return(
         <>
@@ -92,7 +92,10 @@ const DeckFolder = (props) =>{
                                 <div className="deck-card card-3"></div>
                                 <div className="deck-card card-2"></div>
                                 <div className="deck-card card-1">
-                                    <p className="deck-name display-3-lines">{deck.name} <img src={editIcon} alt="Edit Icon"/></p>
+                                    <p className="deck-name display-3-lines">
+                                        {deck.name}
+                                        {/*<img src={editIcon} alt="Edit Icon"/>*/}
+                                    </p>
                                     <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
                                 </div>
                             </div>

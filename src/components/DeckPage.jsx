@@ -29,7 +29,7 @@ const DeckPage = () =>{
     return(
         <>
             {visible && <EditDeckModal toggleVisibility={toggleVisibility} cards={foundDeck.cards}
-                                       folderId={folderId} deckId={deckId}></EditDeckModal>}
+                                       folderId={folderId} deckId={deckId} />}
 
             <div className="page-container">
                 <button id='return-button' className="large-btn default-btn img-btn" title="Return to the previous page"

@@ -109,7 +109,7 @@ const Home = () => {
     return (
         <>
             {visible &&
-                <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders}></NewFolderModal>}
+                <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders} />}
 
             <div className="home-header">
                 <button id="edit-layout-button" className="default-btn img-btn" title="Edit the folder layout"  onClick={toggleEditMode}>
@@ -127,7 +127,7 @@ const Home = () => {
                 <div className="deck-folders">
                     {folders.map((folder) => (
                         <div key={folder.id} className="deck-folder-group">
-                            <DeckFolder key={folder.id} folder={folder}></DeckFolder>
+                            <DeckFolder key={folder.id} folder={folder} />
 
                             {/* Static position field (always visible) */}
                             <div className="position-container">

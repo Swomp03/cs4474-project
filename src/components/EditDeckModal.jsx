@@ -4,6 +4,9 @@ import {saveCards} from "../utils/localStorage.js";
 import {EditDeckCards, AddDeckCard} from "./EditDeckCards.jsx";
 import {useEffect, useState} from "react";
 
+import cancel from "../assets/icons/cancel.svg"
+import save from "../assets/icons/save.svg"
+
 // TODO: Make escape hide modal as well?
 // TODO: Add warning on cancel?
 
@@ -224,14 +227,20 @@ const EditDeckModal = (props) => {
 
     return (
         <div id="modal-root" className="static">
-            <div id="modal-background" onClick={() => props.toggleVisibility()}></div>
+            <div id="modal-background" onClick={() => props.toggleVisibility()} />
 
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button type="button" className="header-btn modal-btn default-btn" onClick={() => props.toggleVisibility()}>Cancel</button>
+                        <button type="button" className="header-btn modal-btn default-btn img-btn" onClick={() => props.toggleVisibility()}>
+                            <img src={cancel} alt="Cancel icon" />
+                            Cancel
+                        </button>
                         <h1>Edit Deck</h1>
-                        <button type="submit" className="header-btn primary-btn" form="cards-container">Save</button>
+                        <button type="submit" className="header-btn primary-btn img-btn" form="cards-container">
+                            <img src={save} alt="Save icon" />
+                            Save
+                        </button>
                     </div>
 
                     <form id="cards-container" className="group-container" onSubmit={e => saveEdits(e)}>
@@ -239,9 +248,9 @@ const EditDeckModal = (props) => {
                             <EditDeckCards key={index} card={card} increaseIndex={increaseIndex}
                                            decreaseIndex={decreaseIndex} moveCard={moveCard}
                                            updateValue={updateValue} updatePosition={updatePosition}
-                                           resetPosition={resetPosition} removeCard={removeCard}></EditDeckCards>
+                                           resetPosition={resetPosition} removeCard={removeCard} />
                         ))}
-                        <AddDeckCard addCard={addCard}></AddDeckCard>
+                        <AddDeckCard addCard={addCard} />
                     </form>
                 </div>
             </div>
