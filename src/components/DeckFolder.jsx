@@ -1,8 +1,13 @@
 import "./componentStyles/DeckFolder.css"
 
-import { addDeck } from "../utils/localStorage";
-import { useState } from "react";
+import {addDeck, loadData} from "../utils/localStorage";
+import {useEffect, useState} from "react";
+
 import editIcon from "../assets/icons/edit.svg";
+import arrowDropdown from "../assets/icons/arrow_drop_down.svg";
+import useToggle from "./hooks/useToggle.js";
+
+// TODO: Store visible state so it remembers on page load?
 
 const DeckFolder = (props) =>{
     const folderName = props.folder.name;
@@ -11,6 +16,10 @@ const DeckFolder = (props) =>{
 
     const [deckName, setDeckName] = useState("");
     const [deckDescription, setDeckDescription] = useState("");
+
+    const { state: visible, toggle: toggleVisibility } = useToggle(true);
+
+    const dropdownId = "dropdown-" + folderId;
 
     const handleAddDeck = (e) =>{
         e.preventDefault();
@@ -24,6 +33,31 @@ const DeckFolder = (props) =>{
         window.location.reload();
     }
 
+    useEffect(() => {
+        const dropdown = document.getElementById(dropdownId);
+        const isHidden = dropdown.classList.contains('hidden-folder');
+
+        // Close the dropdown by setting the height to 0
+        if (isHidden) {
+            const currentHeight = dropdown.offsetHeight;
+            dropdown.style.height = currentHeight + 'px';
+
+            // Force browser to acknowledge the height
+            setTimeout(() => {
+                dropdown.style.height = '0px';
+            }, 5);
+        } else { // Otherwise, open the dropdown by setting the height back to normal
+            dropdown.style.height = 'auto';
+            const targetHeight = dropdown.offsetHeight;
+            dropdown.style.height = '0px';
+
+            // Force browser to acknowledge the change
+            setTimeout(() => {
+                dropdown.style.height = targetHeight + 'px';
+            }, 15);
+        }
+    });
+
     return(
         <>
             <div className="folder-div">
@@ -34,13 +68,15 @@ const DeckFolder = (props) =>{
                         <button type="submit">Add Folder</button>
                     </form>
                 </div> */}
-                
-                <button className="folder-button">{folderName}</button>
-                
-                <div className="dropdown-group">
-                {/*<div>*/}
-                    {/* <button className="add-new-deck-button">+ Add New Deck</button> */}
 
+                <div className="folder-header-container">
+                    <span className="folder-name">{folderName}</span>
+                    <button className={visible ? "folder-header-btn" : "folder-header-btn rotated-90"} onClick={toggleVisibility}>
+                        <img src={arrowDropdown} alt="Dropdown icon"/>
+                    </button>
+                </div>
+                
+                <div id={dropdownId} className={visible ? "dropdown-group" : "dropdown-group hidden-folder"}>
                     <div className="new-deck-background">
                         <h2>New Deck:</h2>
                         <form onSubmit={handleAddDeck}>

@@ -7,6 +7,15 @@
     /*margin-left: 5vh;*/
     display: grid;
     gap: 1rem;
+
+    transition: height 0.5s ease;
+}
+
+.hidden-folder {
+    /*display: none;*/
+
+    height: 0 !important;
+    overflow: hidden;
 }
 
 .deck-name {
@@ -22,7 +31,7 @@
     color: rgb(234, 234, 234);
 }
 
-.folder-button {
+.folder-header-container {
     height: 3rem;
     text-align: left;
     font-size: 24px;
@@ -30,6 +39,45 @@
     background-color: rgb(149, 149, 149);
     border: none;
     border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 1rem;
+}
+
+.folder-name {
+    font-weight: bold;
+}
+
+.folder-header-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 50px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    text-align: center;
+    font-size: 18px;
+
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.folder-header-btn:hover {
+    background-color: #9f9f9f;
+}
+
+.folder-header-btn:focus {
+    background-color: #9f9f9f;
+}
+
+.folder-header-btn > img {
+    width: 20px;
+    height: 20px;
 }
 
 .folder-div {
@@ -50,6 +98,10 @@
 
 .deck-link:hover {
     outline: none;
+}
+
+.rotated-90 {
+    transform: rotate(-90deg);
 }
 
 .display-3-lines {

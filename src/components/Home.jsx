@@ -108,6 +108,9 @@ const Home = () => {
     
     return (
         <>
+            {visible &&
+                <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders}></NewFolderModal>}
+
             <div className="home-header">
                 <button id="edit-layout-button" className="default-btn img-btn" title="Edit the folder layout"  onClick={toggleEditMode}>
                     <img src={dashboardIcon} alt="Dashboard Icon" />
@@ -119,8 +122,6 @@ const Home = () => {
                     New Folder
                 </button>
             </div>
-            {visible &&
-                <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders}></NewFolderModal>}
 
             <div className="deck-folders-container">
                 <div className="deck-folders">

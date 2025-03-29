@@ -28,6 +28,9 @@ const DeckPage = () =>{
     console.log("Found deck:", foundDeck);
     return(
         <>
+            {visible && <EditDeckModal toggleVisibility={toggleVisibility} cards={foundDeck.cards}
+                                       folderId={folderId} deckId={deckId}></EditDeckModal>}
+
             <div className="page-container">
                 <button id='return-button' className="large-btn default-btn img-btn" title="Return to the previous page"
                         onClick={() => navigate(-1)}>
@@ -47,8 +50,6 @@ const DeckPage = () =>{
                         </div>
                 </div>
             </div>
-            {visible && <EditDeckModal toggleVisibility={toggleVisibility} cards={foundDeck.cards}
-                                       folderId={folderId} deckId={deckId}></EditDeckModal>}
         </>
     )
 }
