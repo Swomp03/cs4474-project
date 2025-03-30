@@ -1,11 +1,12 @@
 import "./componentStyles/DeckFolder.css"
 
-import {addDeck, loadData} from "../utils/localStorage";
+import {addDeck, deleteDeck, loadData} from "../utils/localStorage";
 import {useEffect, useState} from "react";
 
 import editIcon from "../assets/icons/edit.svg";
 import arrowDropdown from "../assets/icons/arrow_drop_down.svg";
 import useToggle from "./hooks/useToggle.js";
+import deleteIcon from "../assets/icons/delete.svg";
 
 // TODO: Store visible state so it remembers on page load?
 
@@ -31,6 +32,15 @@ const DeckFolder = (props) =>{
         setDeckName("");
         setDeckDescription("");
         window.location.reload();
+    }
+
+    const handleDeleteDeck = (e, deckId, deckName, deckDesc) =>{
+        e.preventDefault();
+        let deleteText = "Are you sure you want to delete this deck:\n" + deckName + "\n" + deckDesc;
+        if(confirm(deleteText)){
+            deleteDeck(folderId, deckId);
+            window.location.reload();
+        }
     }
 
     useEffect(() => {
@@ -87,16 +97,22 @@ const DeckFolder = (props) =>{
                     </div>
 
                     {decks.map((deck) => (
-                        <a href={`/deckpage/${folderId}/${deck.id}`} className="deck-link">
-                            <div key={deck.id} className="deck-group card-stack">
-                                <div className="deck-card card-3"></div>
-                                <div className="deck-card card-2"></div>
-                                <div className="deck-card card-1">
-                                    <p className="deck-name display-3-lines">{deck.name} <img src={editIcon} alt="Edit Icon"/></p>
-                                    <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
+                        <div>
+                            
+                            <a href={`/deckpage/${folderId}/${deck.id}`} className="deck-link">
+                                <div key={deck.id} className="deck-group card-stack">
+                                    <div className="deck-card card-3"></div>
+                                    <div className="deck-card card-2"></div>
+                                    <div className="deck-card card-1">
+                                        <p className="deck-name display-3-lines">{deck.name}
+                                            <img src={editIcon} alt="Edit Icon"/>
+                                            <img src={deleteIcon} alt="Delete Icon" className="deck-delete-icon" onClick={(e) => handleDeleteDeck(e, deck.id, deck.name, deck.description)}/>
+                                        </p>
+                                        <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     ))}
                 </div>
             </div>

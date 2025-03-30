@@ -3,11 +3,13 @@ const KEY = "flashcards"
 // Saving data to local storage
 export const saveData = (data) => {
     localStorage.setItem(KEY, JSON.stringify(data));
+    // console.log("Saved data");
 };
 
 // Load data from local storage
 export const loadData = () => {
     const storedData = localStorage.getItem(KEY);
+    // console.log("Stored Data:", storedData);
     return storedData ? JSON.parse(storedData) : [];
 };
 
@@ -17,6 +19,9 @@ export const addFolder = (name) => {
     const lastFolder = data[data.length - 1]; // Get the last folder in the list
     const newPosition = lastFolder ? lastFolder.position + 1 : 1; // Set position to last folder's position + 1 (or 1 if no folders exist)
     const newFolder = { id: Date.now().toString(), name, decks: [], position: newPosition };
+
+    // console.log("Folder data:", lastFolder, newPosition, newFolder);
+
     data.push(newFolder);
     saveData(data);
 };
@@ -28,6 +33,7 @@ export const addDeck = (folderId, deckName, deckDescription) => {
     if(folder) {
         folder.decks.push({ id: Date.now().toString(), name: deckName, description: deckDescription, cards: [] });
         saveData(data);
+        // console.log("Data has been saved", folder, data);
     }
 };
 
@@ -52,7 +58,6 @@ export const saveCards = (folderId, deckId, cards) => {
     if(folder){
         const deck = folder.decks.find(d => d.id === deckId);
         if(deck){
-            // TODO: Add warning about empty cards?
             deck.cards = cards;
             saveData(data);
         }
@@ -61,6 +66,24 @@ export const saveCards = (folderId, deckId, cards) => {
 
 // Save the updated order of folders
 export const saveFolders = (folders) => {
+    // console.log("Save Folder:", folders);
     saveData(folders);
 };
 
+export const deleteDeck = (folderId, deckId) =>{
+    const data = loadData();
+    const folder = data.find(f => f.id === folderId);
+    const folderIndex = data.indexOf(folder);
+    console.log("FolderID & DeckId:", folderId, deckId);
+
+    if(folder){
+        const deck = folder.decks.find(d => d.id === deckId);
+        const deckIndex = folder.decks.indexOf(deck);
+        console.log("Position:", folderIndex, folder, deckIndex, deck);
+        if(deck){
+            folder.decks.splice(deckIndex, 1);
+            saveData(data);
+            // console.log("Deck found and deleted");
+        }
+    }
+}
