@@ -3,7 +3,7 @@ import "./componentStyles/DeckFolder.css"
 import {addDeck, deleteDeck, loadData} from "../utils/localStorage";
 import {useEffect, useState} from "react";
 
-import editIcon from "../assets/icons/edit.svg";
+// import editIcon from "../assets/icons/edit.svg";
 import arrowDropdown from "../assets/icons/arrow_drop_down.svg";
 import useToggle from "./hooks/useToggle.js";
 import deleteIcon from "../assets/icons/delete.svg";
@@ -66,7 +66,7 @@ const DeckFolder = (props) =>{
                 dropdown.style.height = targetHeight + 'px';
             }, 15);
         }
-    });
+    }, [dropdownId]);
 
     return(
         <>
@@ -97,22 +97,20 @@ const DeckFolder = (props) =>{
                     </div>
 
                     {decks.map((deck) => (
-                        <div>
-                            
-                            <a href={`/deckpage/${folderId}/${deck.id}`} className="deck-link">
-                                <div key={deck.id} className="deck-group card-stack">
-                                    <div className="deck-card card-3"></div>
-                                    <div className="deck-card card-2"></div>
-                                    <div className="deck-card card-1">
-                                        <p className="deck-name display-3-lines">{deck.name}
-                                            <img src={editIcon} alt="Edit Icon"/>
-                                            <img src={deleteIcon} alt="Delete Icon" className="deck-delete-icon" onClick={(e) => handleDeleteDeck(e, deck.id, deck.name, deck.description)}/>
-                                        </p>
-                                        <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
-                                    </div>
+                        <a href={`/deckpage/${folderId}/${deck.id}`} className="deck-link">
+                            <div key={deck.id} className="deck-group card-stack">
+                                <div className="deck-card card-3"></div>
+                                <div className="deck-card card-2"></div>
+                                <div className="deck-card card-1">
+                                    <p className="deck-name display-3-lines">
+                                        {deck.name}
+                                        <img src={deleteIcon} alt="Delete Icon" className="deck-delete-icon" onClick={(e) => handleDeleteDeck(e, deck.id, deck.name, deck.description)}/>
+                                        {/* <img src={editIcon} alt="Edit Icon"/> */}
+                                    </p>
+                                    <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     ))}
                 </div>
             </div>

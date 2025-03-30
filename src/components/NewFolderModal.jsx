@@ -7,6 +7,9 @@ import { saveFolders, addFolder, loadData } from "../utils/localStorage.js";
 import { EditFolder, AddFolderCard } from "./EditFolders.jsx";
 import { useEffect, useState } from "react";
 
+import cancel from "../assets/icons/cancel.svg";
+import save from "../assets/icons/save.svg";
+
 
 const NewFolderModal = (props) => {
     const [folders, setFolders] = useState(props.folders);
@@ -81,9 +84,15 @@ const NewFolderModal = (props) => {
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button type="button" className={"header-btn modal-btn default-btn"} onClick={() => props.toggleVisibility()}>Cancel</button>
+                        <button type="button" className={"header-btn modal-btn default-btn img-btn"} onClick={() => props.toggleVisibility()}>
+                            <img src={cancel} alt="Cancel icon" />
+                            Cancel
+                        </button>
                         <h1>Edit Folders</h1>
-                        <button type="submit" className={"header-btn primary-btn"} form="folders-container">Save</button>
+                        <button type="submit" className={"header-btn primary-btn img-btn"} form="folders-container">
+                            <img src={save} alt="Save icon" />
+                            Save
+                        </button>
                     </div>
 
                     <form id="folders-container" className="group-container" onSubmit={saveEdits}>
