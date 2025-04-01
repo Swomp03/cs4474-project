@@ -4,7 +4,8 @@ import DeckFolder from "./DeckFolder";
 import { useEffect, useState } from "react";
 import { loadData, saveFolders } from "../utils/localStorage";
 import useToggle from "./hooks/useToggle.js";
-import NewFolderModal from "./NewFolderModal.jsx";
+import EditFoldersModal from "./EditFoldersModal.jsx";
+import AddNewFolderModal from "./AddNewFolderModal.jsx";
 import usePageTitle from "./hooks/setTitle.js";
 
 import dashboardIcon from "../assets/icons/space_dashboard.svg"
@@ -16,7 +17,8 @@ const Home = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [newPositions, setNewPositions] = useState({});
     
-    const { state: visible, toggle: toggleVisibility } = useToggle();
+    const { state: editFolderModalVisible, toggle: toggleEditFolderModalVisibility } = useToggle();
+    const { state: newFolderModalVisible, toggle: toggleNewFolderModalVisibility } = useToggle();
 
     usePageTitle("Home | Anki+");
 
@@ -108,8 +110,11 @@ const Home = () => {
     
     return (
         <>
-            {visible &&
-                <NewFolderModal toggleVisibility={toggleVisibility} folders={folders} updateFolders={updateFolders} />}
+            {editFolderModalVisible &&
+                <EditFoldersModal toggleVisibility={toggleEditFolderModalVisibility} folders={folders} updateFolders={updateFolders} />}
+
+            {newFolderModalVisible &&
+                <AddNewFolderModal toggleVisibility={toggleNewFolderModalVisibility} folders={folders} updateFolders={updateFolders} />}
 
             <div className="home-header">
                 <button id="edit-layout-button" className="default-btn img-btn" title="Edit the folder layout"  onClick={toggleEditMode}>
@@ -117,7 +122,11 @@ const Home = () => {
                     {isEditMode ? " Save Layout" : " Edit Layout"}
                 </button>
                 <h1>Decks</h1>
-                <button id="new-folder-button" className="default-btn img-btn" onClick={toggleVisibility}>
+                <button id="edit-folder-button" className="default-btn img-btn" title="Edit the folder layout"
+                        onClick={toggleEditFolderModalVisibility}>
+                    Edit Folders
+                </button>
+                <button id="new-folder-button" className="default-btn img-btn" onClick={toggleNewFolderModalVisibility}>
                     <img src={plusIcon} alt="Plus Icon"/>
                     New Folder
                 </button>

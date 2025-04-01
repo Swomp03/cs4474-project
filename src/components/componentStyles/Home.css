@@ -27,7 +27,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 4em;
+    align-content: flex-start;
+    /*column-gap: 4em;*/
+    /*row-gap: 3em;*/
+    gap: 4rem;
 
     overflow-y:  scroll;
     overflow-x: visible;
@@ -36,6 +39,10 @@
     scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
     margin-inline: 5px;
     width: 100%;
+}
+
+.deck-folder-group {
+    height: fit-content;
 }
 
 /*.deck-folders::-webkit-scrollbar {*/

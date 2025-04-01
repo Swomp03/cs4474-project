@@ -1,7 +1,7 @@
-import "./componentStyles/PositionEditorModal.css";
+import "./componentStyles/EditModal.css";
 
 import {saveCards} from "../utils/localStorage.js";
-import {EditDeckCards, AddDeckCard} from "./EditDeckCards.jsx";
+import {EditDeckModalCards, AddDeckCard} from "./EditDeckModalCards.jsx";
 import {useEffect, useState} from "react";
 
 import cancel from "../assets/icons/cancel.svg"
@@ -117,29 +117,6 @@ const EditDeckModal = (props) => {
         setCards(newCards);
     }
 
-    // TODO: Re-enable again
-    const resetPosition = (currIndex, currentValueString) => {
-        console.log("Reset pos")
-        console.log(`currIndex: ${currIndex}`);
-
-        const currentValue = parseInt(currentValueString);
-
-        if (isNaN(currentValue) || currentValue < 0 || currentValue >= cards.length) {
-            const newCards = [...cards]; // Make a copy of the array
-
-            console.log(newCards[currIndex]);
-            console.log(newCards);
-
-            newCards[currIndex].position = currIndex + 1;
-
-            try {
-                setCards(newCards);
-            } catch {
-                // ignore any errors since we want to be able to enter blank values
-            }
-        }
-    }
-
     const updatePosition = (currIndex, newIndexString) => {
         const newIndex = parseInt(newIndexString);
 
@@ -160,7 +137,7 @@ const EditDeckModal = (props) => {
 
     const moveCard = (currIndex, newIndexString, event) => {
         // Return early if the user didn't press the enter key
-        if (event.key !== "Enter") {
+        if (event.key !== "Enter") { // TODO: Could be removed as this is in EditDeckModalCard.jsx
             return;
         }
 
@@ -245,10 +222,11 @@ const EditDeckModal = (props) => {
 
                     <form id="cards-container" className="group-container" onSubmit={e => saveEdits(e)}>
                         {cards.map((card, index) => (
-                            <EditDeckCards key={index} card={card} increaseIndex={increaseIndex}
-                                           decreaseIndex={decreaseIndex} moveCard={moveCard}
-                                           updateValue={updateValue} updatePosition={updatePosition}
-                                           resetPosition={resetPosition} removeCard={removeCard} />
+                            <EditDeckModalCards key={index} card={card} maxIndex={cards.length}
+                                                increaseIndex={increaseIndex}
+                                                decreaseIndex={decreaseIndex} moveCard={moveCard}
+                                                updateValue={updateValue} updatePosition={updatePosition}
+                                                removeCard={removeCard} />
                         ))}
                         <AddDeckCard addCard={addCard} />
                     </form>

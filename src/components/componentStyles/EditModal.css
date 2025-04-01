@@ -45,6 +45,7 @@
     align-items: center;
     margin-inline: 2rem;
     margin-block: 1rem;
+    gap: 2rem;
 }
 
 #modal-header > h1 {

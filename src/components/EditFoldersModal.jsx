@@ -1,17 +1,17 @@
 // Known Issues: 
 // - Cancelling after adding news folders is very jank (next time you add folder, it will add all the cancelled folders too)
 
-import "./componentStyles/PositionEditorModal.css";
+import "./componentStyles/EditModal.css";
 
 import { saveFolders, addFolder, loadData } from "../utils/localStorage.js";
-import { EditFolder, AddFolderCard } from "./EditFolders.jsx";
+import { EditFolder, AddFolderCard } from "./EditFoldersModalCards.jsx";
 import { useEffect, useState } from "react";
 
 import cancel from "../assets/icons/cancel.svg";
 import save from "../assets/icons/save.svg";
 
 
-const NewFolderModal = (props) => {
+const EditFoldersModal = (props) => {
     const [folders, setFolders] = useState(props.folders);
 
     useEffect(() => {
@@ -107,4 +107,4 @@ const NewFolderModal = (props) => {
     )
 }
 
-export default NewFolderModal;
+export default EditFoldersModal;

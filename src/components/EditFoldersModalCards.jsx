@@ -1,4 +1,4 @@
-import "./componentStyles/EditDeckCard.css";
+import "./componentStyles/EditModalCards.css";
 
 import deleteIcon from '../assets/icons/delete.svg';
 import plusIcon from '../assets/icons/plus.svg';

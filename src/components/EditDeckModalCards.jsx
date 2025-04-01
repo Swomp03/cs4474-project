@@ -1,13 +1,34 @@
-import "./componentStyles/EditDeckCard.css"
+import "./componentStyles/EditModalCards.css"
 
 import deleteIcon from '../assets/icons/delete.svg';
 import plusIcon from '../assets/icons/plus.svg';
 import minusIcon from '../assets/icons/minus.svg';
 
-export function EditDeckCards(props) {
+export function EditDeckModalCards(props) {
     const card = props.card;
 
-    // onBlur={e => props.resetPosition(card.index, e.target.value)}
+    function onInputFocusLost(target) {
+        // If the input target is not valid alert the user
+        if (!target.checkValidity()) {
+            target.reportValidity();
+        } else { // Otherwise, reset the input value once focus is lost (so there isn't 2 of the same positions shown
+            target.value = card.index + 1;
+        }
+    }
+
+    function onKeyDown(event) {
+        // Return early if the user didn't press the enter key
+        if (event.key !== "Enter") {
+            return;
+        }
+
+        // If the input target is not valid alert the user
+        if (!event.target.checkValidity()) {
+            event.target.reportValidity();
+        } else { // Otherwise, move the card
+            props.moveCard(card.index, event.target.value, event);
+        }
+    }
 
     return (
         <>
@@ -31,8 +52,11 @@ export function EditDeckCards(props) {
                             <img src={minusIcon} alt="Minus icon"/>
                         </button>
                         <input type="number" required={true} className="index-number-input" value={card.position}
+                               min={1}
+                               max={props.maxIndex}
                                onChange={e => props.updatePosition(card.index, e.target.value)}
-                               onKeyDown={e => props.moveCard(card.index, e.target.value, e)}
+                               onKeyDown={e => onKeyDown(e)}
+                               onBlur={e => onInputFocusLost(e.target)}
                         />
                         <button type="button" className="card-btn" title="Increase card postion"
                                 onClick={() => props.increaseIndex(card.index)}>
