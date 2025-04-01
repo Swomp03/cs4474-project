@@ -23,6 +23,8 @@ const PlayPage = () => {
 
   const handleNext = () => {
     if (currentIndex < foundDeck.cards.length - 1) {
+      const card = document.getElementById("card");
+      if (card) card.classList.remove("reveal");
       setCurrentIndex(currentIndex + 1);
       setShowAnswer(false);
     }
@@ -30,6 +32,8 @@ const PlayPage = () => {
 
   const handlePrev = () => {
     if (currentIndex > 0) {
+      const card = document.getElementById("card");
+      if (card) card.classList.remove("reveal");
       setCurrentIndex(currentIndex - 1);
       setShowAnswer(false);
     }
