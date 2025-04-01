@@ -8,12 +8,8 @@ export function EditDeckModalCards(props) {
     const card = props.card;
 
     function onInputFocusLost(target) {
-        // If the input target is not valid alert the user
-        if (!target.checkValidity()) {
-            target.reportValidity();
-        } else { // Otherwise, reset the input value once focus is lost (so there isn't 2 of the same positions shown
-            target.value = card.index + 1;
-        }
+        // Reset the input value once focus is lost (so there isn't 2 of the same positions shown)
+        target.value = card.index + 1;
     }
 
     function onKeyDown(event) {
@@ -57,6 +53,7 @@ export function EditDeckModalCards(props) {
                         <input type="number" required={true} className="index-number-input" value={card.position}
                                min={1}
                                max={props.maxIndex}
+                               form="n/a" // Prevent the input from submitting
                                onChange={e => props.updatePosition(card.index, e.target.value)}
                                onKeyDown={e => onKeyDown(e)}
                                onBlur={e => onInputFocusLost(e.target)}

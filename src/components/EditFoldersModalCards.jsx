@@ -8,12 +8,8 @@ export function EditFolder(props) {
     const folder = props.folder;
 
     function onInputFocusLost(target) {
-        // If the input target is not valid alert the user
-        if (!target.checkValidity()) {
-            target.reportValidity();
-        } else { // Otherwise, reset the input value once focus is lost (so there isn't 2 of the same positions shown
-            target.value = folder.index + 1;
-        }
+        // Reset the input value once focus is lost (so there isn't 2 of the same positions shown)
+        target.value = props.currIndex + 1;
     }
 
     function onKeyDown(event) {
@@ -26,7 +22,7 @@ export function EditFolder(props) {
         if (!event.target.checkValidity()) {
             event.target.reportValidity();
         } else { // Otherwise, move the card
-            props.moveFolder(folder.id, event.target.value, event)
+            props.moveFolder(props.currIndex, event.target.value, event)
         }
     }
 
@@ -42,29 +38,30 @@ export function EditFolder(props) {
                     <div className="placeholder"></div>
                     <div className="index-container">
                         <button type="button"
-                                className={`card-btn ${folder.index === 0 ? 'disabled' : ''}`}
+                                className={`card-btn ${props.currIndex === 0 ? 'disabled' : ''}`}
                                 title="Decrease folder postion"
-                                disabled={folder.index === 0}
-                                onClick={() => props.decreaseIndex(folder.index)}>
+                                disabled={props.currIndex === 0}
+                                onClick={() => props.decreaseIndex(props.currIndex)}>
                             <img src={minusIcon} alt="Minus icon"/>
                         </button>
                         <input type="number" required={true} className="index-number-input" value={folder.position}
                                min={1}
                                max={props.maxIndex}
-                               onChange={e => props.updatePosition(folder.id, e.target.value)}
+                               form="n/a" // Prevent the input from submitting
+                               onChange={e => props.updatePosition(props.currIndex, e.target.value)}
                                onKeyDown={e => onKeyDown(e)}
                                onBlur={e => onInputFocusLost(e.target)}
                         />
                         <button type="button"
-                                className={`card-btn ${folder.index === props.maxIndex - 1 ? 'disabled' : ''}`}
+                                className={`card-btn ${props.currIndex === props.maxIndex - 1 ? 'disabled' : ''}`}
                                 title="Increase folder postion"
-                                disabled={folder.index === props.maxIndex - 1}
-                                onClick={() => props.increaseIndex(folder.index)}>
+                                disabled={props.currIndex === props.maxIndex - 1}
+                                onClick={() => props.increaseIndex(props.currIndex)}>
                             <img src={plusIcon} alt="Plus icon"/>
                         </button>
                     </div>
                     <button type="button" className="card-btn" title="Delete this folder"
-                            onClick={() => props.removeFolder(folder.id)}>
+                            onClick={() => props.removeFolder(props.currIndex)}>
                         <img src={deleteIcon} alt="Delete icon"/>
                     </button>
                 </div>

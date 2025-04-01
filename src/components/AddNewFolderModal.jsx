@@ -3,7 +3,7 @@ import "./componentStyles/EditModalCards.css";
 
 import {saveCards} from "../utils/localStorage.js";
 import {EditDeckModalCards, AddDeckCard} from "./EditDeckModalCards.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 import cancel from "../assets/icons/cancel.svg"
 import save from "../assets/icons/save.svg"

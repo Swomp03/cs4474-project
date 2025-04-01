@@ -34,14 +34,14 @@ const Home = () => {
         setIsEditMode(!isEditMode);
     };
 
-    const handleNewPositionChange = (folderId, newPosition) => {
+    /*const handleNewPositionChange = (folderId, newPosition) => {
         setNewPositions((prev) => ({
             ...prev,
             [folderId]: newPosition,
         }));
-    };
+    };*/
 
-    const updateFolderPosition = (folderId, newPosition, event) => {
+    /*const updateFolderPosition = (folderId, newPosition, event) => {
         // Only proceed if the Enter key is pressed
         if (event.key !== "Enter") {
             return;
@@ -102,7 +102,7 @@ const Home = () => {
             ...prev,
             [folderId]: "",
         }));
-    };
+    };*/
 
     const updateFolders = (updatedFolders) => {
         setFolders(updatedFolders);
@@ -144,23 +144,23 @@ const Home = () => {
                             </div>
 
                             {/* New position field (visible only in edit mode) */}
-                            {isEditMode && (
-                                <div className="new-position-container">
-                                    <label>New Position:</label>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max={folders.length}
-                                        value={newPositions[folder.id] ?? ""}
-                                        onChange={(e) =>
-                                            handleNewPositionChange(folder.id, e.target.value)
-                                        }
-                                        onKeyDown={(e) =>
-                                            updateFolderPosition(folder.id, e.target.value, e)
-                                        }
-                                    />
-                                </div>
-                            )}
+                            {/*{isEditMode && (*/}
+                            {/*    <div className="new-position-container">*/}
+                            {/*        <label>New Position:</label>*/}
+                            {/*        <input*/}
+                            {/*            type="number"*/}
+                            {/*            min="1"*/}
+                            {/*            max={folders.length}*/}
+                            {/*            value={newPositions[folder.id] ?? ""}*/}
+                            {/*            onChange={(e) =>*/}
+                            {/*                handleNewPositionChange(folder.id, e.target.value)*/}
+                            {/*            }*/}
+                            {/*            onKeyDown={(e) =>*/}
+                            {/*                updateFolderPosition(folder.id, e.target.value, e)*/}
+                            {/*            }*/}
+                            {/*        />*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
                         </div>
                     ))}
                 </div>

@@ -22,7 +22,7 @@ const EditDeckModal = (props) => {
     }
 
     const removeCard = (index) => {
-        if (index < 0 || index > cards.length) {
+        if (index < 0 || index >= cards.length) {
             console.log(`Index out of range (must be between 0 and ${cards.length - 1})`);
             return;
         }
@@ -64,7 +64,7 @@ const EditDeckModal = (props) => {
     }
 
     const decreaseIndex = (currIndex) => {
-        if (currIndex < 1) {
+        if (currIndex <= 0) {
             console.log("Can't decrease index, at bound");
             return;
         }
@@ -84,46 +84,40 @@ const EditDeckModal = (props) => {
         setCards(newCards);
     }
 
-    const updatePosition = (currIndex, newIndexString) => {
-        const newIndex = parseInt(newIndexString);
+    const updatePosition = (currIndex, newPositionString) => {
+        const newPosition = parseInt(newPositionString); // Caveat: This can result in NaN if "" but this is intentional
 
-        if (newIndex < 0 || newIndex >= cards.length) {
-            console.log(`Index out of range (must be between 0 and ${cards.length - 1})`);
+        // Log a warning but allow out of range values (the HTML validation will handle it)
+        if (newPosition < 0 || newPosition > cards.length) {
+            console.log(`Position ${newPosition} out of range (must be between 1 and ${cards.length})`);
         }
 
         const newCards = [...cards]; // Make a copy of the array
-
-        newCards[currIndex].position = newIndex;
-
-        try {
-            setCards(newCards);
-        } catch {
-            // ignore any errors since we want to be able to enter blank values
-        }
+        newCards[currIndex].position = newPosition;
+        setCards(newCards);
     }
 
-    const moveCard = (currIndex, newIndexString, event) => {
-        if (newIndexString === "") return;
+    const moveCard = (currIndex, newPositionString, event) => {
+        if (newPositionString === "") return;
 
-        const newIndex = parseInt(newIndexString);
+        const newIndex = parseInt(newPositionString) - 1;
 
         if (isNaN(newIndex)) {
             console.log("Index is not a number");
             return;
         }
 
-        console.log("Moving card from position", currIndex + 1, "to", newIndex);
+        console.log("Moving card from index", currIndex, "to", newIndex);
 
-        if (newIndex < 0 || newIndex > cards.length) {
-            console.log(`Index out of range (must be between 0 and ${cards.length + 1})`);
-            event.preventDefault(); // Prevent submitting
+        if (newIndex < 0 || newIndex > cards.length - 1) {
+            console.log(`Index ${newIndex} out of range (must be between 0 and ${cards.length - 1})`);
         } else {
             const adjustedCards = [...cards];
 
             const movingCard = adjustedCards.splice(currIndex, 1)[0]; // Remove original card
-            adjustedCards.splice(newIndex - 1, 0, movingCard); // Insert the moving card
+            adjustedCards.splice(newIndex, 0, movingCard); // Insert the moving card
 
-            // Fix the indexes
+            // Fix all the indexes and positions
             for (let i = 0; i < adjustedCards.length; i++) {
                 adjustedCards[i].index = i;
                 adjustedCards[i].position = i + 1;
@@ -167,18 +161,19 @@ const EditDeckModal = (props) => {
 
     return (
         <div id="modal-root" className="static">
-            <div id="modal-background" onClick={() => cancelEdits()} />
+            <div id="modal-background" onClick={() => cancelEdits()}/>
 
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button type="button" className="header-btn modal-btn default-btn img-btn" onClick={() => cancelEdits()}>
-                            <img src={cancel} alt="Cancel icon" />
+                        <button type="button" className="header-btn modal-btn default-btn img-btn"
+                                onClick={() => cancelEdits()}>
+                            <img src={cancel} alt="Cancel icon"/>
                             Cancel
                         </button>
                         <h1>Edit Deck</h1>
                         <button type="submit" className="header-btn primary-btn img-btn" form="cards-container">
-                            <img src={save} alt="Save icon" />
+                            <img src={save} alt="Save icon"/>
                             Save
                         </button>
                     </div>
@@ -186,12 +181,11 @@ const EditDeckModal = (props) => {
                     <form id="cards-container" className="group-container" onSubmit={saveEdits}>
                         {cards.map((card, index) => (
                             <EditDeckModalCards key={index} card={card} maxIndex={cards.length}
-                                                increaseIndex={increaseIndex}
+                                                updateValue={updateValue} increaseIndex={increaseIndex}
                                                 decreaseIndex={decreaseIndex} moveCard={moveCard}
-                                                updateValue={updateValue} updatePosition={updatePosition}
-                                                removeCard={removeCard} />
+                                                updatePosition={updatePosition} removeCard={removeCard}/>
                         ))}
-                        <AddDeckCard addCard={addCard} />
+                        <AddDeckCard addCard={addCard}/>
                     </form>
                 </div>
             </div>

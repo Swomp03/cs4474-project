@@ -24,6 +24,7 @@ export const newFolder = (name) => {
 export const addFolder = (name) => {
     const data = loadData();
     const lastFolder = data[data.length - 1]; // Get the last folder in the list
+
     const newPosition = lastFolder ? lastFolder.position + 1 : 1; // Set position to last folder's position + 1 (or 1 if no folders exist)
     const newFolder = {id: Date.now().toString(), name, decks: [], position: newPosition};
     data.push(newFolder);
