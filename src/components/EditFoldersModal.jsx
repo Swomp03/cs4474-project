@@ -14,34 +14,6 @@ import save from "../assets/icons/save.svg";
 const EditFoldersModal = (props) => {
     const [folders, setFolders] = useState(props.folders);
 
-    useEffect(() => {
-        const container = document.getElementById("folders-container");
-        if (!container) return;
-
-        const folderElements = container.children;
-        if (folderElements.length === 1) return;
-
-        [...folderElements].forEach(folder => {
-            if (folder instanceof HTMLButtonElement) return;
-
-            const indexControls = folder.lastChild.children[1];
-            if (indexControls.firstChild.classList?.contains("disabled")) {
-                indexControls.firstChild.classList.remove("disabled");
-                indexControls.firstChild.disabled = false;
-            }
-
-            if (indexControls.lastChild.classList?.contains("disabled")) {
-                indexControls.lastChild.classList.remove("disabled");
-                indexControls.lastChild.disabled = false;
-            }
-        });
-
-        folderElements[0].lastChild.children[1].firstChild.classList.add("disabled");
-        folderElements[0].lastChild.children[1].firstChild.disabled = true;
-        folderElements[folderElements.length - 2].lastChild.children[1].lastChild.classList.add("disabled");
-        folderElements[folderElements.length - 2].lastChild.children[1].lastChild.disabled = true;
-    }, [folders]);
-
     const addNewFolder = () => {
         const newFolderName = "New Folder"; // Default name for new folders
         addFolder(newFolderName);
@@ -97,7 +69,9 @@ const EditFoldersModal = (props) => {
 
                     <form id="folders-container" className="group-container" onSubmit={saveEdits}>
                         {folders.map((folder, index) => (
-                            <EditFolder key={index} folder={folder} updateName={updateName} removeFolder={() => removeFolder(index)} />
+                            <EditFolder key={index} folder={folder} maxIndex={folders.length}
+                                        updateName={updateName}
+                                        removeFolder={() => removeFolder(index)} />
                         ))}
                         <AddFolderCard addFolder={addNewFolder} />
                     </form>

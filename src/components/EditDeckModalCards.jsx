@@ -36,18 +36,21 @@ export function EditDeckModalCards(props) {
 
                 <span className="text-header">Question</span>
                 <textarea required={true} name="question" placeholder="Question..." className="text-input"
-                       value={card.question}
-                       onChange={e => props.updateValue("question", card.index, e.target.value)}/>
+                          value={card.question}
+                          onChange={e => props.updateValue("question", card.index, e.target.value)}/>
 
                 <span className="text-header">Answer</span>
                 <textarea required={true} name="answer" placeholder="Answer..." className="text-input"
-                       value={card.answer}
-                       onChange={e => props.updateValue("answer", card.index, e.target.value, e)}/>
+                          value={card.answer}
+                          onChange={e => props.updateValue("answer", card.index, e.target.value, e)}/>
 
                 <div className="card-footer">
                     <div className="placeholder"></div>
                     <div className="index-container">
-                        <button type="button" className="card-btn" title="Decrease card postion"
+                        <button type="button"
+                                className={`card-btn ${card.index === 0 ? 'disabled' : ''}`}
+                                title="Decrease card postion"
+                                disabled={card.index === 0}
                                 onClick={() => props.decreaseIndex(card.index)}>
                             <img src={minusIcon} alt="Minus icon"/>
                         </button>
@@ -58,7 +61,10 @@ export function EditDeckModalCards(props) {
                                onKeyDown={e => onKeyDown(e)}
                                onBlur={e => onInputFocusLost(e.target)}
                         />
-                        <button type="button" className="card-btn" title="Increase card postion"
+                        <button type="button"
+                                className={`card-btn ${card.index === props.maxIndex - 1 ? 'disabled' : ''}`}
+                                title="Increase card postion"
+                                disabled={card.index === props.maxIndex - 1}
                                 onClick={() => props.increaseIndex(card.index)}>
                             <img src={plusIcon} alt="Plus icon"/>
                         </button>

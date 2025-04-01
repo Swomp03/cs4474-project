@@ -2,47 +2,13 @@ import "./componentStyles/EditModal.css";
 
 import {saveCards} from "../utils/localStorage.js";
 import {EditDeckModalCards, AddDeckCard} from "./EditDeckModalCards.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 import cancel from "../assets/icons/cancel.svg"
 import save from "../assets/icons/save.svg"
 
-// TODO: Make escape hide modal as well?
-// TODO: Add warning on cancel?
-
 const EditDeckModal = (props) => {
     const [cards, setCards] = useState(props.cards);
-
-    // Used to disable the index buttons when it makes sense
-    useEffect(() => {
-        const container = document.getElementById("cards-container");
-        if (!container) return;
-
-        const cardElements = container.children;
-        if (cardElements.length === 1) return;
-
-        // Reset all elements
-        [...cardElements].forEach(card => {
-            if (card instanceof HTMLButtonElement) return; // Ignore the new card button
-
-            const indexControls = card.lastChild.children[1];
-            if (indexControls.firstChild.classList?.contains("disabled")) {
-                indexControls.firstChild.classList.remove("disabled");
-                indexControls.firstChild.disabled = false;
-            }
-
-            if (indexControls.lastChild.classList?.contains("disabled")) {
-                indexControls.lastChild.classList.remove("disabled");
-                indexControls.lastChild.disabled = false;
-            }
-        });
-
-        // Disable the first and last card's index buttons since they have no effect
-        cardElements[0].lastChild.children[1].firstChild.classList.add("disabled");
-        cardElements[0].lastChild.children[1].firstChild.disabled = true;
-        cardElements[cardElements.length - 2].lastChild.children[1].lastChild.classList.add("disabled");
-        cardElements[cardElements.length - 2].lastChild.children[1].lastChild.disabled = true;
-    }, [cards]);
 
     const addCard = () => {
         // Create a new card at the end of the deck, with placeholder text
@@ -57,7 +23,7 @@ const EditDeckModal = (props) => {
 
     const removeCard = (index) => {
         if (index < 0 || index > cards.length) {
-            console.log(`Index out of range (must be between 1 and ${cards.length})`);
+            console.log(`Index out of range (must be between 0 and ${cards.length - 1})`);
             return;
         }
 
@@ -85,6 +51,7 @@ const EditDeckModal = (props) => {
         const newCards = [...cards]; // Make a copy of the array
 
         const targetCard = newCards[currIndex + 1];
+
         newCards[currIndex + 1] = newCards[currIndex]; // Increase the moving card's index by 1
         newCards[currIndex + 1].index = currIndex + 1;
         newCards[currIndex + 1].position = currIndex + 2;
@@ -136,17 +103,9 @@ const EditDeckModal = (props) => {
     }
 
     const moveCard = (currIndex, newIndexString, event) => {
-        // Return early if the user didn't press the enter key
-        if (event.key !== "Enter") { // TODO: Could be removed as this is in EditDeckModalCard.jsx
-            return;
-        }
+        if (newIndexString === "") return;
 
-        if (newIndexString === "") {
-            event.target.blur(); // Remove focus
-            return;
-        }
-
-        const newIndex = parseInt(newIndexString); // Convert back to a zero-based index
+        const newIndex = parseInt(newIndexString);
 
         if (isNaN(newIndex)) {
             console.log("Index is not a number");
@@ -156,7 +115,7 @@ const EditDeckModal = (props) => {
         console.log("Moving card from position", currIndex + 1, "to", newIndex);
 
         if (newIndex < 0 || newIndex > cards.length) {
-            console.log(`Index out of range (must be between 1 and ${cards.length})`);
+            console.log(`Index out of range (must be between 0 and ${cards.length + 1})`);
             event.preventDefault(); // Prevent submitting
         } else {
             const adjustedCards = [...cards];
@@ -193,23 +152,27 @@ const EditDeckModal = (props) => {
         setCards(updatedCards);
     }
 
+    const cancelEdits = () => {
+        const cancel = confirm(`Are you sure you want to cancel? Your changes will be lost`);
+        if (cancel)
+            props.toggleVisibility();
+    }
+
     const saveEdits = (event) => {
         event.preventDefault();
 
         saveCards(props.folderId, props.deckId, cards);
         props.toggleVisibility();
-
-        return true;
     }
 
     return (
         <div id="modal-root" className="static">
-            <div id="modal-background" onClick={() => props.toggleVisibility()} />
+            <div id="modal-background" onClick={() => cancelEdits()} />
 
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button type="button" className="header-btn modal-btn default-btn img-btn" onClick={() => props.toggleVisibility()}>
+                        <button type="button" className="header-btn modal-btn default-btn img-btn" onClick={() => cancelEdits()}>
                             <img src={cancel} alt="Cancel icon" />
                             Cancel
                         </button>
@@ -220,7 +183,7 @@ const EditDeckModal = (props) => {
                         </button>
                     </div>
 
-                    <form id="cards-container" className="group-container" onSubmit={e => saveEdits(e)}>
+                    <form id="cards-container" className="group-container" onSubmit={saveEdits}>
                         {cards.map((card, index) => (
                             <EditDeckModalCards key={index} card={card} maxIndex={cards.length}
                                                 increaseIndex={increaseIndex}
