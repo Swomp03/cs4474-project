@@ -33,7 +33,7 @@ const DeckPage = () =>{
 
             <div className="page-container">
                 <button id='return-button' className="large-btn default-btn img-btn" title="Return to the previous page"
-                        onClick={() => navigate(-1)}>
+                        onClick={() => navigate("/")}>
                     <img src={returnArrow} alt="Back arrow"/>
                     Return
                 </button>
