@@ -2,12 +2,12 @@ import "./componentStyles/EditModal.css";
 import "./componentStyles/EditModalCards.css";
 
 import {saveCards} from "../utils/localStorage.js";
-import {EditDeckModalCards, AddDeckCard} from "./EditDeckModalCards.jsx";
+import {EditDeckCard, AddDeckCard} from "./EditDeckModalCards.jsx";
 import {useState} from "react";
 
 import cancel from "../assets/icons/cancel.svg"
 import save from "../assets/icons/save.svg"
-import {EditFolder} from "./EditFoldersModalCards.jsx";
+import {EditFolderCard} from "./EditFoldersModalCards.jsx";
 import minusIcon from "../assets/icons/minus.svg";
 import plusIcon from "../assets/icons/plus.svg";
 import deleteIcon from "../assets/icons/delete.svg";
@@ -43,7 +43,7 @@ const AddNewFolderModal = (props) => {
                     <form id="cards-container" className="group-container">
                         <div className="card edit-card">
                             <span className="text-header">Folder Name</span>
-                            <textarea required={true} name="name" placeholder="Folder Name..." className="text-input"
+                            <textarea required={true} name="name" placeholder="Enter folder name..." className="text-input"
                                       value={folder.name}
                                       onChange={e => props.updateName(folder.id, e.target.value)}/>
 

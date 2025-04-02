@@ -4,7 +4,7 @@ import deleteIcon from '../assets/icons/delete.svg';
 import plusIcon from '../assets/icons/plus.svg';
 import minusIcon from '../assets/icons/minus.svg';
 
-export function EditFolder(props) {
+export function EditFolderCard(props) {
     const folder = props.folder;
 
     function onInputFocusLost(target) {
@@ -22,7 +22,7 @@ export function EditFolder(props) {
         if (!event.target.checkValidity()) {
             event.target.reportValidity();
         } else { // Otherwise, move the card
-            props.moveFolder(props.currIndex, event.target.value, event)
+            props.moveFolder(props.currIndex, event.target.value, event);
         }
     }
 
@@ -30,7 +30,7 @@ export function EditFolder(props) {
         <>
             <div className="card edit-card">
                 <span className="text-header">Folder Name</span>
-                <textarea required={true} name="name" placeholder="Folder Name..." className="text-input"
+                <textarea required={true} name="name" placeholder="Enter folder name..." className="text-input"
                        value={folder.name}
                        onChange={e => props.updateName(folder.id, e.target.value)}/>
 
@@ -41,7 +41,7 @@ export function EditFolder(props) {
                                 className={`card-btn ${props.currIndex === 0 ? 'disabled' : ''}`}
                                 title="Decrease folder postion"
                                 disabled={props.currIndex === 0}
-                                onClick={() => props.decreaseIndex(props.currIndex)}>
+                                onClick={e => props.decreaseIndex(props.currIndex, e)}>
                             <img src={minusIcon} alt="Minus icon"/>
                         </button>
                         <input type="number" required={true} className="index-number-input" value={folder.position}
@@ -56,7 +56,7 @@ export function EditFolder(props) {
                                 className={`card-btn ${props.currIndex === props.maxIndex - 1 ? 'disabled' : ''}`}
                                 title="Increase folder postion"
                                 disabled={props.currIndex === props.maxIndex - 1}
-                                onClick={() => props.increaseIndex(props.currIndex)}>
+                                onClick={e => props.increaseIndex(props.currIndex, e)}>
                             <img src={plusIcon} alt="Plus icon"/>
                         </button>
                     </div>

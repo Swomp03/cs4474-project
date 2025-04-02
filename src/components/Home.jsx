@@ -8,14 +8,15 @@ import EditFoldersModal from "./EditFoldersModal.jsx";
 import AddNewFolderModal from "./AddNewFolderModal.jsx";
 import usePageTitle from "./hooks/setTitle.js";
 
-import dashboardIcon from "../assets/icons/space_dashboard.svg"
+import edit from "../assets/icons/edit.svg"
+// import dashboardIcon from "../assets/icons/space_dashboard.svg"
 import plusIcon from "../assets/icons/plus.svg"
 
 const Home = () => {
     // const [folderName, setFolderName] = useState("");
     const [folders, setFolders] = useState([]);
-    const [isEditMode, setIsEditMode] = useState(false);
-    const [newPositions, setNewPositions] = useState({});
+    // const [isEditMode, setIsEditMode] = useState(false);
+    // const [newPositions, setNewPositions] = useState({});
     
     const { state: editFolderModalVisible, toggle: toggleEditFolderModalVisibility } = useToggle();
     const { state: newFolderModalVisible, toggle: toggleNewFolderModalVisibility } = useToggle();
@@ -26,13 +27,13 @@ const Home = () => {
         setFolders(loadData());
     }, []);
 
-    const toggleEditMode = () => {
+    /*const toggleEditMode = () => {
         if (isEditMode) {
             saveFolders(folders);
             setNewPositions({});
         }
         setIsEditMode(!isEditMode);
-    };
+    };*/
 
     /*const handleNewPositionChange = (folderId, newPosition) => {
         setNewPositions((prev) => ({
@@ -117,17 +118,20 @@ const Home = () => {
                 <AddNewFolderModal toggleVisibility={toggleNewFolderModalVisibility} folders={folders} updateFolders={updateFolders} />}
 
             <div className="home-header">
-                <button id="edit-layout-button" className="default-btn img-btn" title="Edit the folder layout"  onClick={toggleEditMode}>
-                    <img src={dashboardIcon} alt="Dashboard Icon" />
-                    {isEditMode ? " Save Layout" : " Edit Layout"}
-                </button>
-                <h1>Decks</h1>
+                {/*<button id="edit-layout-button" className="default-btn img-btn" title="Edit the folder layout"  onClick={toggleEditMode}>*/}
+                {/*    <img src={dashboardIcon} alt="Dashboard icon" />*/}
+                {/*    {isEditMode ? " Save Layout" : " Edit Layout"}*/}
+                {/*</button>*/}
                 <button id="edit-folder-button" className="default-btn img-btn" title="Edit the folder layout"
                         onClick={toggleEditFolderModalVisibility}>
+                    <img src={edit} alt="Edit folder icon"/>
                     Edit Folders
                 </button>
+
+                <h1>Decks</h1>
+
                 <button id="new-folder-button" className="default-btn img-btn" onClick={toggleNewFolderModalVisibility}>
-                    <img src={plusIcon} alt="Plus Icon"/>
+                    <img src={plusIcon} alt="Plus icon"/>
                     New Folder
                 </button>
             </div>
@@ -139,9 +143,9 @@ const Home = () => {
                             <DeckFolder key={folder.id} folder={folder} />
 
                             {/* Static position field (always visible) */}
-                            <div className="position-container">
-                                <span>Position: {folder.position}</span>
-                            </div>
+                            {/*<div className="position-container">*/}
+                            {/*    <span>Position: {folder.position}</span>*/}
+                            {/*</div>*/}
 
                             {/* New position field (visible only in edit mode) */}
                             {/*{isEditMode && (*/}

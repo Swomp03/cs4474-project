@@ -11,8 +11,8 @@ export const loadData = () => {
     return storedData ? JSON.parse(storedData) : [];
 };
 
-// Create a folder
-export const newFolder = (name) => {
+// Create a new folder and return it
+export const createNewFolder = (name = "") => {
     const data = loadData();
     const lastFolder = data[data.length - 1]; // Get the last folder in the list
 
@@ -21,7 +21,7 @@ export const newFolder = (name) => {
 };
 
 // Adding a folder
-export const addFolder = (name) => {
+export const addFolder = (name = "") => {
     const data = loadData();
     const lastFolder = data[data.length - 1]; // Get the last folder in the list
 
@@ -44,6 +44,16 @@ export const addDeck = (folderId, deckName, deckDescription) => {
         folder.decks.push({id: Date.now().toString(), name: deckName, description: deckDescription, cards: []});
         saveData(data);
     }
+};
+
+// Create a new card and return it
+export const createNewCard = (position, question = "", answer = "") => {
+    const newCard = {
+        "position": position,
+        "question": question,
+        "answer": answer
+    };
+    return newCard;
 };
 
 // Add a card to a deck

@@ -1,7 +1,7 @@
 import "./componentStyles/EditModal.css";
 
-import {saveFolders, newFolder, loadData} from "../utils/localStorage.js";
-import {EditFolder, AddFolderCard} from "./EditFoldersModalCards.jsx";
+import {saveFolders, createNewFolder, loadData} from "../utils/localStorage.js";
+import {EditFolderCard, AddFolderCard} from "./EditFoldersModalCards.jsx";
 import {useState} from "react";
 
 import cancel from "../assets/icons/cancel.svg";
@@ -13,9 +13,9 @@ const EditFoldersModal = (props) => {
     const [folders, setFolders] = useState(loadData());
 
     const addNewFolder = () => {
-        const folder = newFolder("New Folder");
-
-        setFolders([...folders, folder]);
+        // Create a new folder at the end of the other folders, with the default blank placeholder text
+        const newFolder = createNewFolder();
+        setFolders([...folders, newFolder]);
     }
 
     const removeFolder = (index) => {
@@ -27,7 +27,6 @@ const EditFoldersModal = (props) => {
         console.log("Removing folder at", index);
 
         const adjustedFolders = [...folders];
-
         adjustedFolders.splice(index, 1); // Delete folder at index
 
         // Fix the indexes
@@ -38,17 +37,19 @@ const EditFoldersModal = (props) => {
         setFolders(adjustedFolders);
     }
 
-    const increaseIndex = (currIndex) => {
+    const increaseIndex = (currIndex, event) => {
         if (currIndex >= folders.length - 1) {
             console.log("Can't increase index, at bound");
             return;
         }
 
+        event.currentTarget.blur(); // Remove focus
+
         const newFolders = [...folders]; // Make a copy of the array
 
         const targetFolder = newFolders[currIndex + 1];
 
-        newFolders[currIndex + 1] = newFolders[currIndex]; // Increase the moving folder's index by 1
+        newFolders[currIndex + 1] = newFolders[currIndex];
         newFolders[currIndex + 1].position = currIndex + 2;
 
         targetFolder.position = currIndex + 1;
@@ -57,11 +58,13 @@ const EditFoldersModal = (props) => {
         setFolders(newFolders);
     }
 
-    const decreaseIndex = (currIndex) => {
+    const decreaseIndex = (currIndex, event) => {
         if (currIndex <= 0) {
             console.log("Can't decrease index, at bound");
             return;
         }
+
+        event.currentTarget.blur(); // Remove focus
 
         const newFolders = [...folders]; // Make a copy of the array
 
@@ -160,10 +163,10 @@ const EditFoldersModal = (props) => {
 
                     <form id="folders-container" className="group-container" onSubmit={saveEdits}>
                         {folders.map((folder, index) => (
-                            <EditFolder key={index} folder={folder} currIndex={index} maxIndex={folders.length}
-                                        updateName={updateName} increaseIndex={increaseIndex}
-                                        decreaseIndex={decreaseIndex} moveFolder={moveFolder}
-                                        updatePosition={updatePosition} removeFolder={removeFolder}/>
+                            <EditFolderCard key={index} folder={folder} currIndex={index} maxIndex={folders.length}
+                                            updateName={updateName} increaseIndex={increaseIndex}
+                                            decreaseIndex={decreaseIndex} moveFolder={moveFolder}
+                                            updatePosition={updatePosition} removeFolder={removeFolder}/>
                         ))}
                         <AddFolderCard addFolder={addNewFolder}/>
                     </form>

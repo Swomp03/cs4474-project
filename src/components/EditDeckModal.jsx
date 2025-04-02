@@ -1,7 +1,7 @@
 import "./componentStyles/EditModal.css";
 
-import {saveCards} from "../utils/localStorage.js";
-import {EditDeckModalCards, AddDeckCard} from "./EditDeckModalCards.jsx";
+import {createNewCard, saveCards} from "../utils/localStorage.js";
+import {AddDeckCard, EditDeckCard} from "./EditDeckModalCards.jsx";
 import {useState} from "react";
 
 import cancel from "../assets/icons/cancel.svg"
@@ -10,14 +10,9 @@ import save from "../assets/icons/save.svg"
 const EditDeckModal = (props) => {
     const [cards, setCards] = useState(props.cards);
 
-    const addCard = () => {
-        // Create a new card at the end of the deck, with placeholder text
-        const newCard = {
-            "index": cards.length,
-            "position": cards.length + 1,
-            "question": "",
-            "answer": ""
-        };
+    const addNewCard = () => {
+        // Create a new card at the end of the deck, with the default blank placeholder text
+        const newCard = createNewCard(cards.length + 1);
         setCards([...cards, newCard]);
     }
 
@@ -35,50 +30,49 @@ const EditDeckModal = (props) => {
 
         // Fix the indexes
         for (let i = 0; i < adjustedCards.length; i++) {
-            adjustedCards[i].index = i;
             adjustedCards[i].position = i + 1;
         }
 
         setCards(adjustedCards);
     }
 
-    const increaseIndex = (currIndex) => {
+    const increaseIndex = (currIndex, event) => {
         if (currIndex >= cards.length - 1) {
             console.log("Can't increase index, at bound");
             return;
         }
 
+        event.currentTarget.blur(); // Remove focus
+
         const newCards = [...cards]; // Make a copy of the array
 
         const targetCard = newCards[currIndex + 1];
 
-        newCards[currIndex + 1] = newCards[currIndex]; // Increase the moving card's index by 1
-        newCards[currIndex + 1].index = currIndex + 1;
+        newCards[currIndex + 1] = newCards[currIndex];
         newCards[currIndex + 1].position = currIndex + 2;
 
         targetCard.position = currIndex + 1;
-        targetCard.index = currIndex; // Change the target card's index to the index of the moved card
         newCards[currIndex] = targetCard;
 
         setCards(newCards);
     }
 
-    const decreaseIndex = (currIndex) => {
+    const decreaseIndex = (currIndex, event) => {
         if (currIndex <= 0) {
             console.log("Can't decrease index, at bound");
             return;
         }
 
+        event.currentTarget.blur(); // Remove focus
+
         const newCards = [...cards]; // Make a copy of the array
 
         const targetCard = newCards[currIndex - 1];
 
-        newCards[currIndex - 1] = newCards[currIndex]; // Decrease the moving card's index by 1
-        newCards[currIndex - 1].index = currIndex - 1;
+        newCards[currIndex - 1] = newCards[currIndex];
         newCards[currIndex - 1].position = currIndex;
 
         targetCard.position = currIndex + 1;
-        targetCard.index = currIndex; // Change the target card's index to the index of the moved card
         newCards[currIndex] = targetCard;
 
         setCards(newCards);
@@ -117,9 +111,8 @@ const EditDeckModal = (props) => {
             const movingCard = adjustedCards.splice(currIndex, 1)[0]; // Remove original card
             adjustedCards.splice(newIndex, 0, movingCard); // Insert the moving card
 
-            // Fix all the indexes and positions
+            // Fix all the positions
             for (let i = 0; i < adjustedCards.length; i++) {
-                adjustedCards[i].index = i;
                 adjustedCards[i].position = i + 1;
             }
 
@@ -180,12 +173,12 @@ const EditDeckModal = (props) => {
 
                     <form id="cards-container" className="group-container" onSubmit={saveEdits}>
                         {cards.map((card, index) => (
-                            <EditDeckModalCards key={index} card={card} maxIndex={cards.length}
+                            <EditDeckCard key={index} card={card} currIndex={index} maxIndex={cards.length}
                                                 updateValue={updateValue} increaseIndex={increaseIndex}
                                                 decreaseIndex={decreaseIndex} moveCard={moveCard}
                                                 updatePosition={updatePosition} removeCard={removeCard}/>
                         ))}
-                        <AddDeckCard addCard={addCard}/>
+                        <AddDeckCard addNewCard={addNewCard}/>
                     </form>
                 </div>
             </div>
