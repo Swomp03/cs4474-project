@@ -131,6 +131,38 @@ button:focus {
   gap: 4px;
 }
 
+.card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: transparent;
+  border: none;
+  border-radius: 50px;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  text-align: center;
+  font-size: 18px;
+
+  transition: background-color 0.3s;
+}
+
+.card-btn:hover {
+  background-color: #9f9f9f;
+}
+
+.card-btn:focus {
+  background-color: #9f9f9f;
+}
+
+.card-btn > img {
+  width: 20px;
+  height: 20px;
+}
+
 #return-button{
   /*margin: 1rem;*/
   margin-bottom: 12px;

@@ -129,36 +129,6 @@ input::-webkit-inner-spin-button {
     height: 28px;
 }
 
-.card-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: transparent;
-    border: none;
-    border-radius: 50px;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    text-align: center;
-    font-size: 18px;
-
-    transition: background-color 0.3s;
-}
-
-.card-btn:hover {
-    background-color: #9f9f9f;
-}
-
-.card-btn:focus {
-    background-color: #9f9f9f;
-}
-
-.card-btn > img {
-    width: 20px;
-    height: 20px;
-}
-
 .disabled {
     background-color: transparent !important;
     /*color: #cccccc !important;*/

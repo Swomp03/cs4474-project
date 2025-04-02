@@ -1,6 +1,6 @@
 import "./componentStyles/DeckFolder.css"
 
-import {addDeck, deleteDeck, loadData} from "../utils/localStorage";
+import {addDeck, deleteDeck} from "../utils/localStorage";
 import {useEffect, useState} from "react";
 
 // import editIcon from "../assets/icons/edit.svg";
@@ -10,7 +10,7 @@ import deleteIcon from "../assets/icons/delete.svg";
 
 // TODO: Store visible state so it remembers on page load?
 
-const DeckFolder = (props) =>{
+const DeckFolder = (props) => {
     const folderName = props.folder.name;
     const decks = props.folder.decks;
     const folderId = props.folder.id;
@@ -18,26 +18,26 @@ const DeckFolder = (props) =>{
     const [deckName, setDeckName] = useState("");
     const [deckDescription, setDeckDescription] = useState("");
 
-    const { state: visible, toggle: toggleVisibility } = useToggle(true);
+    const {state: visible, toggle: toggleVisibility} = useToggle(true);
 
     const dropdownId = "dropdown-" + folderId;
 
-    const handleAddDeck = (e) =>{
+    const handleAddDeck = (e) => {
         e.preventDefault();
-        if(!deckName.trim()) return;
-        if(!deckDescription.trim()) return;
+        if (!deckName.trim()) return;
+        if (!deckDescription.trim()) return;
 
         addDeck(folderId, deckName, deckDescription);
-        
+
         setDeckName("");
         setDeckDescription("");
         window.location.reload();
     }
 
-    const handleDeleteDeck = (e, deckId, deckName, deckDesc) =>{
+    const handleDeleteDeck = (e, deckId, deckName, deckDesc) => {
         e.preventDefault();
         let deleteText = "Are you sure you want to delete this deck:\n" + deckName + "\n" + deckDesc;
-        if(confirm(deleteText)){
+        if (confirm(deleteText)) {
             deleteDeck(folderId, deckId);
             window.location.reload();
         }
@@ -68,7 +68,7 @@ const DeckFolder = (props) =>{
         }
     }, [dropdownId]);
 
-    return(
+    return (
         <>
             <div className="folder-div">
                 {/* <div>
@@ -81,17 +81,20 @@ const DeckFolder = (props) =>{
 
                 <div className="folder-header-container">
                     <span className="folder-name">{folderName}</span>
-                    <button className={visible ? "folder-header-btn" : "folder-header-btn rotated-90"} onClick={toggleVisibility}>
+                    <button className={visible ? "folder-header-btn" : "folder-header-btn rotated-90"}
+                            onClick={toggleVisibility}>
                         <img src={arrowDropdown} alt="Dropdown icon"/>
                     </button>
                 </div>
-                
+
                 <div id={dropdownId} className={visible ? "dropdown-group" : "dropdown-group hidden-folder"}>
                     <div className="new-deck-background">
                         <h2>New Deck:</h2>
                         <form onSubmit={handleAddDeck}>
-                            <input type="text" placeholder="Enter Deck Name" value={deckName} onChange={(e) => setDeckName(e.target.value)}/>
-                            <input type="text" placeholder="Enter Deck Desc." value={deckDescription} onChange={(e2) => setDeckDescription(e2.target.value)}/>
+                            <input type="text" placeholder="Enter Deck Name" value={deckName}
+                                   onChange={(e) => setDeckName(e.target.value)}/>
+                            <input type="text" placeholder="Enter Deck Desc." value={deckDescription}
+                                   onChange={(e2) => setDeckDescription(e2.target.value)}/>
                             <button type="submit" className="default-btn">+ Add Deck</button>
                         </form>
                     </div>
@@ -102,12 +105,18 @@ const DeckFolder = (props) =>{
                                 <div className="deck-card card-3"></div>
                                 <div className="deck-card card-2"></div>
                                 <div className="deck-card card-1">
-                                    <p className="deck-name display-3-lines">
-                                        {deck.name}
-                                        <img src={deleteIcon} alt="Delete Icon" className="deck-delete-icon" onClick={(e) => handleDeleteDeck(e, deck.id, deck.name, deck.description)}/>
+                                    <div className="deck-card-content">
+                                        <div className="deck-card-text-area">
+                                            <p className="deck-name display-3-lines">{deck.name}</p>
+                                            <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
+                                        </div>
+
+                                        <button className="card-btn delete-deck-btn"
+                                                onClick={(e) => handleDeleteDeck(e, deck.id, deck.name, deck.description)}>
+                                            <img src={deleteIcon} alt="Delete Icon"/>
+                                        </button>
                                         {/* <img src={editIcon} alt="Edit Icon"/> */}
-                                    </p>
-                                    <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
+                                    </div>
                                 </div>
                             </div>
                         </a>

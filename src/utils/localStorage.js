@@ -90,12 +90,6 @@ export const saveCards = (folderId, deckId, cards) => {
     }
 };
 
-// Save the updated order of folders
-export const saveFolders = (folders) => {
-    // console.log("Save Folder:", folders);
-    saveData(folders);
-};
-
 export const deleteDeck = (folderId, deckId) =>{
     const data = loadData();
     const folder = data.find(f => f.id === folderId);
