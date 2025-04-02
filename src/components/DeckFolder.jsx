@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import arrowDropdown from "../assets/icons/arrow_drop_down.svg";
 import useToggle from "./hooks/useToggle.js";
 import deleteIcon from "../assets/icons/delete.svg";
+import plusIcon from "../assets/icons/plus.svg";
 
 // TODO: Store visible state so it remembers on page load?
 
@@ -36,7 +37,7 @@ const DeckFolder = (props) => {
 
     const handleDeleteDeck = (e, deckId, deckName, deckDesc) => {
         e.preventDefault();
-        let deleteText = "Are you sure you want to delete this deck:\n" + deckName + "\n" + deckDesc;
+        let deleteText = `Are you sure you want to delete ${deckName}?`;
         if (confirm(deleteText)) {
             deleteDeck(folderId, deckId);
             window.location.reload();
@@ -89,26 +90,32 @@ const DeckFolder = (props) => {
 
                 <div id={dropdownId} className={visible ? "dropdown-group" : "dropdown-group hidden-folder"}>
                     <div className="new-deck-background">
-                        <h2>New Deck:</h2>
-                        <form onSubmit={handleAddDeck}>
-                            <input type="text" placeholder="Enter Deck Name" value={deckName}
+                        <h2>New Deck</h2>
+                        <form className="new-deck-form" onSubmit={handleAddDeck}>
+                            <input type="text" className="deck-text-input" placeholder="Enter deck name..."
+                                   value={deckName}
                                    onChange={(e) => setDeckName(e.target.value)}/>
-                            <input type="text" placeholder="Enter Deck Desc." value={deckDescription}
+                            <input type="text" className="deck-text-input" placeholder="Enter deck description..."
+                                   value={deckDescription}
                                    onChange={(e2) => setDeckDescription(e2.target.value)}/>
-                            <button type="submit" className="default-btn">+ Add Deck</button>
+                            <button type="submit" className="default-btn img-btn">
+                                <img src={plusIcon} alt="Plus icon"/>
+                                Add Deck
+                            </button>
                         </form>
                     </div>
 
                     {decks.map((deck) => (
                         <a key={deck.id} href={`/deckpage/${folderId}/${deck.id}`} className="deck-link">
-                            <div className="deck-group card-stack">
+                            <div className="card-stack">
                                 <div className="deck-card card-3"></div>
                                 <div className="deck-card card-2"></div>
                                 <div className="deck-card card-1">
                                     <div className="deck-card-content">
                                         <div className="deck-card-text-area">
                                             <p className="deck-name display-3-lines">{deck.name}</p>
-                                            <p className="deck-description display-3-lines"><i>{deck.description}</i></p>
+                                            <p className="deck-description display-3-lines"><i>{deck.description}</i>
+                                            </p>
                                         </div>
 
                                         <button className="card-btn delete-deck-btn"

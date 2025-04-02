@@ -1,50 +1,14 @@
-.add-new-deck-button {
-    margin: 3vh 0 0;
-    height: 5vh;
-}
+/*.add-new-deck-button {*/
+/*    margin: 3vh 0 0;*/
+/*    height: 5vh;*/
+/*}*/
 
-.dropdown-group {
-    /*margin-left: 5vh;*/
+.folder-div {
     display: grid;
+    width: 290px;
     gap: 1rem;
 
-    transition: height 0.5s ease;
-}
-
-.hidden-folder {
-    /*display: none;*/
-
-    height: 0 !important;
-    overflow: hidden;
-}
-
-.deck-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin-block: 0.75rem;
-}
-
-.deck-card-content {
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-
-.deck-card-text-area {
-    display: flex;
-    flex-direction: column;
-    flex: 2; /* Make the bigger flex element */
-}
-
-.delete-deck-btn {
-    margin-top: 0.75rem;
-}
-
-.deck-description {
-    /*margin-left: 3vh;*/
-    margin-block: 0.75rem;
-    font-size: 16px;
-    color: rgb(234, 234, 234);
+    --deck-folder-background: rgb(120, 120, 120);
 }
 
 .folder-header-container {
@@ -52,9 +16,9 @@
     text-align: left;
     font-size: 24px;
 
-    background-color: rgb(149, 149, 149);
+    background-color: var(--deck-folder-background);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
 
     display: flex;
     align-items: center;
@@ -96,17 +60,74 @@
     height: 20px;
 }
 
-.folder-div {
+
+.dropdown-group {
+    /*margin-left: 5vh;*/
     display: grid;
-    width: 290px;
     gap: 1rem;
+
+    transition: height 0.5s ease;
 }
 
 .new-deck-background {
-    background-color: rgb(120, 120, 120);
-    border-radius: 5px;
+    background-color: var(--deck-folder-background);
+    border-radius: var(--border-radius); /*border-radius: 5px;*/
     padding: 8px;
 }
+
+.new-deck-background h2 {
+    text-align: center;
+    margin-block: 0.75rem;
+}
+
+.hidden-folder {
+    /*display: none;*/
+
+    height: 0 !important;
+    overflow: hidden;
+}
+
+.new-deck-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.deck-text-input {
+    background-color: #9a9a9a;
+    color: inherit;
+    border: 1px solid #d8d8d8;
+    /*border-bottom: 1px solid #dfdfdf;*/
+    border-radius: 10px;
+    /*width: 64px;*/
+    /*height: 32px;*/
+    padding: 6px;
+    /*text-align: center;*/
+    font-size: 14px;
+    /*outline: 1px solid #dfdfdf;*/
+
+    resize: none;
+
+    transition: background-color 0.3s;
+}
+
+.deck-text-input::placeholder {
+    color: #dadada;
+}
+
+.deck-text-input:hover {
+    background-color: #8f8f8f;
+}
+
+.deck-text-input:focus {
+    background-color: #8f8f8f;
+}
+
+.new-deck-form button {
+    margin-inline: auto;
+    font-size: 16px;
+}
+
 
 .deck-link {
     border-radius: var(--border-radius);
@@ -114,6 +135,35 @@
 
 .deck-link:hover {
     outline: none;
+}
+
+.deck-card-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.deck-card-text-area {
+    display: flex;
+    flex-direction: column;
+    flex: 2; /* Make the bigger flex element */
+}
+
+.deck-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-block: 0.75rem;
+}
+
+.deck-description {
+    /*margin-left: 3vh;*/
+    margin-block: 0.75rem;
+    font-size: 16px;
+    color: rgb(234, 234, 234);
+}
+
+.delete-deck-btn {
+    margin-top: 0.75rem;
 }
 
 .rotated-90 {
@@ -128,8 +178,6 @@
     text-overflow: ellipsis;
     line-height: 1.4;
 }
-
-
 
 
 .card-stack {
