@@ -151,11 +151,11 @@ button:focus {
 }
 
 .card-btn:hover {
-  background-color: #9f9f9f;
+  background-color: #8f8f8f;
 }
 
 .card-btn:focus {
-  background-color: #9f9f9f;
+  background-color: #8f8f8f;
 }
 
 .card-btn > img {

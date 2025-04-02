@@ -35,7 +35,7 @@ const DeckFolder = (props) => {
         window.location.reload();
     }
 
-    const handleDeleteDeck = (e, deckId, deckName, deckDesc) => {
+    const handleDeleteDeck = (e, deckId, deckName) => {
         e.preventDefault();
         let deleteText = `Are you sure you want to delete ${deckName}?`;
         if (confirm(deleteText)) {
@@ -81,7 +81,9 @@ const DeckFolder = (props) => {
                 </div> */}
 
                 <div className="folder-header-container">
-                    <span className="folder-name">{folderName}</span>
+                    <span className="folder-name display-3-lines"
+                          title={folderName.length > 45 ? folderName : null}>{folderName}</span>
+
                     <button className={visible ? "folder-header-btn" : "folder-header-btn rotated-90"}
                             onClick={toggleVisibility}>
                         <img src={arrowDropdown} alt="Dropdown icon"/>
@@ -89,6 +91,11 @@ const DeckFolder = (props) => {
                 </div>
 
                 <div id={dropdownId} className={visible ? "dropdown-group" : "dropdown-group hidden-folder"}>
+                    <button type="button" className="default-btn img-btn show-new-deck-container-btn">
+                        <img src={plusIcon} alt="Plus icon"/>
+                        New Deck
+                    </button>
+
                     <div className="new-deck-background">
                         <h2>New Deck</h2>
                         <form className="new-deck-form" onSubmit={handleAddDeck}>
@@ -113,13 +120,16 @@ const DeckFolder = (props) => {
                                 <div className="deck-card card-1">
                                     <div className="deck-card-content">
                                         <div className="deck-card-text-area">
-                                            <p className="deck-name display-3-lines">{deck.name}</p>
-                                            <p className="deck-description display-3-lines"><i>{deck.description}</i>
+                                            <p className="deck-name display-3-lines"
+                                               title={deck.name.length > 65 ? deck.description : null}>{deck.name}</p>
+                                            <p className="deck-description display-3-lines"
+                                               title={deck.description.length > 80 ? deck.description : null}>
+                                                <i>{deck.description}</i>
                                             </p>
                                         </div>
 
                                         <button className="card-btn delete-deck-btn"
-                                                onClick={(e) => handleDeleteDeck(e, deck.id, deck.name, deck.description)}>
+                                                onClick={(e) => handleDeleteDeck(e, deck.id, deck.name)}>
                                             <img src={deleteIcon} alt="Delete Icon"/>
                                         </button>
                                         {/* <img src={editIcon} alt="Edit Icon"/> */}

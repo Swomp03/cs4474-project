@@ -12,9 +12,10 @@
 }
 
 .folder-header-container {
-    height: 3rem;
+    max-height: 10rem;
     text-align: left;
     font-size: 24px;
+    overflow: hidden;
 
     background-color: var(--deck-folder-background);
     border: none;
@@ -23,11 +24,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     padding-inline: 1rem;
+}
+
+/* TODO: Keep? */
+.show-new-deck-container-btn {
+    font-size: 14px;
+    padding: 6px;
+}
+
+.show-new-deck-container-btn img {
+    width: 14px;
+    height: 14px;
 }
 
 .folder-name {
     font-weight: bold;
+    padding-block: 0.5rem;
 }
 
 .folder-header-btn {
@@ -39,7 +53,9 @@
     border: none;
     border-radius: 50px;
     width: 32px;
+    min-width: 32px;
     height: 32px;
+    min-height: 32px;
     padding: 0;
     text-align: center;
     font-size: 18px;
