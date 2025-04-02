@@ -33,7 +33,7 @@ export function EditDeckCard(props) {
                 <span className="text-header">Question</span>
                 <textarea required={true} name="question" placeholder="Enter a question..." className="text-input"
                           value={card.question}
-                          onChange={e => props.updateValue("question", card.index, e.target.value)}/>
+                          onChange={e => props.updateValue("question", props.currIndex, e.target.value)}/>
 
                 <span className="text-header">Answer</span>
                 <textarea required={true} name="answer" placeholder="Enter the answer..." className="text-input"

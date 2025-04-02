@@ -18,15 +18,39 @@
     margin-block: 20px;
     perspective: 1000px;
     font-size: 32px;
+
+    position: relative;
+    animation-duration: 0.75s;
+    animation-timing-function: ease-in-out;
 }
 
 .reveal #card-inner {
     transform: rotateX(180deg);
 }
 
+.next-card {
+    animation-name: move-card;
+}
+
+.prev-card {
+    animation-name: move-card;
+    animation-direction: reverse;
+}
+
 /*#card:hover #card-inner {*/
 /*    transform: rotateX(180deg);*/
 /*}*/
+
+@keyframes move-card {
+    0%   {right: 0;}
+    40%  {right: 4000px;}
+    60%  {left: 4000px;}
+    100% {left: 0;}
+}
+
+.hide-overflow {
+    overflow-x: hidden;
+}
 
 #card-inner {
     position: relative;
