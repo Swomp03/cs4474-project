@@ -12,11 +12,8 @@ import minusIcon from "../assets/icons/minus.svg";
 import plusIcon from "../assets/icons/plus.svg";
 import deleteIcon from "../assets/icons/delete.svg";
 
-// TODO: Make escape hide modal as well?
-// TODO: Add warning on cancel?
 
-
-// TODO: FINISH ME PLEASE!!!!
+// TODO: FINISH ME PLEASE!!!! -- Copy changes from other modals
 
 const AddNewFolderModal = (props) => {
     // const [cards, setCards] = useState(props.cards);

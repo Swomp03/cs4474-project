@@ -8,6 +8,7 @@ import arrowDropdown from "../assets/icons/arrow_drop_down.svg";
 import useToggle from "./hooks/useToggle.js";
 import deleteIcon from "../assets/icons/delete.svg";
 import plusIcon from "../assets/icons/plus.svg";
+import cancel from "../assets/icons/cancel.svg";
 
 // TODO: Store visible state so it remembers on page load?
 
@@ -19,9 +20,13 @@ const DeckFolder = (props) => {
     const [deckName, setDeckName] = useState("");
     const [deckDescription, setDeckDescription] = useState("");
 
-    const {state: visible, toggle: toggleVisibility} = useToggle(true);
+    const {state: folderContentsVisible, toggle: toggleFolderContentsVisibility} = useToggle(true);
+    const {state: newDeckCardHidden, toggle: toggleNewDeckCardHiddeness} = useToggle();
+
 
     const dropdownId = "dropdown-" + folderId;
+    const newDeckId = "new-deck-" + folderId;
+    const newDeckBtnId = "new-deck-btn-" + folderId;
 
     const handleAddDeck = (e) => {
         e.preventDefault();
@@ -44,6 +49,7 @@ const DeckFolder = (props) => {
         }
     }
 
+    // TODO: Fix me
     useEffect(() => {
         const dropdown = document.getElementById(dropdownId);
         const isHidden = dropdown.classList.contains('hidden-folder');
@@ -69,6 +75,29 @@ const DeckFolder = (props) => {
         }
     }, [dropdownId]);
 
+    const toggleNewDeckVis = () => {
+        const newDeck = document.getElementById(newDeckId);
+        const newDeckBtn = document.getElementById(newDeckBtnId);
+
+        toggleNewDeckCardHiddeness();
+
+        if (newDeck && newDeckCardHidden) {
+            newDeck.classList.add("hidden-container");
+
+            setTimeout(() => {
+                newDeck.classList.add("hidden");
+                newDeckBtn.classList.remove("hidden");
+            }, 280)
+        } else if (newDeck) {
+            newDeck.classList.remove("hidden");
+
+            setTimeout(() => {
+                newDeck.classList.remove("hidden-container");
+                newDeckBtn.classList.add("hidden");
+            }, 10)
+        }
+    }
+
     return (
         <>
             <div className="folder-div">
@@ -84,19 +113,20 @@ const DeckFolder = (props) => {
                     <span className="folder-name display-3-lines"
                           title={folderName.length > 45 ? folderName : null}>{folderName}</span>
 
-                    <button className={visible ? "folder-header-btn" : "folder-header-btn rotated-90"}
-                            onClick={toggleVisibility}>
+                    <button className={`folder-header-btn ${!folderContentsVisible ? "rotated-90" : ""}`}
+                            onClick={toggleFolderContentsVisibility}>
                         <img src={arrowDropdown} alt="Dropdown icon"/>
                     </button>
                 </div>
 
-                <div id={dropdownId} className={visible ? "dropdown-group" : "dropdown-group hidden-folder"}>
-                    <button type="button" className="default-btn img-btn show-new-deck-container-btn">
+                <div id={dropdownId} className={`dropdown-group ${!folderContentsVisible ? "hidden-container" : ""}`}>
+                    <button type="button" id={newDeckBtnId} className="default-btn img-btn show-new-deck-container-btn"
+                            onClick={toggleNewDeckVis}>
                         <img src={plusIcon} alt="Plus icon"/>
                         New Deck
                     </button>
 
-                    <div className="new-deck-background">
+                    <div id={newDeckId} className={`new-deck-container hidden hidden-container`}>
                         <h2>New Deck</h2>
                         <form className="new-deck-form" onSubmit={handleAddDeck}>
                             <input type="text" className="deck-text-input" placeholder="Enter deck name..."
@@ -105,10 +135,18 @@ const DeckFolder = (props) => {
                             <input type="text" className="deck-text-input" placeholder="Enter deck description..."
                                    value={deckDescription}
                                    onChange={(e2) => setDeckDescription(e2.target.value)}/>
-                            <button type="submit" className="default-btn img-btn">
-                                <img src={plusIcon} alt="Plus icon"/>
-                                Add Deck
-                            </button>
+
+                            <div className="new-deck-form-controls">
+                                <button type="submit" className="primary-btn img-btn">
+                                    <img src={plusIcon} alt="Plus icon"/>
+                                    Add
+                                </button>
+
+                                <button type="button" className="default-btn img-btn cancel-btn" onClick={toggleNewDeckVis}>
+                                    <img src={cancel} alt="Cancel icon"/>
+                                    Cancel
+                                </button>
+                            </div>
                         </form>
                     </div>
 

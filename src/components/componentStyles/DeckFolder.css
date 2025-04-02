@@ -28,15 +28,13 @@
     padding-inline: 1rem;
 }
 
-/* TODO: Keep? */
 .show-new-deck-container-btn {
-    font-size: 14px;
-    padding: 6px;
-}
-
-.show-new-deck-container-btn img {
-    width: 14px;
-    height: 14px;
+    font-size: 16px;
+    margin-inline: auto;
+    height: 44px;
+    max-height: 44px;
+    width: 10rem;
+    background: var(--deck-folder-background);
 }
 
 .folder-name {
@@ -85,28 +83,54 @@
     transition: height 0.5s ease;
 }
 
-.new-deck-background {
+.new-deck-container {
     background-color: var(--deck-folder-background);
     border-radius: var(--border-radius); /*border-radius: 5px;*/
     padding: 8px;
+    height: 180px;
+
+    transition: height 0.5s ease;
 }
 
-.new-deck-background h2 {
+.new-deck-container h2 {
     text-align: center;
     margin-block: 0.75rem;
 }
 
-.hidden-folder {
+.hidden-container {
     /*display: none;*/
 
     height: 0 !important;
     overflow: hidden;
 }
 
+.hidden {
+    display: none;
+}
+
 .new-deck-form {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.new-deck-form-controls {
+    display: flex;
+    justify-content: space-around;
+    font-size: 16px;
+}
+
+.new-deck-form-controls button {
+    padding-inline: 1rem;
+    width: 7rem;
+}
+
+.cancel-btn {
+    background-color: #8c8c8c;
+}
+
+.cancel-btn:hover {
+    background-color: #9a9a9a;
 }
 
 .deck-text-input {
@@ -137,11 +161,6 @@
 
 .deck-text-input:focus {
     background-color: #8f8f8f;
-}
-
-.new-deck-form button {
-    margin-inline: auto;
-    font-size: 16px;
 }
 
 
@@ -181,6 +200,7 @@
 .delete-deck-btn {
     margin-top: 0.75rem;
 }
+
 
 .rotated-90 {
     transform: rotate(-90deg);
