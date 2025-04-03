@@ -140,7 +140,7 @@ const Home = () => {
                 <div className="deck-folders">
                     {folders.map((folder) => (
                         <div key={folder.id} className="deck-folder-group">
-                            <DeckFolder key={folder.id} folder={folder} />
+                            <DeckFolder key={folder.id} folder={folder} updateFolders={updateFolders} />
 
                             {/* Static position field (always visible) */}
                             {/*<div className="position-container">*/}

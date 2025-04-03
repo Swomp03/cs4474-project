@@ -1,11 +1,12 @@
 import "./componentStyles/DeckFolder.css"
 
-import {addDeck, deleteDeck} from "../utils/localStorage";
-import {useEffect, useState} from "react";
+import {addDeck, deleteDeck, loadData} from "../utils/localStorage";
+import {useState} from "react";
+
+import useToggle from "./hooks/useToggle.js";
 
 // import editIcon from "../assets/icons/edit.svg";
 import arrowDropdown from "../assets/icons/arrow_drop_down.svg";
-import useToggle from "./hooks/useToggle.js";
 import deleteIcon from "../assets/icons/delete.svg";
 import plusIcon from "../assets/icons/plus.svg";
 import cancel from "../assets/icons/cancel.svg";
@@ -21,8 +22,7 @@ const DeckFolder = (props) => {
     const [deckDescription, setDeckDescription] = useState("");
 
     const {state: folderContentsVisible, toggle: toggleFolderContentsVisibility} = useToggle(true);
-    const {state: newDeckCardHidden, toggle: toggleNewDeckCardHiddeness} = useToggle();
-
+    const {state: newDeckCardHidden, toggle: toggleNewDeckCard} = useToggle();
 
     const dropdownId = "dropdown-" + folderId;
     const newDeckId = "new-deck-" + folderId;
@@ -37,7 +37,8 @@ const DeckFolder = (props) => {
 
         setDeckName("");
         setDeckDescription("");
-        window.location.reload();
+        props.updateFolders(loadData()); // Update the page without fully reloading
+        toggleNewDeckVis(); // Hide the new deck card container
     }
 
     const handleDeleteDeck = (e, deckId, deckName) => {
@@ -45,41 +46,15 @@ const DeckFolder = (props) => {
         let deleteText = `Are you sure you want to delete ${deckName}?`;
         if (confirm(deleteText)) {
             deleteDeck(folderId, deckId);
-            window.location.reload();
+            props.updateFolders(loadData()); // Update the page without fully reloading
         }
     }
-
-    // TODO: Fix me
-    useEffect(() => {
-        const dropdown = document.getElementById(dropdownId);
-        const isHidden = dropdown.classList.contains('hidden-folder');
-
-        // Close the dropdown by setting the height to 0
-        if (isHidden) {
-            const currentHeight = dropdown.offsetHeight;
-            dropdown.style.height = currentHeight + 'px';
-
-            // Force browser to acknowledge the height
-            setTimeout(() => {
-                dropdown.style.height = '0px';
-            }, 5);
-        } else { // Otherwise, open the dropdown by setting the height back to normal
-            dropdown.style.height = 'auto';
-            const targetHeight = dropdown.offsetHeight;
-            dropdown.style.height = '0px';
-
-            // Force browser to acknowledge the change
-            setTimeout(() => {
-                dropdown.style.height = targetHeight + 'px';
-            }, 15);
-        }
-    }, [dropdownId]);
 
     const toggleNewDeckVis = () => {
         const newDeck = document.getElementById(newDeckId);
         const newDeckBtn = document.getElementById(newDeckBtnId);
 
-        toggleNewDeckCardHiddeness();
+        toggleNewDeckCard();
 
         if (newDeck && newDeckCardHidden) {
             newDeck.classList.add("hidden-container");
@@ -101,14 +76,6 @@ const DeckFolder = (props) => {
     return (
         <>
             <div className="folder-div">
-                {/* <div>
-                    <h2>Create a New Folder</h2>
-                    <form onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Enter Folder Name" value={folderName} onChange={(e) => setFolderName(e.target.value)}/>
-                        <button type="submit">Add Folder</button>
-                    </form>
-                </div> */}
-
                 <div className="folder-header-container">
                     <span className="folder-name display-3-lines"
                           title={folderName.length > 45 ? folderName : null}>{folderName}</span>
@@ -119,7 +86,7 @@ const DeckFolder = (props) => {
                     </button>
                 </div>
 
-                <div id={dropdownId} className={`dropdown-group ${!folderContentsVisible ? "hidden-container" : ""}`}>
+                <div id={dropdownId} className={`dropdown-group ${folderContentsVisible ? "expanded" : ""}`}>
                     <button type="button" id={newDeckBtnId} className="default-btn img-btn show-new-deck-container-btn"
                             onClick={toggleNewDeckVis}>
                         <img src={plusIcon} alt="Plus icon"/>
