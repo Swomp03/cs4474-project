@@ -43,11 +43,18 @@ const DeckFolder = (props) => {
 
     const handleDeleteDeck = (e, deckId, deckName) => {
         e.preventDefault();
-        let deleteText = `Are you sure you want to delete ${deckName}?`;
+        let deleteText = `Are you sure you want to delete "${deckName}"?`;
         if (confirm(deleteText)) {
             deleteDeck(folderId, deckId);
             props.updateFolders(loadData()); // Update the page without fully reloading
         }
+    }
+
+    const handleCancelAddingDeck = () => {
+        setDeckName("");
+        setDeckDescription("");
+
+        toggleNewDeckVis(); // Hide the new deck card container
     }
 
     const toggleNewDeckVis = () => {
@@ -96,10 +103,10 @@ const DeckFolder = (props) => {
                     <div id={newDeckId} className={`new-deck-container hidden hidden-container`}>
                         <h2>New Deck</h2>
                         <form className="new-deck-form" onSubmit={handleAddDeck}>
-                            <input type="text" className="deck-text-input" placeholder="Enter deck name..."
+                            <input type="text" required={true} className="deck-text-input" placeholder="Enter deck name..."
                                    value={deckName}
                                    onChange={(e) => setDeckName(e.target.value)}/>
-                            <input type="text" className="deck-text-input" placeholder="Enter deck description..."
+                            <input type="text" required={true} className="deck-text-input" placeholder="Enter deck description..."
                                    value={deckDescription}
                                    onChange={(e2) => setDeckDescription(e2.target.value)}/>
 
@@ -109,7 +116,7 @@ const DeckFolder = (props) => {
                                     Add
                                 </button>
 
-                                <button type="button" className="default-btn img-btn cancel-btn" onClick={toggleNewDeckVis}>
+                                <button type="button" className="default-btn img-btn cancel-btn" onClick={handleCancelAddingDeck}>
                                     <img src={cancel} alt="Cancel icon"/>
                                     Cancel
                                 </button>
