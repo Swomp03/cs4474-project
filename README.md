@@ -15,7 +15,7 @@ Choose one of the following methods:
 
 **Option A: Clone with Git**
 ```bash
-git clone https://github.com/com/Swomp03/cs4474-project.git
+git clone https://github.com/Swomp03/cs4474-project.git
 cd cs4474-project
 ```
 
