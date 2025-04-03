@@ -54,12 +54,11 @@ export const addDeck = (folderId, deckName, deckDescription) => {
 
 // Create a new card and return it
 export const createNewCard = (position, question = "", answer = "") => {
-    const newCard = {
+    return {
         "position": position,
         "question": question,
         "answer": answer
     };
-    return newCard;
 };
 
 // Add a card to a deck

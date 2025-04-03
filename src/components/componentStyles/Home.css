@@ -32,10 +32,10 @@
     /*row-gap: 3em;*/
     gap: 4rem;
 
-    overflow-y:  scroll;
+    overflow-y: auto;
     overflow-x: visible;
 
-    padding-left: 17px; /* TODO: Ensure this is correct for scrollbar width*/
+    scrollbar-gutter: stable both-edges;
     scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
     margin-inline: 5px;
     width: 100%;

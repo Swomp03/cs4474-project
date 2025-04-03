@@ -11,9 +11,8 @@
 #root {
     overflow-y: auto;
 
-    /*padding-left: 17px; !* TODO: Ensure this is correct for scrollbar width*!*/
+    /*scrollbar-gutter: stable both-edges;*/
     scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
-
 }
 
 .deck-button {

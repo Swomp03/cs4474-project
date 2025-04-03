@@ -71,9 +71,13 @@
 
     background-color: var(--card-colour);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    overflow: auto;
     border-radius: var(--border-radius);
+
+    scrollbar-gutter: stable both-edges;
+    scrollbar-color: #a8a8a8 transparent; /* TODO: Change colour? */
 }
 
 #card-back {
@@ -81,9 +85,13 @@
 }
 
 .card-text {
-    width: 100%;
-    overflow: hidden;
-    white-space: pre-line;
+    /*width: 100%;*/
+    /*overflow: hidden;*/
+    /*white-space: pre-line;*/
+    margin-block: auto;
+    margin-inline: auto;
+    padding-block: 2rem;
+    padding-inline: 1rem;
 }
 
 #navigation {

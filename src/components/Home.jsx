@@ -2,7 +2,7 @@ import "./componentStyles/Home.css";
 
 import DeckFolder from "./DeckFolder";
 import { useEffect, useState } from "react";
-import { loadData, saveFolders } from "../utils/localStorage";
+import { loadData } from "../utils/localStorage";
 import useToggle from "./hooks/useToggle.js";
 import EditFoldersModal from "./EditFoldersModal.jsx";
 import AddNewFolderModal from "./AddNewFolderModal.jsx";
