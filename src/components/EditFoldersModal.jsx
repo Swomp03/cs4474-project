@@ -129,7 +129,7 @@ const EditFoldersModal = (props) => {
     }
 
     const cancelEdits = () => {
-        const cancel = confirm(`Are you sure you want to cancel? Your changes will be lost`);
+        const cancel = confirm(`Are you sure you want to cancel? Any changes will be lost.`);
         if (cancel)
             props.toggleVisibility();
     }

@@ -12,6 +12,16 @@ img {
     /*flex: 1 1 auto;*/
 }
 
+.small-card {
+    display: flex;
+    padding: 16px;
+    height: 12rem;
+    width: 22rem;
+    border-radius: var(--border-radius);
+
+    /*flex: 1 1 auto;*/
+}
+
 .edit-card {
     flex-direction: column;
     background-color: darkgray;

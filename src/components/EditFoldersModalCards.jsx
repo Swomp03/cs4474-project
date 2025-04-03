@@ -28,7 +28,7 @@ export function EditFolderCard(props) {
 
     return (
         <>
-            <div className="card edit-card">
+            <div className="small-card edit-card">
                 <span className="text-header">Folder Name</span>
                 <textarea required={true} name="name" placeholder="Enter folder name..." className="text-input"
                        value={folder.name}
@@ -70,10 +70,23 @@ export function EditFolderCard(props) {
     )
 }
 
+export function NewFolderCard(props) {
+    return (
+        <>
+            <div className="small-card edit-card">
+                <span className="text-header">Folder Name</span>
+                <textarea required={true} name="name" placeholder="Enter folder name..." className="text-input"
+                          value={props.folderName}
+                          onChange={e => props.setFolderName(e.target.value)}/>
+            </div>
+        </>
+    )
+}
+
 export function AddFolderCard(props) {
     return (
         <>
-            <button type="button" id="new-card" className="card" onClick={() => props.addFolder()}>
+            <button type="button" id="new-card" className="small-card" onClick={() => props.addFolder()}>
                 <img src={plusIcon} alt="Plus icon"/>
                 <span>New Folder</span>
             </button>

@@ -1,72 +1,52 @@
 import "./componentStyles/EditModal.css";
-import "./componentStyles/EditModalCards.css";
 
-import {saveCards} from "../utils/localStorage.js";
-import {EditDeckCard, AddDeckCard} from "./EditDeckModalCards.jsx";
+import {loadData, addFolder} from "../utils/localStorage.js";
+import {NewFolderCard} from "./EditFoldersModalCards.jsx";
 import {useState} from "react";
 
-import cancel from "../assets/icons/cancel.svg"
-import save from "../assets/icons/save.svg"
-import {EditFolderCard} from "./EditFoldersModalCards.jsx";
-import minusIcon from "../assets/icons/minus.svg";
-import plusIcon from "../assets/icons/plus.svg";
-import deleteIcon from "../assets/icons/delete.svg";
+import cancel from "../assets/icons/cancel.svg";
+import plus from "../assets/icons/plus.svg";
 
-
-// TODO: FINISH ME PLEASE!!!! -- Copy changes from other modals
 
 const AddNewFolderModal = (props) => {
-    // const [cards, setCards] = useState(props.cards);
-    const folder = useState({})
+    const [folderName, setFolderName] = useState("");
+
+    const cancelEdits = () => {
+        const cancel = confirm(`Are you sure you want to cancel? Any changes will be lost.`);
+        if (cancel)
+            props.toggleVisibility();
+    }
+
+    const saveEdits = (event) => {
+        event.preventDefault();
+
+        addFolder(folderName);
+
+        props.updateFolders(loadData()); // Push the changes to the Home page
+        props.toggleVisibility();
+    }
 
     return (
         <div id="modal-root" className="static">
-            <div id="modal-background" onClick={() => props.toggleVisibility()} />
+            <div id="modal-background" onClick={() => cancelEdits()}></div>
 
             <div id="modal-container">
                 <div id="modal-body">
                     <div id="modal-header">
-                        <button type="button" className="header-btn modal-btn default-btn img-btn" onClick={() => props.toggleVisibility()}>
-                            <img src={cancel} alt="Cancel icon" />
+                        <button type="button" className={"header-btn modal-btn default-btn img-btn"}
+                                onClick={() => cancelEdits()}>
+                            <img src={cancel} alt="Cancel icon"/>
                             Cancel
                         </button>
                         <h1>Add Folder</h1>
-                        <button type="submit" className="header-btn primary-btn img-btn" form="cards-container">
-                            <img src={save} alt="Save icon" />
-                            Save
+                        <button type="submit" className={"header-btn primary-btn img-btn"} form="folders-container">
+                            <img src={plus} alt="Plus icon"/>
+                            Add
                         </button>
                     </div>
 
-                    <form id="cards-container" className="group-container">
-                        <div className="card edit-card">
-                            <span className="text-header">Folder Name</span>
-                            <textarea required={true} name="name" placeholder="Enter folder name..." className="text-input"
-                                      value={folder.name}
-                                      onChange={e => props.updateName(folder.id, e.target.value)}/>
-
-                            <div className="card-footer">
-                                <div className="placeholder"></div>
-                                <div className="index-container">
-                                    <button type="button" className="card-btn" title="Decrease folder position"
-                                            onClick={() => props.decreaseIndex(folder.id)}>
-                                        <img src={minusIcon} alt="Minus icon"/>
-                                    </button>
-                                    <input type="number" required={true} className="index-number-input"
-                                           value={folder.position}
-                                           onChange={e => props.updatePosition(folder.id, e.target.value)}
-                                           onKeyDown={e => props.moveFolder(folder.id, e.target.value, e)}
-                                    />
-                                    <button type="button" className="card-btn" title="Increase folder position"
-                                            onClick={() => props.increaseIndex(folder.id)}>
-                                        <img src={plusIcon} alt="Plus icon"/>
-                                    </button>
-                                </div>
-                                <button type="button" className="card-btn" title="Delete this folder"
-                                        onClick={() => props.removeFolder(folder.id)}>
-                                    <img src={deleteIcon} alt="Delete icon"/>
-                                </button>
-                            </div>
-                        </div>
+                    <form id="folders-container" className="group-container" onSubmit={saveEdits}>
+                        <NewFolderCard folderName={folderName} setFolderName={setFolderName}/>
                     </form>
                 </div>
             </div>
